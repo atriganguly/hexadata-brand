@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest a component, token, output or improvement
+labels: [feature]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Brand values (colours, fonts, taglines, logos) are decided by the HexaData brand owner. You can propose one here; it will be labelled `needs-owner-approval`.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you solving?
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to see?
+    validations: { required: true }
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: Additive only (no renamed or removed public names)
+        - label: I would be willing to open a pull request

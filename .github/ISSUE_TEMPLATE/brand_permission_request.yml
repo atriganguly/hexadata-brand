@@ -1,0 +1,33 @@
+name: Brand permission request
+description: Ask permission to use the HexaData name, logo or taglines
+labels: [brand-change, needs-owner-approval]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The HexaData name, logos and taglines are trademarks of Esconet Technologies Limited. Read [BRAND-LICENSE.md](https://github.com/atriganguly/hexadata-brand/blob/main/BRAND-LICENSE.md) first: co-branding, sponsor acknowledgements, logo gardens, educational or research use and plain-text references need **no** permission when done as described.
+  - type: input
+    id: org
+    attributes:
+      label: Your organisation or project
+    validations: { required: true }
+  - type: textarea
+    id: use
+    attributes:
+      label: What you want to do, and where it will appear
+      description: Links or mock-ups help.
+    validations: { required: true }
+  - type: dropdown
+    id: asset
+    attributes:
+      label: What you want to use
+      multiple: true
+      options: [Logo, Name in text, Taglines, Colour palette or typography as a brand identity, Something else]
+    validations: { required: true }
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Confirmations
+      options:
+        - label: I will use unmodified artwork and will not imply endorsement by HexaData
+          required: true

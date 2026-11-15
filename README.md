@@ -1,11 +1,53 @@
-# @hexadata/brand
+<div align="center">
 
-HexaData brand tokens (colour, typography, taglines) for **web, React, React Native and Tailwind**, generated from a
-single source of truth: [`brand/`](brand/), transcribed from _HexaData Brand Kit v1.0_.
+<a href="https://atriganguly.github.io/hexadata-brand/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://atriganguly.github.io/hexadata-brand/v2/logo/horizontal-primary-on-dark.png">
+    <img src="https://atriganguly.github.io/hexadata-brand/v2/logo/horizontal-primary-on-light.png" alt="HexaData" width="420">
+  </picture>
+</a>
 
-**Design goals:** brand-exact · WCAG-enforced · no third-party requests · no browser storage · no personal data · tamper-evident updates.
+# HexaData Brand
 
-> Status: v2.0.0 (release candidate; npm and PyPI publishing arrives with trusted publishing in v2.2). See [Verification status](#verification-status) for exactly what has and has not been run.
+**Supercomputing, On-demand.**<br>
+Engineered in India. Built for the World.
+
+The official HexaData brand system: logo, colour, type, foundations and components for web, React, React Native, Flutter, SwiftUI, Android, Python, Office, e-mail and print. One source, generated everywhere, updated everywhere.
+
+[![CI](https://github.com/atriganguly/hexadata-brand/actions/workflows/ci.yml/badge.svg)](https://github.com/atriganguly/hexadata-brand/actions/workflows/ci.yml)
+[![Pages](https://github.com/atriganguly/hexadata-brand/actions/workflows/pages.yml/badge.svg)](https://github.com/atriganguly/hexadata-brand/actions/workflows/pages.yml)
+[![Release](https://img.shields.io/github/v/release/atriganguly/hexadata-brand?label=release)](https://github.com/atriganguly/hexadata-brand/releases/latest)
+[![Software: Apache-2.0](https://img.shields.io/badge/software-Apache--2.0-blue)](LICENSE)
+[![Brand assets: all rights reserved](https://img.shields.io/badge/brand%20assets-all%20rights%20reserved-lightgrey)](BRAND-LICENSE.md)
+[![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2%20AA-success)](ACCESSIBILITY.md)
+![Runtime dependencies: 0](https://img.shields.io/badge/runtime%20dependencies-0-success)
+![Node >=22](https://img.shields.io/badge/node-%3E%3D22-informational)
+
+[**Website**](https://atriganguly.github.io/hexadata-brand/) · [Brand Kit PDF](https://atriganguly.github.io/hexadata-brand/downloads/) · [Stacks](https://atriganguly.github.io/hexadata-brand/stacks/) · [Components](https://atriganguly.github.io/hexadata-brand/components/) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+
+</div>
+
+> **Status:** v2.0.0 is released ([release notes](https://github.com/atriganguly/hexadata-brand/releases/tag/v2.0.0)). npm and PyPI publishing arrives with trusted publishing in v2.2; until then install from the GitHub release assets or use the hosted channel.
+
+## Contents
+
+[What you get](#what-you-get) · [Licence](#licence-open-software-protected-brand) · [Install](#install) · [Use](#use) · [Live brand updates](#live-brand-updates-on-by-default-silent-on-failure) · [Website and PDF](#website-brand-kit-pdf-and-local-preview) · [Develop](#develop) · [How it is verified](#how-it-is-verified) · [Documents](#documents)
+
+## What you get
+
+| Output                                                      | For                                                  |
+| ----------------------------------------------------------- | ---------------------------------------------------- |
+| CSS variables, base styles and 20+ components (`.hd-*`)     | Any website or framework                             |
+| Tailwind v3 preset and v4 theme                             | Tailwind projects (strict: only brand colours exist) |
+| React wrappers, `<hexa-*>` web components                   | React, Next.js, Vue, Svelte, Angular, plain HTML     |
+| React Native theme and official static fonts                | Mobile apps                                          |
+| Flutter, SwiftUI, Android (Compose + XML)                   | Native apps                                          |
+| Python tokens and chart themes                              | Reports, dashboards, notebooks                       |
+| Office themes, e-mail template, print colour sheet          | Documents, campaigns, print                          |
+| Hosted channel `/v2/` with a signed manifest                | Apps that must update without a release              |
+| Website, Brand Kit PDF, Figma library, Claude design system | Reference for people and for Claude                  |
+
+**Design goals:** brand-exact · WCAG-enforced · no third-party requests by default · no browser storage · no personal data · tamper-evident updates · zero runtime dependencies.
 
 ## Licence: open software, protected brand
 
@@ -16,8 +58,11 @@ single source of truth: [`brand/`](brand/), transcribed from _HexaData Brand Kit
 ## Install
 
 ```bash
-npm install @hexadata/brand
+npm install @hexadata/brand        # once published to npm (planned with v2.2)
+npm install https://github.com/atriganguly/hexadata-brand/releases/download/v2.0.0/hexadata-brand-2.0.0.tgz   # today
 ```
+
+No package manager? Link the hosted files directly (see [Live brand updates](#live-brand-updates-on-by-default-silent-on-failure)). Other platforms are in the release assets and in [`platforms/`](platforms/README.md).
 
 Peer dependencies are optional: `react` (for `/react`, `/native`), `react-native` (for `/native`), `tailwindcss` (for `/tailwind`).
 
@@ -192,15 +237,21 @@ allowed pairing drops below its WCAG minimum or if generated files drift.
 [ACCESSIBILITY.md](ACCESSIBILITY.md) · [PRIVACY.md](PRIVACY.md) · [SECURITY.md](SECURITY.md) · [docs/COMPLIANCE.md](docs/COMPLIANCE.md) ·
 [docs/contrast-matrix.md](docs/contrast-matrix.md) · [docs/AMENDMENT-REQUEST.md](docs/AMENDMENT-REQUEST.md) · [CHANGELOG.md](CHANGELOG.md)
 
-## Verification status
+## How it is verified
 
-| Check                                                                                                                      | Status                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| 68 unit tests (tokens vs Brand Kit, contrast, schema fuzz, Ed25519 transport, React SSR, Tailwind v4 compile, fonts maths) | ✅ run, passing (Node 22)                                                           |
-| Built-output tests, `.d.cts` correctness, consumer type-check (ESM + CJS, node16) for core + tailwind                      | ✅ run, passing                                                                     |
-| Real Chromium: strict CSP, zero third-party requests, no storage, signed update applied, tamper rejected                   | ✅ run, 5/5                                                                         |
-| Whole-repo `tsc --strict` (TypeScript 6.0.3)                                                                               | ✅ run, clean                                                                       |
-| `npm ci`, ESLint, Prettier, publint, attw, `npm audit`, CI workflows                                                       | ⚠️ **not run** (offline authoring); first CI run is the check                       |
-| Self-hosted font build (`build:fonts`) and fallback metrics                                                                | ⚠️ **not run** (needs `@fontsource-variable/*`, `@capsizecss/*`); logic unit-tested |
-| `react`/`native` consumer typings with real `@types/react`                                                                 | ⚠️ checked with stubs only                                                          |
-| Tailwind **v3** preset in a real v3 build; React Native on a device                                                        | ⚠️ structural tests only                                                            |
+Every push runs (see [`.github/workflows`](.github/workflows)):
+
+- Generated files match `brand/` (`generate:check`), TypeScript strict, ESLint, Prettier, unit, golden and public-API contract tests.
+- Built output on Node 22 and 24: dist tests, consumer type-checks (ESM and CJS), `publint`, `attw`, tarball whitelist and size, zero runtime dependencies, `npm audit`.
+- Real Chromium: strict CSP, no third-party requests, nothing stored, signed update applied, forged update ignored, computed contrast of every component in light and dark.
+- The website: axe WCAG 2.2 AA in light and dark on every page, links, console errors, phone width.
+- The Brand Kit PDF, the Figma library and the Claude design system must match the current brand fingerprint.
+- Python, Flutter, SwiftUI and Android packages are compiled with their real toolchains.
+
+---
+
+<div align="center">
+
+HexaData and the HexaData logo are trademarks of Esconet Technologies Limited. Use of the name, logos and taglines is governed by [BRAND-LICENSE.md](BRAND-LICENSE.md). Software licensed under [Apache-2.0](LICENSE). Brand and permission questions: atri.ganguly@esc.co.in (alternative: sales@hexadata.in).
+
+</div>

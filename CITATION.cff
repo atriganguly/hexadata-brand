@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: 'If you reference this brand system, please cite it as below. The HexaData name and logos remain trademarks of Esconet Technologies Limited.'
+title: HexaData Brand
+abstract: 'The official HexaData brand system: logo, colour, type, foundations and components, generated for web, mobile, Python, Office, e-mail and print.'
+type: software
+authors:
+  - name: HexaData (Esconet Technologies Limited)
+repository-code: https://github.com/atriganguly/hexadata-brand
+url: https://atriganguly.github.io/hexadata-brand/
+license: Apache-2.0
+version: 2.0.0
+date-released: 2026-11-15

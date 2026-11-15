@@ -1,0 +1,19 @@
+changelog:
+  exclude:
+    labels: [skip-changelog]
+    authors: [dependabot]
+  categories:
+    - title: Brand changes
+      labels: [brand-change]
+    - title: Features
+      labels: [feature]
+    - title: Fixes
+      labels: [bug]
+    - title: Accessibility
+      labels: [accessibility]
+    - title: Documentation
+      labels: [docs]
+    - title: Dependencies and tooling
+      labels: [dependencies, ci]
+    - title: Other changes
+      labels: ['*']

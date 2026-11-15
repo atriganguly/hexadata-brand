@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Repository: README with the official logo, badges and contents; community files (Code of Conduct, Contributing, Support, issue and PR templates, release-note categories, CITATION.cff); CodeQL, dependency review and OpenSSF Scorecard workflows; `security.txt` on the website; package metadata; GitHub settings, labels and rulesets.
+
 ## 2.0.0 (2026-11-15)
 
 Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Breaking.**

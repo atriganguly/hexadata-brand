@@ -127,6 +127,18 @@ write(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${publicPaths.map((p) => `  <url><loc>${data.origin}/${p}</loc></url>`).join('\n')}\n</urlset>\n`,
 );
 write('.nojekyll', '');
+// RFC 9116 security.txt (expires in one year from the build)
+const expires = new Date(Date.now() + 365 * 86_400_000).toISOString().replace(/\.\d+Z$/, 'Z');
+write(
+  '.well-known/security.txt',
+  `Contact: https://github.com/atriganguly/hexadata-brand/security/advisories/new
+Contact: mailto:atri.ganguly@esc.co.in
+Expires: ${expires}
+Preferred-Languages: en
+Canonical: ${data.origin}/.well-known/security.txt
+Policy: https://github.com/atriganguly/hexadata-brand/blob/main/SECURITY.md
+`,
+);
 
 // Evergreen channel + immutable copy, and the guideline PDFs
 for (const dir of ['v2', data.version]) cpSync(join(channel, dir), join(out, dir), { recursive: true });

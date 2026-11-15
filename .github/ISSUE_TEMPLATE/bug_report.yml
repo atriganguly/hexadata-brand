@@ -1,0 +1,54 @@
+name: Bug report
+description: Something in the package, site, components or a platform output is wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Do **not** include secrets. Security problems go to the private advisory form (see SECURITY.md).
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        [
+          Tokens or CSS,
+          Components,
+          React or web components,
+          React Native,
+          Flutter,
+          SwiftUI,
+          Android,
+          Python,
+          Office or e-mail or print,
+          Website,
+          Hosted channel or live updates,
+          Logo or fonts,
+          Tooling or CI,
+          Docs,
+        ]
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: A minimal snippet or URL helps most.
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Package version or release tag, and the platform or browser.
+      placeholder: 2.0.0, Chrome 140, Node 22
+    validations: { required: true }
+  - type: checkboxes
+    id: a11y
+    attributes:
+      label: Accessibility
+      options:
+        - label: This is an accessibility problem (contrast, keyboard, screen reader, motion)

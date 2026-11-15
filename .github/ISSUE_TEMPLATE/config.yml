@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/atriganguly/hexadata-brand/security/advisories/new
+    about: Never report vulnerabilities in a public issue.
+  - name: Ask a question
+    url: https://github.com/atriganguly/hexadata-brand/discussions
+    about: How do I use the brand, a component or a platform package?
+  - name: Brand website and guidelines
+    url: https://atriganguly.github.io/hexadata-brand/
+    about: Logo, colour, typography, components, stacks and downloads.
