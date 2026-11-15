@@ -24,6 +24,11 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - Self-hosted variable WOFF2 (latin, latin-ext) + metric-matched fallbacks; Devanagari-capable system fallbacks in the stack.
 - Docs: PRIVACY, SECURITY, ACCESSIBILITY, COMPLIANCE, amendment request. CI, release workflow, SBOM, Dependabot.
 
+- Foundations (spacing, radius, elevation, motion, type scale, breakpoints, z-index) as DTCG tokens, emitted as CSS variables, `FOUNDATIONS` (TS), Tailwind v3 preset and v4 theme. **Proposed, pending owner approval**: `docs/FOUNDATIONS-PROPOSAL.md`.
+- New semantic roles `accentFill`, `onAccentFill`, `danger`, `warning`, `success`, `onStatus` (palette colours only).
+- `@hexadata/brand/base.css`, `/components.css`, `/all.css`: cascade-layered base styles and 20+ CSS components (button, fields, switch, card, badge, alert, table, tabs, dialog, breadcrumb, pagination, spinner, skeleton, avatar, code, layout, header/nav/footer). Contrast lint plus real-browser contrast test in both themes.
+- Golden two-key test, public-API contract snapshot, Style Dictionary v5 interop test.
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.

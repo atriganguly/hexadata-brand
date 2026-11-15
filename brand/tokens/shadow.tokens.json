@@ -1,0 +1,133 @@
+{
+  "$description": "Elevation. Shadows are tinted with the palette's midnight. On dark surfaces separate with a grey border, never shadow alone (Brand Kit contrast rule).",
+  "shadow": {
+    "1": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "{color.midnight}",
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 2,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$extensions": {
+        "com.hexadata": {
+          "status": "proposed",
+          "alpha": [0.12]
+        }
+      }
+    },
+    "2": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "{color.midnight}",
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 2,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 6,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": "{color.midnight}",
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 2,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$extensions": {
+        "com.hexadata": {
+          "status": "proposed",
+          "alpha": [0.14, 0.1]
+        }
+      }
+    },
+    "3": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "{color.midnight}",
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 8,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 24,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": "{color.midnight}",
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 2,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 6,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$extensions": {
+        "com.hexadata": {
+          "status": "proposed",
+          "alpha": [0.18, 0.12]
+        }
+      }
+    }
+  }
+}

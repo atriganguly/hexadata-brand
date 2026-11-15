@@ -24,6 +24,63 @@
   --hd-font-display: "Space Grotesk", "Space Grotesk Fallback", "Helvetica Neue", "Arial", system-ui, sans-serif;
   --hd-font-body: "Inter Tight", "Inter Tight Fallback", system-ui, -apple-system, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari", sans-serif;
   --hd-font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Liberation Mono", "Consolas", "Courier New", monospace;
+  --hd-font-weight-regular: 400;
+  --hd-font-weight-medium: 500;
+  --hd-font-weight-semibold: 600;
+  --hd-font-weight-bold: 700;
+
+  /* Foundations (proposed; see docs/FOUNDATIONS-PROPOSAL.md) */
+  --hd-space-0: 0;
+  --hd-space-1: 0.25rem;
+  --hd-space-2: 0.5rem;
+  --hd-space-3: 0.75rem;
+  --hd-space-4: 1rem;
+  --hd-space-5: 1.25rem;
+  --hd-space-6: 1.5rem;
+  --hd-space-8: 2rem;
+  --hd-space-10: 2.5rem;
+  --hd-space-12: 3rem;
+  --hd-space-16: 4rem;
+  --hd-space-20: 5rem;
+  --hd-space-24: 6rem;
+  --hd-space-0-5: 0.125rem;
+  --hd-radius-none: 0;
+  --hd-radius-sm: 0.25rem;
+  --hd-radius-md: 0.5rem;
+  --hd-radius-lg: 0.75rem;
+  --hd-radius-xl: 1rem;
+  --hd-radius-full: 9999px;
+  --hd-shadow-1: 0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.12);
+  --hd-shadow-2: 0 2px 6px 0 rgb(var(--hd-midnight-rgb) / 0.14), 0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.1);
+  --hd-shadow-3: 0 8px 24px 0 rgb(var(--hd-midnight-rgb) / 0.18), 0 2px 6px 0 rgb(var(--hd-midnight-rgb) / 0.12);
+  --hd-duration-instant: 0ms;
+  --hd-duration-fast: 120ms;
+  --hd-duration-base: 200ms;
+  --hd-duration-slow: 320ms;
+  --hd-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --hd-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --hd-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --hd-font-size-xs: 0.75rem;
+  --hd-font-size-sm: 0.875rem;
+  --hd-font-size-base: 1rem;
+  --hd-font-size-lg: 1.125rem;
+  --hd-font-size-xl: 1.25rem;
+  --hd-font-size-2xl: 1.5rem;
+  --hd-font-size-3xl: 1.875rem;
+  --hd-font-size-4xl: 2.25rem;
+  --hd-font-size-5xl: 3rem;
+  --hd-font-size-6xl: 3.75rem;
+  --hd-line-height-tight: 1.2;
+  --hd-line-height-snug: 1.35;
+  --hd-line-height-normal: 1.5;
+  --hd-line-height-relaxed: 1.7;
+  --hd-z-base: 0;
+  --hd-z-dropdown: 1000;
+  --hd-z-sticky: 1100;
+  --hd-z-overlay: 1200;
+  --hd-z-modal: 1300;
+  --hd-z-toast: 1400;
+  --hd-z-tooltip: 1500;
 
   /* Semantic roles: light (default) */
   --hd-bg: var(--hd-white);
@@ -44,6 +101,18 @@
   --hd-border-strong-rgb: var(--hd-obsidian-rgb);
   --hd-border-subtle: var(--hd-grey);
   --hd-border-subtle-rgb: var(--hd-grey-rgb);
+  --hd-accent-fill: var(--hd-deep-blue);
+  --hd-accent-fill-rgb: var(--hd-deep-blue-rgb);
+  --hd-on-accent-fill: var(--hd-white);
+  --hd-on-accent-fill-rgb: var(--hd-white-rgb);
+  --hd-danger: var(--hd-crimson);
+  --hd-danger-rgb: var(--hd-crimson-rgb);
+  --hd-warning: var(--hd-copper);
+  --hd-warning-rgb: var(--hd-copper-rgb);
+  --hd-success: var(--hd-green);
+  --hd-success-rgb: var(--hd-green-rgb);
+  --hd-on-status: var(--hd-obsidian);
+  --hd-on-status-rgb: var(--hd-obsidian-rgb);
   color-scheme: light;
 }
 
@@ -67,6 +136,18 @@
     --hd-border-strong-rgb: var(--hd-grey-rgb);
     --hd-border-subtle: var(--hd-grey);
     --hd-border-subtle-rgb: var(--hd-grey-rgb);
+    --hd-accent-fill: var(--hd-vivid-cerulean);
+    --hd-accent-fill-rgb: var(--hd-vivid-cerulean-rgb);
+    --hd-on-accent-fill: var(--hd-obsidian);
+    --hd-on-accent-fill-rgb: var(--hd-obsidian-rgb);
+    --hd-danger: var(--hd-crimson);
+    --hd-danger-rgb: var(--hd-crimson-rgb);
+    --hd-warning: var(--hd-copper);
+    --hd-warning-rgb: var(--hd-copper-rgb);
+    --hd-success: var(--hd-green);
+    --hd-success-rgb: var(--hd-green-rgb);
+    --hd-on-status: var(--hd-obsidian);
+    --hd-on-status-rgb: var(--hd-obsidian-rgb);
     color-scheme: dark;
   }
 }
@@ -90,10 +171,30 @@
   --hd-border-strong-rgb: var(--hd-grey-rgb);
   --hd-border-subtle: var(--hd-grey);
   --hd-border-subtle-rgb: var(--hd-grey-rgb);
+  --hd-accent-fill: var(--hd-vivid-cerulean);
+  --hd-accent-fill-rgb: var(--hd-vivid-cerulean-rgb);
+  --hd-on-accent-fill: var(--hd-obsidian);
+  --hd-on-accent-fill-rgb: var(--hd-obsidian-rgb);
+  --hd-danger: var(--hd-crimson);
+  --hd-danger-rgb: var(--hd-crimson-rgb);
+  --hd-warning: var(--hd-copper);
+  --hd-warning-rgb: var(--hd-copper-rgb);
+  --hd-success: var(--hd-green);
+  --hd-success-rgb: var(--hd-green-rgb);
+  --hd-on-status: var(--hd-obsidian);
+  --hd-on-status-rgb: var(--hd-obsidian-rgb);
   color-scheme: dark;
 }
 
 /* Users who ask for more contrast get the strong border/text roles everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hd-duration-fast: 0ms;
+    --hd-duration-base: 0ms;
+    --hd-duration-slow: 0ms;
+  }
+}
+
 @media (prefers-contrast: more) {
   :root {
     --hd-border-subtle: var(--hd-border-strong);

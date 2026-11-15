@@ -12,6 +12,21 @@ export function emit(t: Tokens, { write, HEADER, kebab, cssStack, paletteKeys }:
           `${indent}--hd-${kebab(role)}: var(--hd-${kebab(key)});\n${indent}--hd-${kebab(role)}-rgb: var(--hd-${kebab(key)}-rgb);`,
       )
       .join('\n');
+  const fv = (prefix: string, g: Record<string, string>): string =>
+    Object.entries(g)
+      .map(([k, v]) => `  --hd-${prefix}-${k}: ${v};`)
+      .join('\n');
+  const F = t.foundations;
+  const foundationVars = [
+    fv('space', F.space),
+    fv('radius', F.radius),
+    fv('shadow', F.shadow),
+    fv('duration', F.duration),
+    fv('ease', F.easing),
+    fv('font-size', F.fontSize),
+    fv('line-height', F.lineHeight),
+    fv('z', F.zIndex),
+  ].join('\n');
   write(
     'src/css/hexadata.css',
     `/* ${HEADER} */
@@ -21,6 +36,13 @@ ${paletteVars}
   --hd-font-display: ${cssStack(t.fonts.display)};
   --hd-font-body: ${cssStack(t.fonts.body)};
   --hd-font-mono: ${cssStack(t.fonts.mono)};
+  --hd-font-weight-regular: 400;
+  --hd-font-weight-medium: 500;
+  --hd-font-weight-semibold: 600;
+  --hd-font-weight-bold: 700;
+
+  /* Foundations (proposed; see docs/FOUNDATIONS-PROPOSAL.md) */
+${foundationVars}
 
   /* Semantic roles: light (default) */
 ${semVars('light', '  ')}
@@ -40,6 +62,14 @@ ${semVars('dark', '  ')}
 }
 
 /* Users who ask for more contrast get the strong border/text roles everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hd-duration-fast: 0ms;
+    --hd-duration-base: 0ms;
+    --hd-duration-slow: 0ms;
+  }
+}
+
 @media (prefers-contrast: more) {
   :root {
     --hd-border-subtle: var(--hd-border-strong);

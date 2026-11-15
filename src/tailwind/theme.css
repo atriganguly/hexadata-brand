@@ -24,7 +24,47 @@
   --color-hd-accent: var(--hd-accent);
   --color-hd-border-strong: var(--hd-border-strong);
   --color-hd-border-subtle: var(--hd-border-subtle);
+  --color-hd-accent-fill: var(--hd-accent-fill);
+  --color-hd-on-accent-fill: var(--hd-on-accent-fill);
+  --color-hd-danger: var(--hd-danger);
+  --color-hd-warning: var(--hd-warning);
+  --color-hd-success: var(--hd-success);
+  --color-hd-on-status: var(--hd-on-status);
   --font-display: var(--hd-font-display);
   --font-body: var(--hd-font-body);
   --font-mono: var(--hd-font-mono);
+
+  /* Foundations: strict like colours, only brand scales exist (spacing keeps Tailwind's 0.25rem base, which the brand scale matches). */
+  --radius-*: initial;
+  --radius-none: var(--hd-radius-none);
+  --radius-sm: var(--hd-radius-sm);
+  --radius-md: var(--hd-radius-md);
+  --radius-lg: var(--hd-radius-lg);
+  --radius-xl: var(--hd-radius-xl);
+  --radius-full: var(--hd-radius-full);
+  --shadow-*: initial;
+  --shadow-sm: var(--hd-shadow-1);
+  --shadow-md: var(--hd-shadow-2);
+  --shadow-lg: var(--hd-shadow-3);
+  --text-*: initial;
+  --text-xs: var(--hd-font-size-xs);
+  --text-sm: var(--hd-font-size-sm);
+  --text-base: var(--hd-font-size-base);
+  --text-lg: var(--hd-font-size-lg);
+  --text-xl: var(--hd-font-size-xl);
+  --text-2xl: var(--hd-font-size-2xl);
+  --text-3xl: var(--hd-font-size-3xl);
+  --text-4xl: var(--hd-font-size-4xl);
+  --text-5xl: var(--hd-font-size-5xl);
+  --text-6xl: var(--hd-font-size-6xl);
+  --ease-*: initial;
+  --ease-standard: var(--hd-ease-standard);
+  --ease-enter: var(--hd-ease-enter);
+  --ease-exit: var(--hd-ease-exit);
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
 }

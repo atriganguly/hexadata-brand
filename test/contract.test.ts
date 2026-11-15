@@ -28,6 +28,13 @@ const current: Record<string, string[]> = {
   'export:react': Object.keys(react).sort(),
   'export:native': Object.keys(native).sort(),
   'css-variables': [...new Set(matches(read('src/css/hexadata.css'), /(--hd-[a-z0-9-]+)\s*:/g))].sort(),
+  'css-classes': [
+    ...new Set(
+      [...read('src/css/base.css').matchAll(/\.(hd-[a-z0-9-]+)/g), ...read('src/css/components.css').matchAll(/\.(hd-[a-z0-9-]+)/g)].map(
+        (m) => m[1]!,
+      ),
+    ),
+  ].sort(),
   'tailwind-v4-theme': [...new Set(matches(read('src/tailwind/theme.css'), /(--(?:color|font)-[a-z0-9-*]+)\s*:/g))].sort(),
   'tailwind-v3-colors': Object.keys(preset.theme.colors.hd).sort(),
 };

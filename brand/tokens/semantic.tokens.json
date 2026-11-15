@@ -37,6 +37,30 @@
       "borderSubtle": {
         "$type": "color",
         "$value": "{color.grey}"
+      },
+      "accentFill": {
+        "$type": "color",
+        "$value": "{color.deepBlue}"
+      },
+      "onAccentFill": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.crimson}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.copper}"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green}"
+      },
+      "onStatus": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
       }
     },
     "dark": {
@@ -75,6 +99,30 @@
       "borderSubtle": {
         "$type": "color",
         "$value": "{color.grey}"
+      },
+      "accentFill": {
+        "$type": "color",
+        "$value": "{color.vividCerulean}"
+      },
+      "onAccentFill": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.crimson}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.copper}"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green}"
+      },
+      "onStatus": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
       }
     }
   }

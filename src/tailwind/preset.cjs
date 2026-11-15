@@ -32,6 +32,12 @@ const brandColors = {
     'accent': rgb('accent'),
     'border-strong': rgb('border-strong'),
     'border-subtle': rgb('border-subtle'),
+    'accent-fill': rgb('accent-fill'),
+    'on-accent-fill': rgb('on-accent-fill'),
+    'danger': rgb('danger'),
+    'warning': rgb('warning'),
+    'success': rgb('success'),
+    'on-status': rgb('on-status'),
   },
 };
 
@@ -46,11 +52,22 @@ const fontFamily = {
  * Default (strict): REPLACES Tailwind's colour palette so only brand colours exist.
  * `extend: true`: adds brand colours alongside Tailwind's defaults.
  */
+const foundations = {
+  borderRadius: {"none":"var(--hd-radius-none)","sm":"var(--hd-radius-sm)","md":"var(--hd-radius-md)","lg":"var(--hd-radius-lg)","xl":"var(--hd-radius-xl)","full":"var(--hd-radius-full)"},
+  boxShadow: {"sm":"var(--hd-shadow-1)","md":"var(--hd-shadow-2)","lg":"var(--hd-shadow-3)"},
+  fontSize: {"xs":"var(--hd-font-size-xs)","sm":"var(--hd-font-size-sm)","base":"var(--hd-font-size-base)","lg":"var(--hd-font-size-lg)","xl":"var(--hd-font-size-xl)","2xl":"var(--hd-font-size-2xl)","3xl":"var(--hd-font-size-3xl)","4xl":"var(--hd-font-size-4xl)","5xl":"var(--hd-font-size-5xl)","6xl":"var(--hd-font-size-6xl)"},
+  transitionDuration: {"instant":"var(--hd-duration-instant)","fast":"var(--hd-duration-fast)","base":"var(--hd-duration-base)","slow":"var(--hd-duration-slow)"},
+  transitionTimingFunction: {"standard":"var(--hd-ease-standard)","enter":"var(--hd-ease-enter)","exit":"var(--hd-ease-exit)"},
+  zIndex: {"base":"var(--hd-z-base)","dropdown":"var(--hd-z-dropdown)","sticky":"var(--hd-z-sticky)","overlay":"var(--hd-z-overlay)","modal":"var(--hd-z-modal)","toast":"var(--hd-z-toast)","tooltip":"var(--hd-z-tooltip)"},
+  // CSS variables cannot be used inside @media, so breakpoints are literal values.
+  screens: {"sm":"40rem","md":"48rem","lg":"64rem","xl":"80rem","2xl":"96rem"},
+};
+
 function createPreset(options = {}) {
   if (options.extend === true) {
-    return { theme: { extend: { colors: brandColors, fontFamily } } };
+    return { theme: { extend: { colors: brandColors, fontFamily, ...foundations } } };
   }
-  return { theme: { colors: brandColors, extend: { fontFamily } } };
+  return { theme: { colors: brandColors, ...foundations, extend: { fontFamily } } };
 }
 
 const preset = createPreset();

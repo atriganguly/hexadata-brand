@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isHex6 } from '../../src/core/contrast.ts';
-import type { Tokens } from './types.ts';
+import type { FoundationGroup, Foundations, Tokens } from './types.ts';
 
 /** Reads brand/ (DTCG 2025.10 token files + contrast.json + content.json) into the flat model emitters use. */
 
@@ -18,6 +18,65 @@ function hexOf(token: unknown, path: string): string {
   const hex = typeof v === 'object' && v !== null ? (v as Json)['hex'] : v;
   if (typeof hex !== 'string' || !isHex6(hex.toUpperCase())) return fail(`${path} has no valid #RRGGBB hex`);
   return hex.toUpperCase();
+}
+
+const num = (v: unknown, path: string): number =>
+  typeof v === 'number' && Number.isFinite(v) ? v : fail(`${path} must be a finite number`);
+
+function unitValue(v: unknown, path: string, units: string[]): string {
+  const o = obj(v, path);
+  const unit = String(o['unit']);
+  if (!units.includes(unit)) fail(`${path} unit must be one of ${units.join('/')}`);
+  const n = num(o['value'], `${path}.value`);
+  return n === 0 && unit !== 'ms' ? '0' : `${n}${unit}`;
+}
+
+/** Reads one DTCG group (children with $value) and converts each to its CSS value. */
+function group(root: Json, key: string, convert: (value: unknown, path: string, token: Json) => string): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [name, tok] of Object.entries(obj(root[key], key))) {
+    if (name.startsWith('$')) continue;
+    const t = obj(tok, `${key}.${name}`);
+    out[name] = convert(t['$value'], `${key}.${name}`, t);
+  }
+  return out;
+}
+
+function shadowValue(value: unknown, path: string, token: Json): string {
+  const layers = Array.isArray(value) ? value : fail(`${path} must be a shadow array`);
+  const alphas = (obj(obj(token['$extensions'], `${path}.$extensions`)['com.hexadata'], 'com.hexadata')['alpha'] ?? []) as number[];
+  return layers
+    .map((l, i) => {
+      const o = obj(l, `${path}[${i}]`);
+      const m = typeof o['color'] === 'string' ? /^\{color\.([A-Za-z0-9]+)\}$/.exec(o['color']) : null;
+      if (!m) fail(`${path}[${i}].color must alias a palette colour like {color.midnight}`);
+      const kebab = m![1]!.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      const px = (k: string): string => unitValue(o[k], `${path}[${i}].${k}`, ['px']);
+      return `${px('offsetX')} ${px('offsetY')} ${px('blur')} ${px('spread')} rgb(var(--hd-${kebab}-rgb) / ${num(alphas[i], `${path}.alpha[${i}]`)})`;
+    })
+    .join(', ');
+}
+
+function loadFoundations(root: string): Foundations {
+  const rd = (f: string): Json => read(root, `brand/tokens/${f}.tokens.json`);
+  const dimension = (v: unknown, p: string): string => unitValue(v, p, ['rem', 'px']);
+  const typography = obj(rd('typography')['font'], 'font');
+  const motion = obj(rd('motion')['motion'], 'motion');
+  const f: Record<FoundationGroup, Record<string, string>> = {
+    space: group(rd('space'), 'space', dimension),
+    radius: group(rd('radius'), 'radius', dimension),
+    shadow: group(rd('shadow'), 'shadow', shadowValue),
+    duration: group(motion, 'duration', (v, p) => unitValue(v, p, ['ms'])),
+    easing: group(motion, 'easing', (v, p) => {
+      const a = Array.isArray(v) && v.length === 4 ? v : fail(`${p} must be 4 numbers`);
+      return `cubic-bezier(${a.map((n, i) => num(n, `${p}[${i}]`)).join(', ')})`;
+    }),
+    fontSize: group(typography, 'size', dimension),
+    lineHeight: group(typography, 'lineHeight', (v, p) => String(num(v, p))),
+    breakpoint: group(rd('breakpoint'), 'breakpoint', dimension),
+    zIndex: group(rd('z-index'), 'z', (v, p) => String(num(v, p))),
+  };
+  return f;
 }
 
 export function loadModel(root: string): Tokens {
@@ -67,5 +126,6 @@ export function loadModel(root: string): Tokens {
     semanticPairs: contrast['semanticPairs'] as Tokens['semanticPairs'],
     pairs: contrast['pairs'] as Tokens['pairs'],
     forbiddenPairs: contrast['forbiddenPairs'] as Tokens['forbiddenPairs'],
+    foundations: loadFoundations(root),
   };
 }

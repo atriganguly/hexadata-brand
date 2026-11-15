@@ -95,6 +95,54 @@
       "fg": "borderStrong",
       "bg": "bgAlt",
       "min": 3
+    },
+    {
+      "mode": "light",
+      "fg": "onAccentFill",
+      "bg": "accentFill",
+      "min": 4.5
+    },
+    {
+      "mode": "light",
+      "fg": "onStatus",
+      "bg": "danger",
+      "min": 4.5
+    },
+    {
+      "mode": "light",
+      "fg": "onStatus",
+      "bg": "warning",
+      "min": 4.5
+    },
+    {
+      "mode": "light",
+      "fg": "onStatus",
+      "bg": "success",
+      "min": 4.5
+    },
+    {
+      "mode": "dark",
+      "fg": "onAccentFill",
+      "bg": "accentFill",
+      "min": 4.5
+    },
+    {
+      "mode": "dark",
+      "fg": "onStatus",
+      "bg": "danger",
+      "min": 4.5
+    },
+    {
+      "mode": "dark",
+      "fg": "onStatus",
+      "bg": "warning",
+      "min": 4.5
+    },
+    {
+      "mode": "dark",
+      "fg": "onStatus",
+      "bg": "success",
+      "min": 4.5
     }
   ],
   "pairs": [

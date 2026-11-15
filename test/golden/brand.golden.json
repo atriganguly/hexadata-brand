@@ -57,7 +57,13 @@
       "fgOnAlt": "obsidian",
       "accent": "deepBlue",
       "borderStrong": "obsidian",
-      "borderSubtle": "grey"
+      "borderSubtle": "grey",
+      "accentFill": "deepBlue",
+      "onAccentFill": "white",
+      "danger": "crimson",
+      "warning": "copper",
+      "success": "green",
+      "onStatus": "obsidian"
     },
     "dark": {
       "bg": "obsidian",
@@ -68,7 +74,13 @@
       "fgOnAlt": "white",
       "accent": "vividCerulean",
       "borderStrong": "grey",
-      "borderSubtle": "grey"
+      "borderSubtle": "grey",
+      "accentFill": "vividCerulean",
+      "onAccentFill": "obsidian",
+      "danger": "crimson",
+      "warning": "copper",
+      "success": "green",
+      "onStatus": "obsidian"
     }
   }
 }

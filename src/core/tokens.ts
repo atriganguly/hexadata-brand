@@ -55,7 +55,7 @@ export const FONTS = {
 } as const;
 export type FontRole = keyof typeof FONTS;
 
-export type SemanticRole = 'bg' | 'fg' | 'fgStrong' | 'fgMuted' | 'bgAlt' | 'fgOnAlt' | 'accent' | 'borderStrong' | 'borderSubtle';
+export type SemanticRole = 'bg' | 'fg' | 'fgStrong' | 'fgMuted' | 'bgAlt' | 'fgOnAlt' | 'accent' | 'borderStrong' | 'borderSubtle' | 'accentFill' | 'onAccentFill' | 'danger' | 'warning' | 'success' | 'onStatus';
 export type ThemeMode = 'light' | 'dark';
 export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, PaletteKey>>>> = {
   light: {
@@ -68,6 +68,12 @@ export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, 
     accent: 'deepBlue',
     borderStrong: 'obsidian',
     borderSubtle: 'grey',
+    accentFill: 'deepBlue',
+    onAccentFill: 'white',
+    danger: 'crimson',
+    warning: 'copper',
+    success: 'green',
+    onStatus: 'obsidian',
   },
   dark: {
     bg: 'obsidian',
@@ -79,6 +85,12 @@ export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, 
     accent: 'vividCerulean',
     borderStrong: 'grey',
     borderSubtle: 'grey',
+    accentFill: 'vividCerulean',
+    onAccentFill: 'obsidian',
+    danger: 'crimson',
+    warning: 'copper',
+    success: 'green',
+    onStatus: 'obsidian',
   },
 };
 
@@ -181,6 +193,92 @@ export const SEMANTIC_PAIRS: readonly SemanticPair[] = [
   { mode: 'dark', fg: 'accent', bg: 'bgAlt', min: 4.5 },
   { mode: 'dark', fg: 'borderStrong', bg: 'bg', min: 3 },
   { mode: 'dark', fg: 'borderStrong', bg: 'bgAlt', min: 3 },
+  { mode: 'light', fg: 'onAccentFill', bg: 'accentFill', min: 4.5 },
+  { mode: 'light', fg: 'onStatus', bg: 'danger', min: 4.5 },
+  { mode: 'light', fg: 'onStatus', bg: 'warning', min: 4.5 },
+  { mode: 'light', fg: 'onStatus', bg: 'success', min: 4.5 },
+  { mode: 'dark', fg: 'onAccentFill', bg: 'accentFill', min: 4.5 },
+  { mode: 'dark', fg: 'onStatus', bg: 'danger', min: 4.5 },
+  { mode: 'dark', fg: 'onStatus', bg: 'warning', min: 4.5 },
+  { mode: 'dark', fg: 'onStatus', bg: 'success', min: 4.5 },
 ];
+
+/** Foundation scales as final CSS values (proposed; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
+export const FOUNDATIONS = {
+  "space": {
+    "0": "0",
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.25rem",
+    "6": "1.5rem",
+    "8": "2rem",
+    "10": "2.5rem",
+    "12": "3rem",
+    "16": "4rem",
+    "20": "5rem",
+    "24": "6rem",
+    "0-5": "0.125rem"
+  },
+  "radius": {
+    "none": "0",
+    "sm": "0.25rem",
+    "md": "0.5rem",
+    "lg": "0.75rem",
+    "xl": "1rem",
+    "full": "9999px"
+  },
+  "shadow": {
+    "1": "0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.12)",
+    "2": "0 2px 6px 0 rgb(var(--hd-midnight-rgb) / 0.14), 0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.1)",
+    "3": "0 8px 24px 0 rgb(var(--hd-midnight-rgb) / 0.18), 0 2px 6px 0 rgb(var(--hd-midnight-rgb) / 0.12)"
+  },
+  "duration": {
+    "instant": "0ms",
+    "fast": "120ms",
+    "base": "200ms",
+    "slow": "320ms"
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0, 0, 1)",
+    "enter": "cubic-bezier(0, 0, 0, 1)",
+    "exit": "cubic-bezier(0.3, 0, 1, 1)"
+  },
+  "fontSize": {
+    "xs": "0.75rem",
+    "sm": "0.875rem",
+    "base": "1rem",
+    "lg": "1.125rem",
+    "xl": "1.25rem",
+    "2xl": "1.5rem",
+    "3xl": "1.875rem",
+    "4xl": "2.25rem",
+    "5xl": "3rem",
+    "6xl": "3.75rem"
+  },
+  "lineHeight": {
+    "tight": "1.2",
+    "snug": "1.35",
+    "normal": "1.5",
+    "relaxed": "1.7"
+  },
+  "breakpoint": {
+    "sm": "40rem",
+    "md": "48rem",
+    "lg": "64rem",
+    "xl": "80rem",
+    "2xl": "96rem"
+  },
+  "zIndex": {
+    "base": "0",
+    "dropdown": "1000",
+    "sticky": "1100",
+    "overlay": "1200",
+    "modal": "1300",
+    "toast": "1400",
+    "tooltip": "1500"
+  }
+} as const;
 
 export const cssVarName = (key: string): string => `--hd-${key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`;

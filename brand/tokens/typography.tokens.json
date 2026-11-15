@@ -71,6 +71,96 @@
       "bold": {
         "$value": 700
       }
+    },
+    "size": {
+      "$type": "dimension",
+      "$extensions": {
+        "com.hexadata": {
+          "status": "proposed",
+          "note": "Not defined by Brand Kit v1.0. Awaiting owner approval; see docs/FOUNDATIONS-PROPOSAL.md."
+        }
+      },
+      "xs": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        }
+      },
+      "base": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1.125,
+          "unit": "rem"
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        }
+      },
+      "3xl": {
+        "$value": {
+          "value": 1.875,
+          "unit": "rem"
+        }
+      },
+      "4xl": {
+        "$value": {
+          "value": 2.25,
+          "unit": "rem"
+        }
+      },
+      "5xl": {
+        "$value": {
+          "value": 3,
+          "unit": "rem"
+        }
+      },
+      "6xl": {
+        "$value": {
+          "value": 3.75,
+          "unit": "rem"
+        }
+      }
+    },
+    "lineHeight": {
+      "$type": "number",
+      "$extensions": {
+        "com.hexadata": {
+          "status": "proposed",
+          "note": "Not defined by Brand Kit v1.0. Awaiting owner approval; see docs/FOUNDATIONS-PROPOSAL.md."
+        }
+      },
+      "tight": {
+        "$value": 1.2
+      },
+      "snug": {
+        "$value": 1.35
+      },
+      "normal": {
+        "$value": 1.5
+      },
+      "relaxed": {
+        "$value": 1.7
+      }
     }
   }
 }

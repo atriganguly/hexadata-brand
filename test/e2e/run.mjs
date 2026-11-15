@@ -53,6 +53,18 @@ writeFileSync(
 
 const CSP =
   "default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://brand.example.com; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'";
+const GALLERY = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>gallery</title><link rel="stylesheet" href="/all.css"></head><body>
+<main class="hd-container hd-stack">
+<h1 data-check>Supercomputing, On-demand.</h1><p data-check>Body text <a data-check href="#">link</a></p>
+<p class="hd-muted" data-check>Muted</p>
+<div class="hd-cluster"><button class="hd-btn" data-check>Primary</button><button class="hd-btn hd-btn--secondary" data-check>Secondary</button><button class="hd-btn hd-btn--ghost" data-check>Ghost</button><button class="hd-btn hd-btn--danger" data-check>Danger</button></div>
+<div class="hd-alert hd-alert--danger" data-check>Danger</div><div class="hd-alert hd-alert--warning" data-check>Warning</div><div class="hd-alert hd-alert--success" data-check>Success</div><div class="hd-alert hd-alert--accent" data-check>Accent</div>
+<div class="hd-card" data-check>Card</div><div class="hd-card hd-card--alt" data-check>Alt card <a data-check href="#">link</a></div>
+<span class="hd-badge" data-check>Badge</span><span class="hd-badge hd-badge--accent" data-check>Accent</span>
+<label class="hd-field"><span class="hd-label" data-check>Name</span><input class="hd-input" data-check placeholder="Placeholder"></label>
+<table class="hd-table"><thead><tr><th data-check>H</th></tr></thead><tbody><tr><td data-check>C</td></tr></tbody></table>
+<footer class="hd-footer" data-check>Footer <a data-check href="#">link</a></footer>
+</main></body></html>`;
 const server = createServer((req, res) => {
   const path = new URL(req.url, 'http://x').pathname;
   const files = { '/': ['index.html', 'text/html'], '/demo.js': ['demo.js', 'text/javascript'] };
@@ -60,6 +72,14 @@ const server = createServer((req, res) => {
   if (path === '/hexadata.css') {
     res.setHeader('content-type', 'text/css');
     return res.end(readFileSync(join(root, 'dist/css/hexadata.css')));
+  }
+  if (path === '/all.css') {
+    res.setHeader('content-type', 'text/css');
+    return res.end(readFileSync(join(root, 'dist/css/all.css')));
+  }
+  if (path === '/gallery') {
+    res.setHeader('content-type', 'text/html');
+    return res.end(GALLERY);
   }
   const f = files[path];
   if (!f) {
@@ -180,6 +200,40 @@ await check('semantic CSS follows prefers-color-scheme and data-theme (light=whi
   assert.deepEqual(await probe(d.page), ['rgb(248, 250, 252)', 'rgb(18, 30, 54)']);
   await d.ctx.close();
 });
+
+for (const scheme of ['light', 'dark']) {
+  await check(`components: every text element has >= 4.5:1 contrast in ${scheme} mode (computed, real browser)`, async () => {
+    const ctx = await browser.newContext({ colorScheme: scheme });
+    const page = await ctx.newPage();
+    await page.goto(`${origin}/gallery`);
+    const bad = await page.evaluate(() => {
+      const lum = ([r, g, b]) =>
+        [r, g, b]
+          .map((v) => v / 255)
+          .map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4))
+          .reduce((a, c, i) => a + c * [0.2126, 0.7152, 0.0722][i], 0);
+      const parse = (v) => v.match(/[\d.]+/g).map(Number);
+      const bgOf = (el) => {
+        for (let e = el; e; e = e.parentElement) {
+          const c = parse(getComputedStyle(e).backgroundColor);
+          if (c.length < 4 || c[3] > 0.99) return c.slice(0, 3);
+        }
+        return [255, 255, 255];
+      };
+      const out = [];
+      for (const el of document.querySelectorAll('[data-check]')) {
+        const fg = parse(getComputedStyle(el).color).slice(0, 3);
+        const bg = bgOf(el);
+        const [a, b] = [lum(fg), lum(bg)];
+        const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+        if (ratio < 4.5) out.push(`${el.tagName}.${el.className} ${ratio.toFixed(2)}`);
+      }
+      return out;
+    });
+    assert.deepEqual(bad, []);
+    await ctx.close();
+  });
+}
 
 await browser.close();
 server.close();

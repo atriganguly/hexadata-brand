@@ -12,6 +12,9 @@ export interface Pair {
   use?: string;
   reason?: string;
 }
+export type FoundationGroup = 'space' | 'radius' | 'shadow' | 'duration' | 'easing' | 'fontSize' | 'lineHeight' | 'breakpoint' | 'zIndex';
+/** Each group maps token name -> final CSS value (shadows already reference the palette's --hd-*-rgb variables). */
+export type Foundations = Record<FoundationGroup, Record<string, string>>;
 export interface Tokens {
   source: string;
   owner: string;
@@ -25,6 +28,7 @@ export interface Tokens {
   semanticPairs: { mode: 'light' | 'dark'; fg: string; bg: string; min: number }[];
   pairs: Pair[];
   forbiddenPairs: Pair[];
+  foundations: Foundations;
 }
 
 export interface Ctx {

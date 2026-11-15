@@ -28,6 +28,20 @@ Peer dependencies are optional: `react` (for `/react`, `/native`), `react-native
 Semantic roles (`--hd-bg`, `--hd-fg`, `--hd-bg-alt`, `--hd-fg-muted`, `--hd-accent`, `--hd-border-strong`, …) follow `prefers-color-scheme`
 and can be forced with `<html data-theme="light|dark">`. **Style with roles, not raw palette**: the roles are the contrast-checked pairings.
 
+### Ready-made styles and components (any framework)
+
+```css
+@import '@hexadata/brand/fonts.css';
+@import '@hexadata/brand/all.css'; /* tokens + base + components in cascade layers hd-base / hd-components / hd-utilities */
+```
+
+```html
+<button class="hd-btn">Get started</button>
+<div class="hd-alert hd-alert--success" role="status">Saved.</div>
+```
+
+Use `base.css` / `components.css` separately if you prefer. Spacing, radius, elevation, motion and the type scale are proposed values pending owner approval ([docs/FOUNDATIONS-PROPOSAL.md](docs/FOUNDATIONS-PROPOSAL.md)).
+
 ### React / Next.js (App Router safe)
 
 ```tsx

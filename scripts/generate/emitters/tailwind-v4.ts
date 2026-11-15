@@ -3,6 +3,14 @@ import type { Ctx, Tokens } from '../types.ts';
 export function emit(t: Tokens, { write, HEADER, kebab, paletteKeys }: Ctx): void {
   const roles = Object.keys(t.semantic.light);
   const v4Colors = [...paletteKeys, ...roles].map((n) => `  --color-hd-${kebab(n)}: var(--hd-${kebab(n)});`).join('\n');
+  const F = t.foundations;
+  const line = (ns: string, prefix: string, g: Record<string, string>, rename: Record<string, string> = {}): string =>
+    Object.keys(g)
+      .map((k) => `  --${ns}-${rename[k] ?? k}: var(--hd-${prefix}-${k});`)
+      .join('\n');
+  const breakpoints = Object.entries(F.breakpoint)
+    .map(([k, v]) => `  --breakpoint-${k}: ${v};`)
+    .join('\n');
   write(
     'src/tailwind/theme.css',
     `/* ${HEADER} */
@@ -16,6 +24,18 @@ ${v4Colors}
   --font-display: var(--hd-font-display);
   --font-body: var(--hd-font-body);
   --font-mono: var(--hd-font-mono);
+
+  /* Foundations: strict like colours, only brand scales exist (spacing keeps Tailwind's 0.25rem base, which the brand scale matches). */
+  --radius-*: initial;
+${line('radius', 'radius', F.radius)}
+  --shadow-*: initial;
+${line('shadow', 'shadow', F.shadow, { '1': 'sm', '2': 'md', '3': 'lg' })}
+  --text-*: initial;
+${line('text', 'font-size', F.fontSize)}
+  --ease-*: initial;
+${line('ease', 'ease', F.easing)}
+  --breakpoint-*: initial;
+${breakpoints}
 }
 `,
   );

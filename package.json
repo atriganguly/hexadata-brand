@@ -80,6 +80,9 @@
     },
     "./tailwind/theme.css": "./dist/tailwind/theme.css",
     "./css": "./dist/css/hexadata.css",
+    "./base.css": "./dist/css/base.css",
+    "./components.css": "./dist/css/components.css",
+    "./all.css": "./dist/css/all.css",
     "./fonts.css": "./dist/css/fonts.css",
     "./fonts-fallback.css": "./dist/css/fonts-fallback.css",
     "./package.json": "./package.json"
@@ -139,7 +142,7 @@
     "test": "tsx --test test/*.test.ts test/*.test.tsx",
     "test:dist": "node --test test/dist.test.mjs",
     "verify": "node scripts/verify-package.mjs",
-    "verify:release": "node scripts/verify-package.mjs --strict && node scripts/check-types.mjs && publint && attw --pack . --profile node16 --exclude-entrypoints ./tailwind/theme.css ./css ./fonts.css ./fonts-fallback.css --ignore-rules named-exports",
+    "verify:release": "node scripts/verify-package.mjs --strict && node scripts/check-types.mjs && publint && attw --pack . --profile node16 --exclude-entrypoints ./tailwind/theme.css ./css ./base.css ./components.css ./all.css ./fonts.css ./fonts-fallback.css --ignore-rules named-exports",
     "prepublishOnly": "npm run build && npm run build:fonts && npm run test && npm run test:dist && npm run test:e2e && npm run verify:release",
     "format": "prettier --write .",
     "check-types": "node scripts/check-types.mjs",

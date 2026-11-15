@@ -63,6 +63,13 @@ copyCts(join(dist, 'types'), join(dist, 'types-cjs'));
 mkdirSync(join(dist, 'css'), { recursive: true });
 mkdirSync(join(dist, 'tailwind'), { recursive: true });
 cpSync(join(root, 'src/css/hexadata.css'), join(dist, 'css/hexadata.css'));
+cpSync(join(root, 'src/css/base.css'), join(dist, 'css/base.css'));
+cpSync(join(root, 'src/css/components.css'), join(dist, 'css/components.css'));
+// all.css: tokens + base + components in one file (no @import, so it works from any host without extra requests).
+writeFileSync(
+  join(dist, 'css/all.css'),
+  ['hexadata.css', 'base.css', 'components.css'].map((f) => readFileSync(join(root, 'src/css', f), 'utf8')).join('\n'),
+);
 cpSync(join(root, 'src/tailwind/preset.cjs'), join(dist, 'tailwind/preset.cjs'));
 cpSync(join(root, 'src/tailwind/preset.d.cts'), join(dist, 'tailwind/preset.d.cts'));
 cpSync(join(root, 'src/tailwind/theme.css'), join(dist, 'tailwind/theme.css'));
