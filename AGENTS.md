@@ -15,6 +15,7 @@ The single source of truth for the HexaData brand. Every HexaData app, site and 
 5. A brand value change must update the source **and** the golden values in `test/tokens.test.ts` together; CI fails otherwise.
 6. Never add a runtime dependency, network call, browser storage or third-party URL to shipped code.
 7. Pure `#000000` / `#FFFFFF` are never tokens.
+8. **Licensing split**: software is Apache-2.0, HexaData Brand Assets are NOT (see BRAND-LICENSE.md). Never relicense, never put brand assets (logos, taglines, Brand Kit) outside `brand/logo/` and `brand/kit/`, never describe them as open or free, never edit `LICENSE`, `BRAND-LICENSE.md` or `NOTICE` without the brand owner's approval.
 
 ## Commands (Node 22+; on this Windows machine activate with `fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; fnm use default`)
 

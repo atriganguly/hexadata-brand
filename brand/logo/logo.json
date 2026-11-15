@@ -1,5 +1,6 @@
 {
-  "$description": "HexaData logo masters. Extracted unmodified from Brand Kit v1.0 (scripts/extract-kit-images.mjs). RASTER ONLY: replace with vector masters when available; keep the ids and the API stays stable.",
+  "$description": "Official HexaData logo masters, supplied as PNG by the HexaData Marketing owner on 2026-11-15 (same artwork as Brand Kit v1.0 p.2, without PDF re-encoding). RASTER ONLY: vector masters are planned for v2.1; keep the ids and the API stays stable. These files are HexaData trademarks: see BRAND-LICENSE.md.",
+  "notice": "HexaData and the HexaData logo are trademarks of Esconet Technologies Limited. All rights reserved. Use only as permitted by BRAND-LICENSE.md (https://github.com/atriganguly/hexadata-brand).",
   "background": {
     "light": "Use on light surfaces (--hd-bg in light mode).",
     "dark": "Use on dark surfaces (--hd-bg in dark mode)."
@@ -31,15 +32,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "d4b7a5308a56f1b089e4e5e91219ea5d8b6ca3da3ad71b1b049ec8b0da3af843",
+      "sha256": "9295fe94b82e9e6fe2e94f88ead90dd3c96f0b7a13f191bd858b6d5e2bf440e8",
       "kitRef": "Brand Kit v1.0 p.2, Logo / Primary (Preferred) / Centered",
-      "pdfObject": 5,
       "trim": {
         "left": 37,
         "top": 87,
         "width": 442,
         "height": 296
-      }
+      },
+      "suppliedAs": "hexadata-logo.png"
     },
     {
       "id": "centered-primary-on-dark",
@@ -50,15 +51,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "3614b31c9c0202f85e4e3622bc0a7cd83bd98650db2379f11e2f2443b226e244",
+      "sha256": "48db2b750456409c496f1fdedb10cd43713c7b39c288af94aaba31af89f0cda7",
       "kitRef": "Brand Kit v1.0 p.2, Alternative / Centered",
-      "pdfObject": 11,
       "trim": {
         "left": 22,
         "top": 79,
         "width": 456,
         "height": 293
-      }
+      },
+      "suppliedAs": "hexadata-logo-white.png"
     },
     {
       "id": "centered-mono",
@@ -69,15 +70,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "92d45e21c9079fe911627f7d795d3f4fea4c25361233b5a66475ef296057b9b4",
+      "sha256": "8e5212c0170ccef8a92729038a376e89cb8906022259381ba5c804d732823acf",
       "kitRef": "Brand Kit v1.0 p.2, Mono / Centered",
-      "pdfObject": 15,
       "trim": {
         "left": 10,
         "top": 50,
         "width": 479,
         "height": 362
-      }
+      },
+      "suppliedAs": "hexadata-logo-white-mono.png"
     },
     {
       "id": "horizontal-primary-on-light",
@@ -88,15 +89,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "dd90fa67977e069b9fbcb39086bcbe528c3a9602b530b95af5ab3ef0e29e5084",
+      "sha256": "735e68dcc4dae14cd9494f3889f854df3bacf75fff9ada376290ae4b1b367f98",
       "kitRef": "Brand Kit v1.0 p.2, Logo / Primary (Preferred) / Horizontal",
-      "pdfObject": 604,
       "trim": {
         "left": 12,
         "top": 156,
         "width": 471,
         "height": 131
-      }
+      },
+      "suppliedAs": "hexadata-logo-slim.png"
     },
     {
       "id": "horizontal-primary-on-dark",
@@ -107,15 +108,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "a8d295682c24e8812cac674372fdc050f0c224981cd820dd811167d6252d6ccd",
+      "sha256": "7623570ea35acac284278993737566bdee07e138ee7a9c961dd3e5f08cd12498",
       "kitRef": "Brand Kit v1.0 p.2, Alternative / Horizontal",
-      "pdfObject": 13,
       "trim": {
         "left": 27,
         "top": 143,
         "width": 461,
         "height": 132
-      }
+      },
+      "suppliedAs": "hexadata-logo-slim-white.png"
     },
     {
       "id": "horizontal-mono",
@@ -126,15 +127,15 @@
       "width": 500,
       "height": 500,
       "opaque": false,
-      "sha256": "ae176c35b2f82d70abbcc99592f202f9732c8b42bda39fd9d282fcf6e014a413",
+      "sha256": "13fbdb43916f1f04037f48e2b7ee0dd7eb08de4e901de1808109589cb344400c",
       "kitRef": "Brand Kit v1.0 p.2, Mono / Horizontal",
-      "pdfObject": 17,
       "trim": {
         "left": 15,
         "top": 138,
         "width": 473,
         "height": 141
-      }
+      },
+      "suppliedAs": "hexadata-logo-slim-white-mono.png"
     },
     {
       "id": "icon-on-light",
@@ -145,15 +146,15 @@
       "width": 4096,
       "height": 4096,
       "opaque": true,
-      "sha256": "f13e5a4eb2746bb5c616a2f9b15539f506abc8acdb891d2559af73c5d99bb12c",
+      "sha256": "af0fad8d00fde41619d042d379db04e264e524f8dfb07678a70adf1893cfb725",
       "kitRef": "Brand Kit v1.0 p.2, Icon (App/Social), white tile",
-      "pdfObject": 9,
       "trim": {
         "left": 0,
         "top": 0,
         "width": 4096,
         "height": 4096
-      }
+      },
+      "suppliedAs": "hexadata-logo-icon-only.png"
     },
     {
       "id": "icon-on-dark",
@@ -164,15 +165,15 @@
       "width": 4096,
       "height": 4096,
       "opaque": true,
-      "sha256": "bf6d32b95eeaaf0062071cba7bc25bdb7840f5c54bff424477bdf52b652ec1d9",
+      "sha256": "37c6df1f49cd6fc77e3af0135fc1e6a9136ddf75d9d587aec1740c5c5439c582",
       "kitRef": "Brand Kit v1.0 p.2, Icon (App/Social), dark tile",
-      "pdfObject": 7,
       "trim": {
         "left": 0,
         "top": 0,
         "width": 4096,
         "height": 4096
-      }
+      },
+      "suppliedAs": "hexadata-logo-icon-only-dark.png"
     }
   ]
 }

@@ -1,6 +1,15 @@
+HexaData Brand (@hexadata/brand)
+Copyright 2026 Esconet Technologies Limited (HexaData).
+
+The software in this repository is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The HexaData Brand Assets (names, logos, taglines, Brand Kit documents and the HexaData brand pack) are NOT covered by
+that licence. They are trademarks and proprietary material of Esconet Technologies Limited, usable only as described in
+BRAND-LICENSE.md.
+
 Third-party notices
 
-Fonts (bundled by `npm run build:fonts` into dist/css/fonts, unmodified fontsource builds), SIL Open Font License 1.1:
+Fonts, SIL Open Font License 1.1, shipped unmodified (official files supplied by HexaData; texts in dist/licenses/):
   - Space Grotesk   (dist/licenses/space-grotesk-OFL.txt)
   - Inter Tight     (dist/licenses/inter-tight-OFL.txt)
   - JetBrains Mono  (dist/licenses/jetbrains-mono-OFL.txt)

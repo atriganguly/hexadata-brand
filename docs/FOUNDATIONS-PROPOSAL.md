@@ -17,7 +17,7 @@ Nothing here changes any Kit-defined value (palette, fonts, taglines, black/grey
 
 ## Logo (needs owner input)
 
-- **Raster only.** Brand Kit v1.0 contains PNG-quality logos (500 px wordmarks, 4096 px icon tiles). 500 px is soft for large displays; please supply vector masters or 2000 px+ exports. Replace the files in `brand/logo/source/`, run `npm run logo:measure`, and nothing else changes.
+- **Raster only for 2.0 (decided).** The official PNGs supplied by HexaData Marketing (500 px wordmarks, 4096 px icon tiles) are the masters; vector (SVG) masters are planned for **v2.1**. 500 px is soft for large displays. When vectors arrive, drop them into `brand/logo/source/`, run `npm run logo:measure`, and nothing else changes.
 - **Inconsistent artwork in the Kit:** the three centered lockups have different proportions (442x296, 456x293, 479x362) and the dark-tile icon uses a navy that is not in the palette. Flagged, not altered.
 - **Mono artwork exists only for dark surfaces**, and there is no transparent icon (only white and navy tiles).
 - **Clear space, minimum size and misuse rules are proposals** (in `brand/logo/logo.json`, `rules`): clear space of about 0.2 x logo height; minimum widths 24 px icon, 96 px centered, 120 px horizontal.

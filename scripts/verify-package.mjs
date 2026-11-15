@@ -79,6 +79,8 @@ if (strict) {
     if (!existsSync(join(root, `dist/licenses/${slug}-OFL.txt`))) fail(`missing OFL licence for ${slug}`);
   const css = existsSync(join(root, 'dist/css/fonts.css')) ? readFileSync(join(root, 'dist/css/fonts.css'), 'utf8') : '';
   if ((css.match(/@font-face/g) ?? []).length !== 6) fail('fonts.css should declare 6 @font-face rules');
+  const ttf = existsSync(join(root, 'dist/fonts/ttf')) ? readdirSync(join(root, 'dist/fonts/ttf')).filter((f) => f.endsWith('.ttf')) : [];
+  if (ttf.length !== 12) fail(`expected 12 static ttf files, found ${ttf.length}`);
   for (const f of [
     'favicon.ico',
     'favicon-32.png',
@@ -104,9 +106,9 @@ try {
     }),
   );
   const allowed =
-    /^(dist\/|react\/package\.json$|native\/package\.json$|elements\/package\.json$|tailwind\/package\.json$|package\.json$|README\.md$|LICENSE$|NOTICE$|SECURITY\.md$|PRIVACY\.md$|ACCESSIBILITY\.md$|CHANGELOG\.md$)/;
+    /^(dist\/|react\/package\.json$|native\/package\.json$|elements\/package\.json$|tailwind\/package\.json$|package\.json$|README\.md$|LICENSE$|BRAND-LICENSE\.md$|NOTICE$|SECURITY\.md$|PRIVACY\.md$|ACCESSIBILITY\.md$|CHANGELOG\.md$)/;
   for (const f of files) if (!allowed.test(f.path)) fail(`unexpected file in tarball: ${f.path}`);
-  if (size > 3_000_000) fail(`tarball is ${size} bytes (> 3 MB)`);
+  if (size > 5_000_000) fail(`tarball is ${size} bytes (> 5 MB)`);
   console.log(`  tarball: ${files.length} files, ${(size / 1024).toFixed(1)} KB packed`);
 } catch (e) {
   warnings.push(`could not run npm pack --dry-run (${e.message.split('\n')[0]})`);

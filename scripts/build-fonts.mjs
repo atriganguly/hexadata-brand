@@ -1,7 +1,8 @@
 // Self-hosts the brand fonts: copies pinned variable WOFF2 files + OFL licences out of node_modules
 // (integrity-pinned by package-lock.json) and generates fonts.css and fonts-fallback.css.
 // No network access at build or runtime. Fails loudly if anything is missing.
-import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -36,10 +37,14 @@ for (const f of BRAND_FONTS) {
     copied.push(file);
     fontsCss += `\n${fontFaceCss({ family: f.family, weights: f.weights, file, subset })}`;
   }
-  const lic = ['LICENSE', 'LICENSE.txt', 'OFL.txt'].map((n) => join(pkgDir, n)).find(existsSync);
-  if (!lic) die(`no licence file in @fontsource-variable/${f.slug}: refusing to ship a font without its OFL text`);
-  cpSync(lic, join(root, `dist/licenses/${f.slug}-OFL.txt`));
+  // The OFL text supplied with the official TTFs is authoritative for both the WOFF2 and the TTF builds.
+  cpSync(join(root, `brand/fonts/licenses/${f.slug}-OFL.txt`), join(root, `dist/licenses/${f.slug}-OFL.txt`));
 }
+// Static TTFs (unmodified, hash-checked by font-tool) for React Native, Flutter, iOS/Android, Office and print.
+execFileSync(process.execPath, [join(root, 'scripts/font-tool.mjs'), 'check'], { stdio: 'inherit' });
+mkdirSync(join(root, 'dist/fonts/ttf'), { recursive: true });
+const ttfs = JSON.parse(readFileSync(join(root, 'brand/fonts/fonts.json'), 'utf8')).files;
+for (const t of ttfs) cpSync(join(root, 'brand/fonts', t.file), join(root, 'dist/fonts', t.file));
 writeFileSync(join(out, 'fonts.css'), fontsCss);
 
 // Metric-matched fallback faces (Capsize). The ranking is printed so maintainers can sanity-check the choice.
@@ -61,4 +66,4 @@ try {
   die(`could not compute fallback metrics (${e.code ?? e.message}). Install @capsizecss/unpack and @capsizecss/metrics.`);
 }
 writeFileSync(join(out, 'fonts-fallback.css'), fallbackCss);
-console.log(`build-fonts: ok (${copied.length} font files)`);
+console.log(`build-fonts: ok (${copied.length} woff2 + ${ttfs.length} ttf)`);

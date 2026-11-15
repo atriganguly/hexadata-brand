@@ -5,12 +5,18 @@ single source of truth: [`brand/`](brand/), transcribed from _HexaData Brand Kit
 
 **Design goals:** brand-exact · WCAG-enforced · no third-party requests · no browser storage · no personal data · tamper-evident updates.
 
-> Status: v2.0.0, not yet published. See [Verification status](#verification-status) for exactly what has and has not been run.
+> Status: v2.0.0 in preparation (alpha). See [Verification status](#verification-status) for exactly what has and has not been run.
+
+## Licence: open software, protected brand
+
+- **The software** (generators, CSS, React, React Native, web components, tests) is **Apache-2.0**. Anyone may use it, including to build a design system for **their own** brand: see [docs/USE-FOR-YOUR-OWN-BRAND.md](docs/USE-FOR-YOUR-OWN-BRAND.md).
+- **The HexaData brand assets** (name, logos, taglines, Brand Kit, the HexaData brand pack) are **trademarks and proprietary material of Esconet Technologies Limited**, not open source. Allowed and forbidden uses are in [BRAND-LICENSE.md](BRAND-LICENSE.md).
+- **The fonts** (Space Grotesk, Inter Tight, JetBrains Mono) are under the SIL Open Font License 1.1.
 
 ## Install
 
 ```bash
-npm install @hexadata/brand          # private scope: configure your registry/token first
+npm install @hexadata/brand
 ```
 
 Peer dependencies are optional: `react` (for `/react`, `/native`), `react-native` (for `/native`), `tailwindcss` (for `/tailwind`).
@@ -97,8 +103,7 @@ const theme = useHexaNativeTheme(useColorScheme() === 'dark' ? 'dark' : 'light')
 // theme.colors.bg, theme.colors.fg, theme.fonts.display.bold, theme.taglines.primary
 ```
 
-**Fonts:** bundle static TTFs named per `NATIVE_FONTS` (`SpaceGrotesk-Regular|Medium|SemiBold|Bold`, `InterTight-…`, `JetBrainsMono-…`),
-e.g. from the OFL-licensed `@expo-google-fonts/*` packages. React Native does not handle variable fonts well, so static files are used. Nothing is downloaded at runtime.
+**Fonts:** the official static TTFs ship in the package at `@hexadata/brand/fonts/ttf/*.ttf` (`SpaceGrotesk-Regular|Medium|SemiBold|Bold`, `InterTight-…`, `JetBrainsMono-…`), already named per `NATIVE_FONTS` (checked by a test against each file's PostScript name). Copy them into your app's font folder (Expo: `expo-font`; bare RN: `react-native.config.js` assets). React Native does not handle variable fonts well, so static files are used. Nothing is downloaded at runtime.
 
 ## Content-Security-Policy
 

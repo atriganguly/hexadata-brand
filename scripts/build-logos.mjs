@@ -26,7 +26,9 @@ for (const v of doc.variants) {
   }
   masters.set(v.id, buf);
 }
-const save = (name, pipeline) => pipeline.toFile(join(out, name));
+const NOTICE_TEXT = `${doc.notice}`;
+const exif = { IFD0: { Copyright: doc.notice, ImageDescription: 'HexaData logo (trademark of Esconet Technologies Limited)' } };
+const save = (name, pipeline) => pipeline.withExif(exif).toFile(join(out, name));
 
 for (const v of doc.variants) {
   const src = masters.get(v.id);
@@ -83,4 +85,5 @@ await save(
     .png({ compressionLevel: 9 }),
 );
 
+writeFileSync(join(out, 'NOTICE.txt'), `${NOTICE_TEXT}\n`);
 console.log(`build-logos: ok (${doc.variants.length} masters)`);

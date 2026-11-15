@@ -1,8 +1,8 @@
 {
   "name": "@hexadata/brand",
   "version": "2.0.0",
-  "description": "HexaData brand tokens (colour, type, taglines) for web, React, React Native and Tailwind. Self-contained: no third-party requests, no browser storage, no personal data.",
-  "license": "UNLICENSED",
+  "description": "HexaData brand system (colour, type, logos, taglines, foundations, components) for web, React, React Native and Tailwind, generated from one source of truth. Self-contained: no third-party requests by default, no browser storage, no personal data.",
+  "license": "Apache-2.0 AND LicenseRef-HexaData-Brand",
   "author": "HexaData",
   "type": "module",
   "sideEffects": [
@@ -12,7 +12,7 @@
     "node": ">=20"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "files": [
     "dist",
@@ -21,6 +21,7 @@
     "elements",
     "tailwind",
     "LICENSE",
+    "BRAND-LICENSE.md",
     "NOTICE",
     "README.md",
     "SECURITY.md",
@@ -101,6 +102,7 @@
     "./fonts.css": "./dist/css/fonts.css",
     "./fonts-fallback.css": "./dist/css/fonts-fallback.css",
     "./logo/*": "./dist/logo/*",
+    "./fonts/ttf/*": "./dist/fonts/ttf/*",
     "./package.json": "./package.json"
   },
   "peerDependencies": {
@@ -167,6 +169,8 @@
     "manifest": "node scripts/manifest-tool.mjs",
     "build:logos": "node scripts/build-logos.mjs",
     "logo:check": "node scripts/logo-tool.mjs check",
-    "logo:measure": "node scripts/logo-tool.mjs measure"
+    "logo:measure": "node scripts/logo-tool.mjs measure",
+    "font:check": "node scripts/font-tool.mjs check",
+    "font:measure": "node scripts/font-tool.mjs measure"
   }
 }

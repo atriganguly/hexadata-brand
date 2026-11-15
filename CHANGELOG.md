@@ -29,8 +29,11 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - `@hexadata/brand/base.css`, `/components.css`, `/all.css`: cascade-layered base styles and 20+ CSS components (button, fields, switch, card, badge, alert, table, tabs, dialog, breadcrumb, pagination, spinner, skeleton, avatar, code, layout, header/nav/footer). Contrast lint plus real-browser contrast test in both themes.
 - Golden two-key test, public-API contract snapshot, Style Dictionary v5 interop test.
 
-- Logo system: masters extracted unmodified from Brand Kit v1.0 into `brand/logo/` (hash-verified by `logo.json`); `npm run build:logos` derives trimmed PNG/WebP wordmarks, icon sizes 64-1024, favicon.ico, app icons and a 1200x630 social card into `dist/logo` (also served as `@hexadata/brand/logo/*`). `<HexaLogo>` / `<hexa-logo>` render both artworks and let CSS pick one for the active theme. **Raster only** until vector masters are supplied.
+- Logo system: official PNG masters supplied by HexaData Marketing in `brand/logo/` (hash-verified by `logo.json`; same artwork as Brand Kit v1.0 p.2); `npm run build:logos` derives trimmed PNG/WebP wordmarks, icon sizes 64-1024, favicon.ico, app icons and a 1200x630 social card into `dist/logo` (also served as `@hexadata/brand/logo/*`). `<HexaLogo>` / `<hexa-logo>` render both artworks and let CSS pick one for the active theme. **Raster only**; vector masters are planned for v2.1.
 - Custom elements `<hexa-tagline>`, `<hexa-logo>`, `<hexa-theme-toggle>`, `<hexa-tooltip>` (`@hexadata/brand/elements`, plus a self-registering `elements/auto` script) and React wrappers (`Button`, `ButtonLink`, `Alert`, `Badge`, `Card`, `Container`, `Stack`, `Cluster`, `Grid`, `Spinner`, `TextField`, `ThemeToggle`).
+
+- Official fonts: the four brand weights of each family as static TTF in `brand/fonts` (hash-checked, identity-checked), shipped at `@hexadata/brand/fonts/ttf/*` for React Native, Flutter, iOS/Android and Office; supplied OFL texts are the authoritative licences.
+- **Licensing changed**: software is now Apache-2.0; HexaData Brand Assets are protected by `BRAND-LICENSE.md` (trademark policy, permitted co-branding/sponsor/educational uses); `docs/USE-FOR-YOUR-OWN-BRAND.md` explains reuse for other brands. Package licence expression `Apache-2.0 AND LicenseRef-HexaData-Brand`; `publishConfig.access` is now `public`. Logo outputs embed the trademark notice (EXIF) and ship `dist/logo/NOTICE.txt`.
 
 ### Fixed
 
