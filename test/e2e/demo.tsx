@@ -17,7 +17,7 @@ const remote =
     : undefined;
 
 createRoot(document.getElementById('root')!).render(
-  <HexaProvider {...(remote ? { remote } : {})} onIssue={(i: unknown) => window.__issues.push(i)}>
+  <HexaProvider live={false} {...(remote ? { remote } : {})} onIssue={(i: unknown) => window.__issues.push(i)}>
     <HexaTagline id="tag" />
   </HexaProvider>,
 );

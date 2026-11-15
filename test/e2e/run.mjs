@@ -51,9 +51,11 @@ writeFileSync(
   '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>e2e</title><link rel="stylesheet" href="/hexadata.css"></head><body><div id="root"></div><script src="/demo.js"></script></body></html>',
 );
 
-const CSP =
-  "default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://brand.example.com; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'";
-const GALLERY = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>gallery</title><link rel="stylesheet" href="/all.css"></head><body>
+const brandOrigin = JSON.parse(readFileSync(join(root, 'brand/content.json'), 'utf8')).origin;
+const CSP = `default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://brand.example.com ${new URL(brandOrigin).origin}; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`;
+const gallery = (
+  liveOff,
+) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>gallery</title><link rel="stylesheet" href="/all.css"></head><body>
 <main class="hd-container hd-stack">
 <h1 data-check>Supercomputing, On-demand.</h1><p data-check>Body text <a data-check href="#">link</a></p>
 <p class="hd-muted" data-check>Muted</p>
@@ -66,9 +68,10 @@ const GALLERY = `<!doctype html><html lang="en"><head><meta charset="utf-8"><tit
 <hexa-logo id="lg" base="/logo/" alt="HexaData"></hexa-logo><hexa-logo id="lgi" form="icon" base="/logo/"></hexa-logo>
 <hexa-tagline id="et" variant="secondary"></hexa-tagline><hexa-theme-toggle></hexa-theme-toggle><hexa-tooltip text="Tip text"><button class="hd-btn" id="tb">Tip</button></hexa-tooltip>
 <footer class="hd-footer" data-check>Footer <a data-check href="#">link</a></footer>
-</main><script src="/elements.js"></script></body></html>`;
+</main><script src="/elements.js"${liveOff ? ' data-hd-live="off"' : ''}></script></body></html>`;
 const server = createServer((req, res) => {
-  const path = new URL(req.url, 'http://x').pathname;
+  const url = new URL(req.url, 'http://x');
+  const path = url.pathname;
   const files = { '/': ['index.html', 'text/html'], '/demo.js': ['demo.js', 'text/javascript'] };
   res.setHeader('Content-Security-Policy', CSP);
   if (path === '/hexadata.css') {
@@ -96,7 +99,7 @@ const server = createServer((req, res) => {
   }
   if (path === '/gallery') {
     res.setHeader('content-type', 'text/html');
-    return res.end(GALLERY);
+    return res.end(gallery(url.searchParams.get('live') === 'off'));
   }
   const f = files[path];
   if (!f) {
@@ -230,7 +233,7 @@ for (const [scheme, shown, hidden] of [
     page.on('response', (r) => {
       if (r.status() >= 400) bad.push(r.url());
     });
-    await page.goto(`${origin}/gallery`);
+    await page.goto(`${origin}/gallery?live=off`);
     await page.waitForLoadState('networkidle');
     const vis = (sel) => page.locator(sel).isVisible();
     assert.equal(await vis(`#lg .hd-logo__img--${shown}`), true);
@@ -249,6 +252,57 @@ for (const [scheme, shown, hidden] of [
   });
 }
 
+await check(
+  'live updates (default ON): exactly one credential-free request to the brand origin; a forged manifest is ignored silently; live=off makes none',
+  async () => {
+    const forged = {
+      kid: '2026-11',
+      payload: b64u(
+        new TextEncoder().encode(
+          JSON.stringify({
+            schemaVersion: 2,
+            revision: 99,
+            issuedAt: '2026-11-13T00:00:00Z',
+            tokens: { taglines: { secondary: 'FORGED' } },
+          }),
+        ),
+      ),
+      signature: b64u(new Uint8Array(64)),
+    };
+    const open = async (query) => {
+      const ctx = await browser.newContext({ colorScheme: 'light' });
+      const page = await ctx.newPage();
+      const requests = [];
+      page.on('request', (r) => requests.push({ url: r.url(), headers: r.headers() }));
+      await page.route(`${brandOrigin}/**`, (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          headers: { 'access-control-allow-origin': '*' },
+          body: JSON.stringify(forged),
+        }),
+      );
+      await page.goto(`${origin}/gallery${query}`);
+      await page.waitForLoadState('networkidle');
+      return { ctx, page, requests };
+    };
+    const on = await open('');
+    const manifestRequests = on.requests.filter((r) => r.url === `${brandOrigin}/v2/manifest.json`);
+    assert.equal(manifestRequests.length, 1, `one manifest request; saw: ${on.requests.map((r) => r.url).join(' | ')}`);
+    assert.equal(manifestRequests[0].headers.cookie, undefined);
+    assert.equal(manifestRequests[0].headers.referer, undefined);
+    assert.equal(await on.page.textContent('#et'), 'Engineered in India. Built for the World.', 'forged tagline must not apply');
+    await on.ctx.close();
+    const off = await open('?live=off');
+    assert.deepEqual(
+      off.requests.filter((r) => r.url.startsWith(brandOrigin)),
+      [],
+      'data-hd-live="off" means zero brand-origin requests',
+    );
+    await off.ctx.close();
+  },
+);
+
 await check('custom elements: tagline text, theme toggle (no storage), accessible dismissible tooltip, strict CSP', async () => {
   const ctx = await browser.newContext({ colorScheme: 'light' });
   const page = await ctx.newPage();
@@ -259,7 +313,7 @@ await check('custom elements: tagline text, theme toggle (no storage), accessibl
     if (m.type() === 'error' || /Content Security Policy/i.test(m.text())) errors.push(m.text());
   });
   page.on('pageerror', (e) => errors.push(String(e)));
-  await page.goto(`${origin}/gallery`);
+  await page.goto(`${origin}/gallery?live=off`);
   assert.equal(await page.textContent('#et'), 'Engineered in India. Built for the World.');
   const toggle = page.locator('hexa-theme-toggle button');
   assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
@@ -288,7 +342,7 @@ for (const scheme of ['light', 'dark']) {
   await check(`components: every text element has >= 4.5:1 contrast in ${scheme} mode (computed, real browser)`, async () => {
     const ctx = await browser.newContext({ colorScheme: scheme });
     const page = await ctx.newPage();
-    await page.goto(`${origin}/gallery`);
+    await page.goto(`${origin}/gallery?live=off`);
     const bad = await page.evaluate(() => {
       const lum = ([r, g, b]) =>
         [r, g, b]

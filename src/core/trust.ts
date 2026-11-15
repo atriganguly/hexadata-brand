@@ -4,7 +4,7 @@ import type { TrustedKey } from './remote.js';
 
 /** Public keys the signed live-update manifest must verify against (brand/keys.json). Empty = live updates are off. */
 export const TRUSTED_KEYS: readonly TrustedKey[] = [
-
+  { kid: "2026-11", publicKey: "Eemn1ZdkEnfHLjVZp5ehYBLunkV-J-sZe2uI5DNRBbY" },
 ];
 
 /** The signed manifest published by the evergreen hosted channel. */

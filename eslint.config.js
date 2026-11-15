@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['dist/**', 'node_modules/**', 'src/core/tokens.ts', 'src/tailwind/preset.cjs', 'test/e2e/demo.tsx'] },
+  { ignores: ['dist/**', 'channel-out/**', 'node_modules/**', 'src/core/tokens.ts', 'src/tailwind/preset.cjs', 'test/e2e/demo.tsx'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

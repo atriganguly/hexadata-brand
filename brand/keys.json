@@ -1,4 +1,4 @@
 {
   "$description": "Trusted Ed25519 public keys for the signed live-update manifest (hosted channel). Public keys only: the private key NEVER lives in the repo. Two slots allow rotation: add the new key here and release before signing with it. An empty list disables live updates (the baked-in brand is used).",
-  "keys": []
+  "keys": [{ "kid": "2026-11", "publicKey": "Eemn1ZdkEnfHLjVZp5ehYBLunkV-J-sZe2uI5DNRBbY" }]
 }
