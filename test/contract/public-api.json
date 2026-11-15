@@ -31,8 +31,31 @@
     "wcagGrade",
     "webCryptoEd25519Verifier"
   ],
-  "export:react": ["HexaProvider", "HexaTagline", "useHexaBrand"],
-  "export:native": ["HexaNativeProvider", "NATIVE_FONTS", "resolveNativeTheme", "useHexaNativeManifest", "useHexaNativeTheme"],
+  "export:react": [
+    "Alert",
+    "Badge",
+    "Button",
+    "ButtonLink",
+    "Card",
+    "Cluster",
+    "Container",
+    "Grid",
+    "HexaProvider",
+    "HexaTagline",
+    "Spinner",
+    "Stack",
+    "TextField",
+    "ThemeToggle",
+    "useHexaBrand"
+  ],
+  "export:native": [
+    "HexaNativeProvider",
+    "NATIVE_FONTS",
+    "resolveNativeTheme",
+    "toNumber",
+    "useHexaNativeManifest",
+    "useHexaNativeTheme"
+  ],
   "css-variables": [
     "--hd-accent",
     "--hd-accent-fill",
@@ -263,6 +286,7 @@
     "hd-tagline",
     "hd-text-detail",
     "hd-text-display",
-    "hd-textarea"
+    "hd-textarea",
+    "hd-tooltip"
   ]
 }

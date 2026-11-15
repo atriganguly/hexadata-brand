@@ -7,6 +7,32 @@
 @layer hd-base, hd-components, hd-utilities;
 
 @layer hd-components {
+  /* ---------- Custom elements (light DOM) ---------- */
+  hexa-tagline {
+    display: block;
+  }
+  hexa-tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  .hd-tooltip {
+    position: absolute;
+    inset-block-end: calc(100% + var(--hd-space-2));
+    inset-inline-start: 50%;
+    z-index: var(--hd-z-tooltip);
+    inline-size: max-content;
+    max-inline-size: 18rem;
+    padding: var(--hd-space-2) var(--hd-space-3);
+    border-radius: var(--hd-radius-md);
+    background: var(--hd-fg);
+    color: var(--hd-bg);
+    font-size: var(--hd-font-size-sm);
+    transform: translateX(-50%);
+  }
+  .hd-tooltip[hidden] {
+    display: none;
+  }
+
   /* ---------- Surfaces ---------- */
   .hd-surface {
     background: var(--hd-bg);

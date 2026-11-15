@@ -21,6 +21,7 @@ const entries = {
   // "use client" must be the first statement of the emitted file; bundlers strip source-level directives.
   react: { in: 'src/react/index.ts', banner: '"use client";' },
   native: { in: 'src/native/index.tsx', banner: undefined },
+  elements: { in: 'src/elements/index.ts', banner: undefined },
 };
 
 for (const [name, entry] of Object.entries(entries)) {
@@ -40,6 +41,19 @@ for (const [name, entry] of Object.entries(entries)) {
     });
   }
 }
+
+// Self-registering browser bundle for plain HTML (<script src="auto.js"></script>); no dependencies, no network.
+await build({
+  entryPoints: [join(root, 'src/elements/auto.ts')],
+  outfile: join(dist, 'elements/auto.js'),
+  bundle: true,
+  format: 'iife',
+  platform: 'browser',
+  target: 'es2020',
+  minify: true,
+  legalComments: 'none',
+  logLevel: 'warning',
+});
 
 // Declarations (ESM flavour) via tsc.
 const tscBin = require.resolve('typescript/bin/tsc');
@@ -82,6 +96,8 @@ const shim = (dir, main, module, types) =>
   );
 shim('react', '../dist/react/index.cjs', '../dist/react/index.js', '../dist/types/react/index.d.ts');
 shim('native', '../dist/native/index.cjs', '../dist/native/index.js', '../dist/types/native/index.d.ts');
+mkdirSync(join(root, 'elements'), { recursive: true });
+shim('elements', '../dist/elements/index.cjs', '../dist/elements/index.js', '../dist/types/elements/index.d.ts');
 shim('tailwind', '../dist/tailwind/preset.cjs', undefined, '../dist/tailwind/preset.d.cts');
 
 console.log('build: ok');

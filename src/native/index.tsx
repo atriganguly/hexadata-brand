@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactElement, type ReactNode } from 'react';
 import {
   DEFAULT_MANIFEST,
+  FOUNDATIONS,
   SEMANTIC,
   fetchSignedManifest,
   type HexaManifest,
@@ -73,7 +74,20 @@ export interface HexaNativeTheme {
   /** Semantic colours already resolved for the requested mode. */
   readonly colors: Readonly<Record<SemanticRole, string>>;
   readonly fonts: typeof NATIVE_FONTS;
+  /** Foundation scales in dp (rem x 16). Proposed values; see docs/FOUNDATIONS-PROPOSAL.md. */
+  readonly space: Readonly<Record<string, number>>;
+  readonly radius: Readonly<Record<string, number>>;
+  readonly fontSize: Readonly<Record<string, number>>;
+  readonly duration: Readonly<Record<string, number>>;
 }
+
+/** '1.5rem' -> 24, '9999px' -> 9999, '120ms' -> 120, '0' -> 0. */
+export function toNumber(css: string): number {
+  const n = parseFloat(css);
+  return css.endsWith('rem') ? n * 16 : n;
+}
+const scale = (g: Readonly<Record<string, string>>): Record<string, number> =>
+  Object.fromEntries(Object.entries(g).map(([k, v]) => [k, toNumber(v)]));
 
 /** PostScript-style family names. Bundle matching static TTFs (see README → React Native fonts). */
 export const NATIVE_FONTS = {
@@ -93,7 +107,16 @@ export function resolveNativeTheme(manifest: HexaManifest, mode: ThemeMode): Hex
   const colors = Object.fromEntries(
     (Object.keys(roles) as SemanticRole[]).map((role) => [role, manifest.tokens.palette[roles[role]]]),
   ) as Record<SemanticRole, string>;
-  return { palette: manifest.tokens.palette, taglines: manifest.tokens.taglines, colors, fonts: NATIVE_FONTS };
+  return {
+    palette: manifest.tokens.palette,
+    taglines: manifest.tokens.taglines,
+    colors,
+    fonts: NATIVE_FONTS,
+    space: scale(FOUNDATIONS.space),
+    radius: scale(FOUNDATIONS.radius),
+    fontSize: scale(FOUNDATIONS.fontSize),
+    duration: scale(FOUNDATIONS.duration),
+  };
 }
 
 /** Hook: `const theme = useHexaNativeTheme(useColorScheme() === 'dark' ? 'dark' : 'light')`. */

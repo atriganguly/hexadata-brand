@@ -63,8 +63,9 @@ const GALLERY = `<!doctype html><html lang="en"><head><meta charset="utf-8"><tit
 <span class="hd-badge" data-check>Badge</span><span class="hd-badge hd-badge--accent" data-check>Accent</span>
 <label class="hd-field"><span class="hd-label" data-check>Name</span><input class="hd-input" data-check placeholder="Placeholder"></label>
 <table class="hd-table"><thead><tr><th data-check>H</th></tr></thead><tbody><tr><td data-check>C</td></tr></tbody></table>
+<hexa-tagline id="et" variant="secondary"></hexa-tagline><hexa-theme-toggle></hexa-theme-toggle><hexa-tooltip text="Tip text"><button class="hd-btn" id="tb">Tip</button></hexa-tooltip>
 <footer class="hd-footer" data-check>Footer <a data-check href="#">link</a></footer>
-</main></body></html>`;
+</main><script src="/elements.js"></script></body></html>`;
 const server = createServer((req, res) => {
   const path = new URL(req.url, 'http://x').pathname;
   const files = { '/': ['index.html', 'text/html'], '/demo.js': ['demo.js', 'text/javascript'] };
@@ -76,6 +77,10 @@ const server = createServer((req, res) => {
   if (path === '/all.css') {
     res.setHeader('content-type', 'text/css');
     return res.end(readFileSync(join(root, 'dist/css/all.css')));
+  }
+  if (path === '/elements.js') {
+    res.setHeader('content-type', 'text/javascript');
+    return res.end(readFileSync(join(root, 'dist/elements/auto.js')));
   }
   if (path === '/gallery') {
     res.setHeader('content-type', 'text/html');
@@ -199,6 +204,34 @@ await check('semantic CSS follows prefers-color-scheme and data-theme (light=whi
   await d.page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
   assert.deepEqual(await probe(d.page), ['rgb(248, 250, 252)', 'rgb(18, 30, 54)']);
   await d.ctx.close();
+});
+
+await check('custom elements: tagline text, theme toggle (no storage), accessible dismissible tooltip, strict CSP', async () => {
+  const ctx = await browser.newContext({ colorScheme: 'light' });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('console', (m) => {
+    if (m.type() === 'error' || /Content Security Policy/i.test(m.text())) errors.push(m.text());
+  });
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto(`${origin}/gallery`);
+  assert.equal(await page.textContent('#et'), 'Engineered in India. Built for the World.');
+  const toggle = page.locator('hexa-theme-toggle button');
+  assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
+  await toggle.click();
+  assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-theme')), 'dark');
+  assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgb(18, 30, 54)');
+  const tip = page.locator('.hd-tooltip');
+  assert.equal(await tip.isHidden(), true);
+  await page.focus('#tb');
+  assert.equal(await tip.isVisible(), true);
+  assert.equal(await page.getAttribute('#tb', 'aria-describedby'), await tip.getAttribute('id'));
+  await page.keyboard.press('Escape');
+  assert.equal(await tip.isHidden(), true);
+  assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length + document.cookie.length), 0);
+  assert.deepEqual(errors, []);
+  await ctx.close();
 });
 
 for (const scheme of ['light', 'dark']) {

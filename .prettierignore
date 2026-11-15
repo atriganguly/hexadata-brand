@@ -10,3 +10,6 @@ react/package.json
 native/package.json
 tailwind/package.json
 .github/workflows
+elements/package.json
+test/contract/public-api.json
+test/golden/brand.golden.json

@@ -1,0 +1,7 @@
+{
+  "name": "@hexadata/brand/elements",
+  "private": true,
+  "main": "../dist/elements/index.cjs",
+  "module": "../dist/elements/index.js",
+  "types": "../dist/types/elements/index.d.ts"
+}

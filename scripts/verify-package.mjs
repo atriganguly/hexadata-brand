@@ -86,7 +86,7 @@ try {
     }),
   );
   const allowed =
-    /^(dist\/|react\/package\.json$|native\/package\.json$|tailwind\/package\.json$|package\.json$|README\.md$|LICENSE$|NOTICE$|SECURITY\.md$|PRIVACY\.md$|ACCESSIBILITY\.md$|CHANGELOG\.md$)/;
+    /^(dist\/|react\/package\.json$|native\/package\.json$|elements\/package\.json$|tailwind\/package\.json$|package\.json$|README\.md$|LICENSE$|NOTICE$|SECURITY\.md$|PRIVACY\.md$|ACCESSIBILITY\.md$|CHANGELOG\.md$)/;
   for (const f of files) if (!allowed.test(f.path)) fail(`unexpected file in tarball: ${f.path}`);
   if (size > 1_500_000) fail(`tarball is ${size} bytes (> 1.5 MB)`);
   console.log(`  tarball: ${files.length} files, ${(size / 1024).toFixed(1)} KB packed`);

@@ -65,3 +65,35 @@ test('native provider + hook render with defaults and no remote', () => {
     DEFAULT_PALETTE.obsidian,
   );
 });
+
+test('component wrappers emit the .hd-* classes and accessible defaults (SSR)', async () => {
+  const { Alert, Badge, Button, ButtonLink, Card, Spinner, TextField } = await import('../src/react/index.ts');
+  assert.equal(renderToString(<Button>Go</Button>), '<button type="button" class="hd-btn">Go</button>');
+  assert.equal(
+    renderToString(
+      <Button variant="danger" size="sm" block>
+        x
+      </Button>,
+    ),
+    '<button type="button" class="hd-btn hd-btn--danger hd-btn--sm hd-btn--block">x</button>',
+  );
+  assert.match(renderToString(<ButtonLink href="/a">A</ButtonLink>), /^<a class="hd-btn" href="\/a">A<\/a>$/);
+  assert.match(renderToString(<Alert tone="danger">e</Alert>), /role="alert" class="hd-alert hd-alert--danger"/);
+  assert.match(renderToString(<Alert tone="success">ok</Alert>), /role="status"/);
+  assert.equal(renderToString(<Badge tone="accent">b</Badge>), '<span class="hd-badge hd-badge--accent">b</span>');
+  assert.match(renderToString(<Card alt>c</Card>), /class="hd-card hd-card--alt"/);
+  assert.match(renderToString(<Spinner label="Loading" />), /role="status"[^>]*><span class="hd-sr-only">Loading<\/span>/);
+  const f = renderToString(<TextField label="Email" help="We never share it" error="Required" />);
+  assert.match(f, /aria-invalid="true"/);
+  assert.match(f, /aria-describedby="[^"]+-help [^"]+-error"/);
+  assert.match(f, /<label class="hd-label" for=/);
+});
+
+test('native theme exposes foundations in dp', () => {
+  const t = resolveNativeTheme(DEFAULT_MANIFEST, 'light');
+  assert.equal(t.space['4'], 16);
+  assert.equal(t.radius['md'], 8);
+  assert.equal(t.fontSize['base'], 16);
+  assert.equal(t.duration['base'], 200);
+  assert.equal(t.colors.accentFill, DEFAULT_PALETTE.deepBlue);
+});
