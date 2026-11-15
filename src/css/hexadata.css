@@ -1,0 +1,104 @@
+/* GENERATED FILE: DO NOT EDIT. Source: tokens/brand.json (run `npm run generate`). */
+:root {
+  --hd-cyan: #009BB6;
+  --hd-cyan-rgb: 0 155 182;
+  --hd-deep-blue: #046AA7;
+  --hd-deep-blue-rgb: 4 106 167;
+  --hd-obsidian: #121E36;
+  --hd-obsidian-rgb: 18 30 54;
+  --hd-vivid-cerulean: #01A3E5;
+  --hd-vivid-cerulean-rgb: 1 163 229;
+  --hd-midnight: #040F49;
+  --hd-midnight-rgb: 4 15 73;
+  --hd-grey: #A3B1C6;
+  --hd-grey-rgb: 163 177 198;
+  --hd-white: #F8FAFC;
+  --hd-white-rgb: 248 250 252;
+  --hd-crimson: #FF3B30;
+  --hd-crimson-rgb: 255 59 48;
+  --hd-copper: #F59E0B;
+  --hd-copper-rgb: 245 158 11;
+  --hd-green: #10B981;
+  --hd-green-rgb: 16 185 129;
+
+  --hd-font-display: "Space Grotesk", "Space Grotesk Fallback", "Helvetica Neue", "Arial", system-ui, sans-serif;
+  --hd-font-body: "Inter Tight", "Inter Tight Fallback", system-ui, -apple-system, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari", sans-serif;
+  --hd-font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Liberation Mono", "Consolas", "Courier New", monospace;
+
+  /* Semantic roles: light (default) */
+  --hd-bg: var(--hd-white);
+  --hd-bg-rgb: var(--hd-white-rgb);
+  --hd-fg: var(--hd-obsidian);
+  --hd-fg-rgb: var(--hd-obsidian-rgb);
+  --hd-fg-strong: var(--hd-midnight);
+  --hd-fg-strong-rgb: var(--hd-midnight-rgb);
+  --hd-fg-muted: var(--hd-obsidian);
+  --hd-fg-muted-rgb: var(--hd-obsidian-rgb);
+  --hd-bg-alt: var(--hd-grey);
+  --hd-bg-alt-rgb: var(--hd-grey-rgb);
+  --hd-fg-on-alt: var(--hd-obsidian);
+  --hd-fg-on-alt-rgb: var(--hd-obsidian-rgb);
+  --hd-accent: var(--hd-deep-blue);
+  --hd-accent-rgb: var(--hd-deep-blue-rgb);
+  --hd-border-strong: var(--hd-obsidian);
+  --hd-border-strong-rgb: var(--hd-obsidian-rgb);
+  --hd-border-subtle: var(--hd-grey);
+  --hd-border-subtle-rgb: var(--hd-grey-rgb);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --hd-bg: var(--hd-obsidian);
+    --hd-bg-rgb: var(--hd-obsidian-rgb);
+    --hd-fg: var(--hd-white);
+    --hd-fg-rgb: var(--hd-white-rgb);
+    --hd-fg-strong: var(--hd-white);
+    --hd-fg-strong-rgb: var(--hd-white-rgb);
+    --hd-fg-muted: var(--hd-grey);
+    --hd-fg-muted-rgb: var(--hd-grey-rgb);
+    --hd-bg-alt: var(--hd-midnight);
+    --hd-bg-alt-rgb: var(--hd-midnight-rgb);
+    --hd-fg-on-alt: var(--hd-white);
+    --hd-fg-on-alt-rgb: var(--hd-white-rgb);
+    --hd-accent: var(--hd-vivid-cerulean);
+    --hd-accent-rgb: var(--hd-vivid-cerulean-rgb);
+    --hd-border-strong: var(--hd-grey);
+    --hd-border-strong-rgb: var(--hd-grey-rgb);
+    --hd-border-subtle: var(--hd-grey);
+    --hd-border-subtle-rgb: var(--hd-grey-rgb);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --hd-bg: var(--hd-obsidian);
+  --hd-bg-rgb: var(--hd-obsidian-rgb);
+  --hd-fg: var(--hd-white);
+  --hd-fg-rgb: var(--hd-white-rgb);
+  --hd-fg-strong: var(--hd-white);
+  --hd-fg-strong-rgb: var(--hd-white-rgb);
+  --hd-fg-muted: var(--hd-grey);
+  --hd-fg-muted-rgb: var(--hd-grey-rgb);
+  --hd-bg-alt: var(--hd-midnight);
+  --hd-bg-alt-rgb: var(--hd-midnight-rgb);
+  --hd-fg-on-alt: var(--hd-white);
+  --hd-fg-on-alt-rgb: var(--hd-white-rgb);
+  --hd-accent: var(--hd-vivid-cerulean);
+  --hd-accent-rgb: var(--hd-vivid-cerulean-rgb);
+  --hd-border-strong: var(--hd-grey);
+  --hd-border-strong-rgb: var(--hd-grey-rgb);
+  --hd-border-subtle: var(--hd-grey);
+  --hd-border-subtle-rgb: var(--hd-grey-rgb);
+  color-scheme: dark;
+}
+
+/* Users who ask for more contrast get the strong border/text roles everywhere. */
+@media (prefers-contrast: more) {
+  :root {
+    --hd-border-subtle: var(--hd-border-strong);
+    --hd-border-subtle-rgb: var(--hd-border-strong-rgb);
+    --hd-fg-muted: var(--hd-fg);
+    --hd-fg-muted-rgb: var(--hd-fg-rgb);
+  }
+}

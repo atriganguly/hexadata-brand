@@ -1,0 +1,6 @@
+# Brand identity is owned by HexaData / Esconet. Replace with real GitHub teams.
+*                  @hexadata/brand-maintainers
+/tokens/           @hexadata/brand-owners
+/src/core/remote.ts @hexadata/security
+/.github/          @hexadata/security
+/SECURITY.md       @hexadata/security

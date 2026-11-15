@@ -1,0 +1,9 @@
+Third-party notices
+
+Fonts (bundled by `npm run build:fonts` into dist/css/fonts, unmodified fontsource builds), SIL Open Font License 1.1:
+  - Space Grotesk   (dist/licenses/space-grotesk-OFL.txt)
+  - Inter Tight     (dist/licenses/inter-tight-OFL.txt)
+  - JetBrains Mono  (dist/licenses/jetbrains-mono-OFL.txt)
+The files in dist/licenses contain the authoritative copyright statements and licence text and must travel with the fonts.
+
+Runtime dependency: zod (MIT), https://github.com/colinhacks/zod

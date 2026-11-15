@@ -1,0 +1,148 @@
+{
+  "name": "@hexadata/brand",
+  "version": "2.0.0",
+  "description": "HexaData brand tokens (colour, type, taglines) for web, React, React Native and Tailwind. Self-contained: no third-party requests, no browser storage, no personal data.",
+  "license": "UNLICENSED",
+  "author": "HexaData",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "files": [
+    "dist",
+    "react",
+    "native",
+    "tailwind",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "PRIVACY.md",
+    "ACCESSIBILITY.md",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/core/index.cjs",
+  "module": "./dist/core/index.js",
+  "types": "./dist/types/core/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "react": [
+        "dist/types/react/index.d.ts"
+      ],
+      "native": [
+        "dist/types/native/index.d.ts"
+      ],
+      "tailwind": [
+        "dist/tailwind/preset.d.cts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/core/index.d.ts",
+        "default": "./dist/core/index.js"
+      },
+      "require": {
+        "types": "./dist/types-cjs/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/types/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/types-cjs/react/index.d.cts",
+        "default": "./dist/react/index.cjs"
+      }
+    },
+    "./native": {
+      "import": {
+        "types": "./dist/types/native/index.d.ts",
+        "default": "./dist/native/index.js"
+      },
+      "require": {
+        "types": "./dist/types-cjs/native/index.d.cts",
+        "default": "./dist/native/index.cjs"
+      }
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind/preset.d.cts",
+      "default": "./dist/tailwind/preset.cjs"
+    },
+    "./tailwind/theme.css": "./dist/tailwind/theme.css",
+    "./css": "./dist/css/hexadata.css",
+    "./fonts.css": "./dist/css/fonts.css",
+    "./fonts-fallback.css": "./dist/css/fonts-fallback.css",
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": ">=0.72.0",
+    "tailwindcss": "^3.4.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.0",
+    "@capsizecss/metrics": "^3.0.0",
+    "@capsizecss/unpack": "^2.0.0",
+    "@eslint/js": "^9.0.0",
+    "@fontsource-variable/inter-tight": "^5.0.0",
+    "@fontsource-variable/jetbrains-mono": "^5.0.0",
+    "@fontsource-variable/space-grotesk": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "playwright": "^1.50.0",
+    "prettier": "^3.3.0",
+    "publint": "^0.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^6.0.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "generate:check": "npm run generate && git diff --exit-code -- src docs/contrast-matrix.md",
+    "build": "npm run generate && node scripts/build.mjs",
+    "build:fonts": "node scripts/build-fonts.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "test": "tsx --test test/*.test.ts test/*.test.tsx",
+    "test:dist": "node --test test/dist.test.mjs",
+    "verify": "node scripts/verify-package.mjs",
+    "verify:release": "node scripts/verify-package.mjs --strict && node scripts/check-types.mjs && publint && attw --pack . --profile node16 --exclude-entrypoints ./tailwind/theme.css ./css ./fonts.css ./fonts-fallback.css --ignore-rules named-exports",
+    "prepublishOnly": "npm run build && npm run build:fonts && npm run test && npm run test:dist && npm run test:e2e && npm run verify:release",
+    "format": "prettier --write .",
+    "check-types": "node scripts/check-types.mjs",
+    "test:e2e": "node test/e2e/run.mjs",
+    "manifest": "node scripts/manifest-tool.mjs"
+  }
+}

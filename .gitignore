@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.local.json
+*.tgz
+.env
+.env.*
+# signing keys must never be committed
+*.jwk
+*.pem
+*.key

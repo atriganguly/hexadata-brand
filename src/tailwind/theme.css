@@ -1,0 +1,30 @@
+/* GENERATED FILE: DO NOT EDIT. Source: tokens/brand.json (run `npm run generate`). */
+/* Tailwind v4: import AFTER "tailwindcss" and "@hexadata/brand/css". */
+@theme inline {
+  --color-*: initial;
+  --color-black: var(--hd-obsidian);
+  --color-white: var(--hd-white);
+  --color-gray: var(--hd-grey);
+  --color-hd-cyan: var(--hd-cyan);
+  --color-hd-deep-blue: var(--hd-deep-blue);
+  --color-hd-obsidian: var(--hd-obsidian);
+  --color-hd-vivid-cerulean: var(--hd-vivid-cerulean);
+  --color-hd-midnight: var(--hd-midnight);
+  --color-hd-grey: var(--hd-grey);
+  --color-hd-white: var(--hd-white);
+  --color-hd-crimson: var(--hd-crimson);
+  --color-hd-copper: var(--hd-copper);
+  --color-hd-green: var(--hd-green);
+  --color-hd-bg: var(--hd-bg);
+  --color-hd-fg: var(--hd-fg);
+  --color-hd-fg-strong: var(--hd-fg-strong);
+  --color-hd-fg-muted: var(--hd-fg-muted);
+  --color-hd-bg-alt: var(--hd-bg-alt);
+  --color-hd-fg-on-alt: var(--hd-fg-on-alt);
+  --color-hd-accent: var(--hd-accent);
+  --color-hd-border-strong: var(--hd-border-strong);
+  --color-hd-border-subtle: var(--hd-border-subtle);
+  --font-display: var(--hd-font-display);
+  --font-body: var(--hd-font-body);
+  --font-mono: var(--hd-font-mono);
+}

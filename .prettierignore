@@ -1,0 +1,12 @@
+dist
+node_modules
+package-lock.json
+src/core/tokens.ts
+src/css/hexadata.css
+src/tailwind/preset.cjs
+src/tailwind/theme.css
+docs/contrast-matrix.md
+react/package.json
+native/package.json
+tailwind/package.json
+.github/workflows

@@ -1,0 +1,6 @@
+{
+  "name": "@hexadata/brand/tailwind",
+  "private": true,
+  "main": "../dist/tailwind/preset.cjs",
+  "types": "../dist/tailwind/preset.d.cts"
+}

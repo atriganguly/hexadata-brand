@@ -1,0 +1,7 @@
+{
+  "name": "@hexadata/brand/native",
+  "private": true,
+  "main": "../dist/native/index.cjs",
+  "module": "../dist/native/index.js",
+  "types": "../dist/types/native/index.d.ts"
+}

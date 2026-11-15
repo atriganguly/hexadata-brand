@@ -1,0 +1,7 @@
+{
+  "name": "@hexadata/brand/react",
+  "private": true,
+  "main": "../dist/react/index.cjs",
+  "module": "../dist/react/index.js",
+  "types": "../dist/types/react/index.d.ts"
+}

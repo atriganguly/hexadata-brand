@@ -1,0 +1,189 @@
+// Real-browser verification of the BUILT package: strict CSP, zero third-party requests, no storage, signed update.
+// Usage: node test/e2e/run.mjs   (needs `npm run build` first and Playwright + Chromium)
+import { build } from 'esbuild';
+import { createServer } from 'node:http';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import assert from 'node:assert/strict';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
+const b64u = (b) => Buffer.from(b).toString('base64url');
+
+// --- signing material -------------------------------------------------------
+const pair = await crypto.subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify']);
+const pub = b64u(await crypto.subtle.exportKey('raw', pair.publicKey));
+const sign = async (obj) => {
+  const payload = new TextEncoder().encode(JSON.stringify(obj));
+  return { kid: 'e2e', payload: b64u(payload), signature: b64u(await crypto.subtle.sign({ name: 'Ed25519' }, pair.privateKey, payload)) };
+};
+const manifest = {
+  schemaVersion: 1,
+  revision: 2,
+  issuedAt: '2026-11-13T00:00:00Z',
+  tokens: { palette: { cyan: '#009AB4' }, taglines: { primary: 'Signed update applied.' } },
+};
+const good = await sign(manifest);
+const tampered = {
+  ...good,
+  payload: b64u(new TextEncoder().encode(JSON.stringify({ ...manifest, tokens: { taglines: { primary: 'EVIL' } } }))),
+};
+
+// --- bundle the demo against dist (not src) --------------------------------
+const out = mkdtempSync(join(tmpdir(), 'hexa-e2e-'));
+await build({
+  entryPoints: [join(root, 'test/e2e/demo.tsx')],
+  outfile: join(out, 'demo.js'),
+  bundle: true,
+  format: 'iife',
+  platform: 'browser',
+  jsx: 'automatic',
+  minify: true,
+  logLevel: 'warning',
+  define: { __KEY__: JSON.stringify(pub), 'process.env.NODE_ENV': '"production"' },
+  alias: { '@hexadata/brand/react': join(root, 'dist/react/index.js') },
+  absWorkingDir: root,
+});
+writeFileSync(
+  join(out, 'index.html'),
+  '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>e2e</title><link rel="stylesheet" href="/hexadata.css"></head><body><div id="root"></div><script src="/demo.js"></script></body></html>',
+);
+
+const CSP =
+  "default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://brand.example.com; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'";
+const server = createServer((req, res) => {
+  const path = new URL(req.url, 'http://x').pathname;
+  const files = { '/': ['index.html', 'text/html'], '/demo.js': ['demo.js', 'text/javascript'] };
+  res.setHeader('Content-Security-Policy', CSP);
+  if (path === '/hexadata.css') {
+    res.setHeader('content-type', 'text/css');
+    return res.end(readFileSync(join(root, 'dist/css/hexadata.css')));
+  }
+  const f = files[path];
+  if (!f) {
+    res.statusCode = 404;
+    return res.end();
+  }
+  res.setHeader('content-type', f[1]);
+  res.end(readFileSync(join(out, f[0])));
+});
+await new Promise((r) => server.listen(0, '127.0.0.1', r));
+const origin = `http://127.0.0.1:${server.address().port}`;
+
+const browser = await chromium.launch();
+const results = [];
+const check = (name, fn) =>
+  fn().then(
+    () => {
+      results.push(['ok', name]);
+    },
+    (e) => {
+      results.push(['FAIL', name, e.message]);
+    },
+  );
+
+async function open(query, manifestBody, opts = {}) {
+  const ctx = await browser.newContext({ colorScheme: opts.colorScheme ?? 'light' });
+  const page = await ctx.newPage();
+  const requests = [],
+    consoleErrors = [];
+  page.on('request', (r) => requests.push({ url: r.url(), headers: r.headers() }));
+  page.on('console', (m) => {
+    if (m.type() === 'error' || /Content Security Policy/i.test(m.text())) consoleErrors.push(m.text());
+  });
+  page.on('pageerror', (e) => consoleErrors.push(String(e)));
+  await page.route('https://brand.example.com/**', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      headers: { 'access-control-allow-origin': '*' },
+      body: JSON.stringify(manifestBody),
+    }),
+  );
+  await page.goto(`${origin}/?${query}`);
+  await page.waitForFunction(() => window.__rendered === true);
+  return { ctx, page, requests, consoleErrors };
+}
+const css = (page, name) => page.evaluate((n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim(), name);
+
+await check('default mode: renders tagline, ZERO requests beyond own origin, no CSP violations', async () => {
+  const { ctx, page, requests, consoleErrors } = await open('mode=none', good);
+  assert.equal(await page.textContent('#tag'), 'Supercomputing, On-demand.');
+  assert.ok(
+    requests.every((r) => r.url.startsWith(origin)),
+    'third-party request: ' + requests.map((r) => r.url).join(', '),
+  );
+  assert.deepEqual(consoleErrors, []);
+  assert.equal(await css(page, '--hd-cyan'), '#009BB6');
+  await ctx.close();
+});
+
+await check('signed update: applied via CSSOM under strict CSP; request has no cookies/referrer', async () => {
+  const { ctx, page, requests, consoleErrors } = await open('mode=remote', good);
+  await page.waitForFunction(() => document.getElementById('tag').textContent === 'Signed update applied.');
+  assert.equal(await css(page, '--hd-cyan'), '#009AB4');
+  assert.equal(await css(page, '--hd-cyan-rgb'), '0 154 180');
+  const m = requests.find((r) => r.url.startsWith('https://brand.example.com'));
+  assert.ok(m, 'manifest request missing');
+  assert.equal(m.headers.cookie, undefined);
+  assert.equal(m.headers.referer, undefined);
+  assert.ok(requests.every((r) => r.url.startsWith(origin) || r.url.startsWith('https://brand.example.com/')));
+  assert.deepEqual(consoleErrors, []);
+  await ctx.close();
+});
+
+await check('tampered manifest is rejected: defaults stay, issue reported as bad-signature', async () => {
+  const { ctx, page } = await open('mode=remote', tampered);
+  await page.waitForFunction(() => window.__issues.length > 0);
+  assert.equal(await page.textContent('#tag'), 'Supercomputing, On-demand.');
+  assert.equal(await css(page, '--hd-cyan'), '#009BB6');
+  assert.equal((await page.evaluate(() => window.__issues[0])).reason, 'bad-signature');
+  await ctx.close();
+});
+
+await check('nothing is stored: no localStorage, sessionStorage, cookies, IndexedDB or caches', async () => {
+  const { ctx, page } = await open('mode=remote', good);
+  await page.waitForFunction(() => document.getElementById('tag').textContent === 'Signed update applied.');
+  const s = await page.evaluate(async () => ({
+    ls: localStorage.length,
+    ss: sessionStorage.length,
+    ck: document.cookie,
+    idb: (await indexedDB.databases()).length,
+    cs: (await caches.keys()).length,
+  }));
+  assert.deepEqual(s, { ls: 0, ss: 0, ck: '', idb: 0, cs: 0 });
+  assert.deepEqual(await ctx.cookies(), []);
+  await ctx.close();
+});
+
+await check('semantic CSS follows prefers-color-scheme and data-theme (light=white/obsidian, dark=obsidian/white)', async () => {
+  const probe = (page) =>
+    page.evaluate(() => {
+      const el = document.createElement('div');
+      el.style.background = 'var(--hd-bg)';
+      el.style.color = 'var(--hd-fg)';
+      document.body.append(el);
+      const c = getComputedStyle(el);
+      return [c.backgroundColor, c.color];
+    });
+  const l = await open('mode=none', good, { colorScheme: 'light' });
+  assert.deepEqual(await probe(l.page), ['rgb(248, 250, 252)', 'rgb(18, 30, 54)']);
+  // explicit override beats the OS preference
+  await l.page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+  assert.deepEqual(await probe(l.page), ['rgb(18, 30, 54)', 'rgb(248, 250, 252)']);
+  await l.ctx.close();
+  const d = await open('mode=none', good, { colorScheme: 'dark' });
+  assert.deepEqual(await probe(d.page), ['rgb(18, 30, 54)', 'rgb(248, 250, 252)']);
+  await d.page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+  assert.deepEqual(await probe(d.page), ['rgb(248, 250, 252)', 'rgb(18, 30, 54)']);
+  await d.ctx.close();
+});
+
+await browser.close();
+server.close();
+for (const r of results) console.log(r[0] === 'ok' ? '  ok  ' : '  FAIL', r[1], r[2] ?? '');
+const failed = results.filter((r) => r[0] !== 'ok').length;
+console.log(`e2e: ${results.length - failed}/${results.length} passed`);
+process.exit(failed ? 1 : 0);

@@ -1,0 +1,28 @@
+name: Release
+on:
+  push: { tags: ['v*'] }
+permissions:
+  contents: write
+  id-token: write # needed only if you enable npm provenance (public repo + public package)
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release # require manual approval on this environment
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, registry-url: 'https://registry.npmjs.org', cache: npm }
+      - run: npm ci --ignore-scripts
+      - name: Tag must match package.json version
+        run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      - run: npx playwright install --with-deps chromium
+      - run: npm run generate:check
+      - run: npm run prepublishOnly # build + fonts + unit + dist + e2e + strict verification
+      - name: SBOM (CycloneDX)
+        run: npm sbom --sbom-format cyclonedx --omit dev > sbom.cdx.json
+      - name: Publish
+        # For a PUBLIC package from a PUBLIC repo add: --provenance
+        run: npm publish
+        env: { NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}' }
+      - uses: softprops/action-gh-release@v2
+        with: { files: sbom.cdx.json, generate_release_notes: true }
