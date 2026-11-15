@@ -1,0 +1,14 @@
+{
+  "$description": "Logo files uploaded to the Claude Design System artifact. `sha256` is the master hash from brand/logo/logo.json: when it changes, re-upload the file and update `blob` (see claude-design-system/README.md).",
+  "artifact": "https://claude.ai/artifact/5WqsTjQNdX7cu2m1qZGpNA",
+  "uploads": {
+    "horizontal-primary-on-light": { "file": "horizontal-primary-on-light.png", "blob": "921396f3cff1820c4c78fa45b8b2056f", "size": 25433 },
+    "horizontal-primary-on-dark": { "file": "horizontal-primary-on-dark.png", "blob": "a0fa3bd2053a52e7b8c8e02fc74b78fe", "size": 24153 },
+    "horizontal-mono": { "file": "horizontal-mono.png", "blob": "0ed66ae09774649c8bfa6bb6d7fe9d05", "size": 23767 },
+    "centered-primary-on-light": { "file": "centered-primary-on-light.png", "blob": "2442cad06b02961e63840cf4e75be4d8", "size": 36995 },
+    "centered-primary-on-dark": { "file": "centered-primary-on-dark.png", "blob": "7cadef234bdaddf4ee2d20656949a82e", "size": 37719 },
+    "centered-mono": { "file": "centered-mono.png", "blob": "5886d102eea37cef2206b39df6eb45fd", "size": 42078 },
+    "icon-on-light": { "file": "icon-on-light-512.png", "blob": "bc63254ad2b7fb1680ca79d9c811d389", "size": 49594 },
+    "icon-on-dark": { "file": "icon-on-dark-512.png", "blob": "9da06cf8cff302ece7fccfd3a0d82d1e", "size": 49429 }
+  }
+}

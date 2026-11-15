@@ -22,3 +22,4 @@ platforms/flutter/pubspec.yaml
 platforms/python/pyproject.toml
 platforms/email/template.html
 figma/sync-payload.json
+claude-ds-out

@@ -9,6 +9,7 @@ export default tseslint.config(
       'dist/**',
       'channel-out/**',
       'site-out/**',
+      'claude-ds-out/**',
       'node_modules/**',
       'src/core/tokens.ts',
       'src/tailwind/preset.cjs',

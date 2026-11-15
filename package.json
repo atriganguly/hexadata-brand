@@ -180,6 +180,9 @@
     "test:site": "node test/site.e2e.mjs",
     "build:platforms": "node scripts/build-platforms.mjs",
     "figma:check": "node scripts/figma-state.mjs check",
-    "figma:record": "node scripts/figma-state.mjs record"
+    "figma:record": "node scripts/figma-state.mjs record",
+    "build:claude-ds": "node scripts/build-claude-ds.mjs",
+    "claude-ds:check": "node scripts/claude-ds-state.mjs check",
+    "claude-ds:record": "node scripts/claude-ds-state.mjs record"
   }
 }

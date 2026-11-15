@@ -17,6 +17,7 @@ The single source of truth for the HexaData brand. Everything visual (colours, t
 | `scripts/generate/` + `generate.ts`                          | Model loader, validator and one emitter per output                                                        | Yes                                    |
 | `src/core`, `react`, `native`, `elements`, `css`, `tailwind` | Package source. Files headed `GENERATED FILE` are outputs                                                 | Only the non-generated ones            |
 | `platforms/`                                                 | Python, Flutter, Swift, Android, Office, e-mail, print (tokens generated, glue hand-written)              | Glue only                              |
+| `claude-design-system/`                                      | Artifact link, `STATE.json` fingerprint, logo upload ids                                                  | Via the tools                          |
 | `figma/`                                                     | Generated sync payload, `STATE.json`, runbook                                                             | `README.md`/`STATE.json` via the tool  |
 | `site/`                                                      | Static website generator + print route for the PDF                                                        | Yes                                    |
 | `scripts/`                                                   | Build, release, channel, PDF, logo/font tools                                                             | Yes                                    |
@@ -39,6 +40,8 @@ The single source of truth for the HexaData brand. Everything visual (colours, t
 ## Recipes
 
 **Change a colour / tagline / font / foundation value (owner-approved only).** Edit the file in `brand/` -> bump `revision` in `brand/content.json` -> `npm run generate` -> `UPDATE_GOLDEN=1 npm test` and review the golden diff -> `npm run build:pdf` (commit the PDF) -> `npm run figma:check` then re-sync Figma and `npm run figma:record` -> CHANGELOG -> full checks.
+
+**Claude Design System (artifact).** After ANY change that touches brand values, logos, fonts, components or the site catalogue: `npm run build && npm run build:logos && node scripts/build-claude-ds.mjs`, publish `claude-ds-out/project` to the artifact in `claude-design-system/STATE.json`, `npm run claude-ds:record`, commit. CI runs `claude-ds:check`. Changed logos also need re-upload (see `claude-design-system/README.md`).
 
 **Replace a logo.** Owner supplies the file -> overwrite the file in `brand/logo/source/` keeping the id -> `npm run logo:measure` -> review `logo.json` diff -> `npm run build:logos` -> build:pdf, Figma re-sync -> checks. Vector masters (v2.1) follow the same path; ids never change.
 
