@@ -5,7 +5,7 @@ single source of truth: [`brand/`](brand/), transcribed from _HexaData Brand Kit
 
 **Design goals:** brand-exact · WCAG-enforced · no third-party requests · no browser storage · no personal data · tamper-evident updates.
 
-> Status: v2.0.0 in preparation (alpha). See [Verification status](#verification-status) for exactly what has and has not been run.
+> Status: v2.0.0 (release candidate; npm and PyPI publishing arrives with trusted publishing in v2.2). See [Verification status](#verification-status) for exactly what has and has not been run.
 
 ## Licence: open software, protected brand
 

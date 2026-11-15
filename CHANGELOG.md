@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (unreleased)
+## 2.0.0 (2026-11-15)
 
 Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Breaking.**
 
