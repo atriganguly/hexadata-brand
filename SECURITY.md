@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Email **<SECURITY-CONTACT: set before publishing>** with details and reproduction steps. Please do not open public issues for vulnerabilities.
+Report privately through GitHub: <https://github.com/atriganguly/hexadata-brand/security/advisories/new> (private vulnerability reporting), with details and reproduction steps. Please do not open public issues for vulnerabilities.
 Target response: acknowledgement within 3 business days; fix or mitigation plan within 14 days for high severity. Coordinated disclosure; credit given if you wish.
 Publish a `/.well-known/security.txt` (RFC 9116) for the domain that hosts the manifest.
 

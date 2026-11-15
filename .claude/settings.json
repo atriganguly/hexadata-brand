@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/*.jwk)",
+      "Read(**/.hexadata-brand-secrets/**)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push --tags*)",
+      "Bash(npm publish*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/guard.mjs" }]
+      }
+    ]
+  }
+}

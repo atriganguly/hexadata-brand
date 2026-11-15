@@ -35,7 +35,15 @@ export default tseslint.config(
   },
   {
     // Node tooling, the site generator and tests.
-    files: ['scripts/**/*.mjs', 'site/**/*.mjs', 'test/**/*.mjs', 'test/**/*.ts', 'test/**/*.tsx', 'src/tailwind/preset.cjs'],
+    files: [
+      'scripts/**/*.mjs',
+      'site/**/*.mjs',
+      '.claude/**/*.mjs',
+      'test/**/*.mjs',
+      'test/**/*.ts',
+      'test/**/*.tsx',
+      'src/tailwind/preset.cjs',
+    ],
     languageOptions: { globals: { ...globals.node, module: 'writable', require: 'readonly' } },
   },
   {

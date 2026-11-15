@@ -49,4 +49,4 @@ The software is designed to be reused: the whole identity lives in `brand/`, and
 
 ## Questions, permission requests, reports of misuse
 
-Send them to the HexaData Marketing owner: **[brand contact: to be set by HexaData Marketing before the first public release]**. Esconet may ask you to stop or correct any use that breaches this policy.
+Send them to the HexaData Marketing owner: open an issue titled "Brand permission request" at <https://github.com/atriganguly/hexadata-brand/issues> (HexaData Marketing will be replacing this with a brand e-mail address). Esconet may ask you to stop or correct any use that breaches this policy.

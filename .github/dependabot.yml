@@ -6,6 +6,10 @@ updates:
     open-pull-requests-limit: 5
     groups:
       dev-tooling: { dependency-type: development }
+    ignore:
+      # typescript-eslint supports TypeScript up to a given minor; let a human bump both together.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: weekly }

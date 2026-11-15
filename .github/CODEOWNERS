@@ -1,6 +1,10 @@
-# Brand identity is owned by HexaData / Esconet. Replace with real GitHub teams.
-*                  @hexadata/brand-maintainers
-/brand/            @hexadata/brand-owners
-/src/core/remote.ts @hexadata/security
-/.github/          @hexadata/security
-/SECURITY.md       @hexadata/security
+# Brand identity is owned by HexaData / Esconet; replace with GitHub teams once they exist.
+*                    @atriganguly
+/brand/              @atriganguly
+/brand/keys.json     @atriganguly
+/LICENSE             @atriganguly
+/BRAND-LICENSE.md    @atriganguly
+/NOTICE              @atriganguly
+/src/core/remote.ts  @atriganguly
+/.github/            @atriganguly
+/SECURITY.md         @atriganguly
