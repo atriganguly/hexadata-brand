@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import { parseManifest, type HexaManifest, type ManifestRejection, type ManifestWarning } from './schema.js';
 import { BRAND_REVISION } from './tokens.js';
 
@@ -66,11 +65,19 @@ export type RemoteResult =
   | { readonly ok: true; readonly manifest: HexaManifest; readonly warnings: readonly ManifestWarning[] }
   | { readonly ok: false; readonly reason: RemoteFailure; readonly detail?: string };
 
-const Envelope = z.object({
-  kid: z.string().min(1).max(64),
-  payload: z.string().min(1).max(32768),
-  signature: z.string().min(1).max(256),
-});
+interface Envelope {
+  readonly kid: string;
+  readonly payload: string;
+  readonly signature: string;
+}
+
+/** Hand-written envelope check (no schema library): three bounded strings. */
+function parseEnvelope(value: unknown): Envelope | null {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return null;
+  const { kid, payload, signature } = value as Record<string, unknown>;
+  const bounded = (v: unknown, max: number): v is string => typeof v === 'string' && v.length >= 1 && v.length <= max;
+  return bounded(kid, 64) && bounded(payload, 32768) && bounded(signature, 256) ? { kid, payload, signature } : null;
+}
 
 const B64URL = /^[A-Za-z0-9_-]*$/;
 
@@ -198,11 +205,11 @@ export async function fetchSignedManifest(options: RemoteManifestOptions): Promi
     }
     if (body === null) return { ok: false, reason: 'too-large' };
 
-    let envelope: z.infer<typeof Envelope>;
+    let envelope: Envelope;
     try {
-      const parsed = Envelope.safeParse(JSON.parse(body));
-      if (!parsed.success) return { ok: false, reason: 'bad-envelope' };
-      envelope = parsed.data;
+      const parsed = parseEnvelope(JSON.parse(body));
+      if (!parsed) return { ok: false, reason: 'bad-envelope' };
+      envelope = parsed;
     } catch {
       return { ok: false, reason: 'bad-envelope' };
     }

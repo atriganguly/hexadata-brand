@@ -8,7 +8,10 @@
  *   <hexa-tooltip text="Opens the docs"><a href="/docs">Docs</a></hexa-tooltip>
  */
 import { DEFAULT_LOGO_BASE, logoUrl, resolveLogo, type LogoForm, type LogoTone } from '../core/logo.js';
-import { DEFAULT_TAGLINES, type TaglineKey } from '../core/tokens.js';
+import type { TaglineKey } from '../core/tokens.js';
+import { getBrand, onBrandChange } from './brand.js';
+
+export { getBrand, onBrandChange, startHexaLive, type HexaLiveOptions } from './brand.js';
 
 type Ctor = new () => HTMLElement;
 const Base: Ctor = (typeof HTMLElement === 'undefined' ? class {} : HTMLElement) as unknown as Ctor;
@@ -17,8 +20,14 @@ let idCounter = 0;
 /** <hexa-tagline variant="primary|secondary"> renders the brand tagline as plain text. */
 export class HexaTaglineElement extends Base {
   static readonly observedAttributes = ['variant'];
+  private off: (() => void) | undefined;
   connectedCallback(): void {
     this.render();
+    this.off = onBrandChange(() => this.render());
+  }
+  disconnectedCallback(): void {
+    this.off?.();
+    this.off = undefined;
   }
   attributeChangedCallback(): void {
     this.render();
@@ -26,7 +35,7 @@ export class HexaTaglineElement extends Base {
   private render(): void {
     const v = this.getAttribute('variant');
     const key: TaglineKey = v === 'secondary' ? 'secondary' : 'primary';
-    this.textContent = DEFAULT_TAGLINES[key];
+    this.textContent = getBrand().tokens.taglines[key];
     this.classList.add('hd-tagline');
   }
 }
@@ -40,8 +49,14 @@ const pick = <T extends string>(v: string | null, allowed: readonly T[], fallbac
  */
 export class HexaLogoElement extends Base {
   static readonly observedAttributes = ['form', 'tone', 'on', 'size', 'base', 'alt'];
+  private off: (() => void) | undefined;
   connectedCallback(): void {
     this.render();
+    this.off = onBrandChange(() => this.render());
+  }
+  disconnectedCallback(): void {
+    this.off?.();
+    this.off = undefined;
   }
   attributeChangedCallback(): void {
     if (this.isConnected) this.render();
@@ -60,7 +75,7 @@ export class HexaLogoElement extends Base {
       const v = resolveLogo(form, tone, side);
       const img = document.createElement('img');
       img.className = `hd-logo__img hd-logo__img--on-${side}`;
-      img.src = logoUrl(v, { base });
+      img.src = logoUrl(v, { base, version: getBrand().assets.logo[v.id] ?? v.sha256 });
       img.width = v.width;
       img.height = v.height;
       img.alt = alt;

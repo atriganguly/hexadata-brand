@@ -21,11 +21,18 @@ export interface LogoVariantSpec {
   tone: 'primary' | 'mono';
   background: 'light' | 'dark';
   opaque: boolean;
+  /** SHA-256 (hex) of the master artwork: changes exactly when the artwork changes. */
+  sha256: string;
   /** Rendered (trimmed) art size in px. */
   width: number;
   height: number;
 }
+export interface TrustedKeySpec {
+  kid: string;
+  publicKey: string;
+}
 export interface Tokens {
+  trustedKeys: TrustedKeySpec[];
   origin: string;
   descriptor: string;
   logo: LogoVariantSpec[];

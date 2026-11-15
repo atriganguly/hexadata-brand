@@ -38,4 +38,13 @@ export function validate(t: Tokens): void {
       if (!t.logo.some((v) => v.form === form && v.background === bg)) fail(`logo: no ${form} variant for ${bg} backgrounds`);
     }
   }
+  if (t.trustedKeys.length > 2) fail('keys.json: at most 2 trusted keys (current + next, for rotation)');
+  for (const k of t.trustedKeys) {
+    if (!/^[A-Za-z0-9._-]{1,64}$/.test(k.kid)) fail(`keys.json: invalid kid ${JSON.stringify(k.kid)}`);
+    // Raw Ed25519 public key = 32 bytes = 43 base64url characters.
+    if (!/^[A-Za-z0-9_-]{43}$/.test(k.publicKey))
+      fail(`keys.json: ${k.kid} publicKey must be a 32-byte base64url string (use manifest-tool keygen)`);
+  }
+  for (const v of t.logo)
+    if (!/^[0-9a-f]{64}$/.test(v.sha256)) fail(`logo ${v.id} has no valid sha256 (run: node scripts/logo-tool.mjs measure)`);
 }

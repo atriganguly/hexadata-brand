@@ -10,6 +10,7 @@ import { emit as emitCoreTokens } from './generate/emitters/core-tokens.ts';
 import { emit as emitCss } from './generate/emitters/css.ts';
 import { emit as emitDocs } from './generate/emitters/docs.ts';
 import { emit as emitLogo } from './generate/emitters/logo.ts';
+import { emit as emitTrust } from './generate/emitters/trust.ts';
 import { emit as emitTailwindV3 } from './generate/emitters/tailwind-v3.ts';
 import { emit as emitTailwindV4 } from './generate/emitters/tailwind-v4.ts';
 import { loadModel } from './generate/model.ts';
@@ -39,5 +40,5 @@ const ctx: Ctx = {
   },
 };
 
-for (const emit of [emitCoreTokens, emitCss, emitTailwindV3, emitTailwindV4, emitDocs, emitLogo]) emit(t, ctx);
+for (const emit of [emitCoreTokens, emitCss, emitTailwindV3, emitTailwindV4, emitDocs, emitLogo, emitTrust]) emit(t, ctx);
 console.log('generate: ok');

@@ -28,6 +28,6 @@ Latest major only (currently 2.x).
 ## Key management and incident response
 
 - Keep the private key in a KMS/HSM; CI signs via short-lived, access-controlled credentials; never commit `*.jwk`/`*.pem` (git-ignored).
-- **Rotation:** add the new `kid` to apps' `keys` (support two keys), release the apps, then sign with the new key and later drop the old one.
+- **Rotation:** add the new key to `brand/keys.json` (second slot) and release the package, wait for apps to adopt it, then sign with the new key and later drop the old one. `build:channel` refuses to sign with a key that is not listed.
 - **Suspected key compromise:** stop signing; publish a new key; ship app updates trusting only the new `kid`; bump the baseline `revision` in a package release so previously issued manifests become rollbacks; rotate hosting credentials. Because keys are pinned in app builds, revocation is **only as fast as your app release cycle**. Keep `expiresAt` short (e.g. 30 days) on issued manifests to bound exposure.
 - **npm account:** enforce 2FA, use granular/automation tokens scoped to this package, require approval on the `release` environment.

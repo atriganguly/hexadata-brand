@@ -4,7 +4,7 @@ export function emit(t: Tokens, { write, HEADER }: Ctx): void {
   const variants = t.logo
     .map(
       (v) =>
-        `  { id: '${v.id}', form: '${v.form}', tone: '${v.tone}', background: '${v.background}', opaque: ${v.opaque}, width: ${v.width}, height: ${v.height} },`,
+        `  { id: '${v.id}', form: '${v.form}', tone: '${v.tone}', background: '${v.background}', opaque: ${v.opaque}, sha256: '${v.sha256}', width: ${v.width}, height: ${v.height} },`,
     )
     .join('\n');
   write(
@@ -32,6 +32,8 @@ export interface LogoVariant {
   readonly background: LogoBackground;
   /** Icons are opaque tiles; wordmarks are transparent. */
   readonly opaque: boolean;
+  /** SHA-256 (hex) of the master artwork; used to cache-bust and to detect logo updates. */
+  readonly sha256: string;
   /** Rendered (trimmed) artwork size in px. */
   readonly width: number;
   readonly height: number;
@@ -54,10 +56,11 @@ export function resolveLogo(form: LogoForm, tone: LogoTone, background: LogoBack
 }
 
 /** Published file URL. Icons are published at several sizes; wordmarks at their native (trimmed) size. */
-export function logoUrl(variant: LogoVariant, options: { base?: string; format?: LogoFormat; size?: IconSize } = {}): string {
+export function logoUrl(variant: LogoVariant, options: { base?: string; format?: LogoFormat; size?: IconSize; version?: string } = {}): string {
   const base = (options.base ?? DEFAULT_LOGO_BASE).replace(/\\/?$/, '/');
   const suffix = variant.form === 'icon' ? \`-\${options.size ?? 256}\` : '';
-  return \`\${base}\${variant.id}\${suffix}.\${options.format ?? 'png'}\`;
+  const v = options.version ? \`?v=\${options.version.slice(0, 12)}\` : '';
+  return \`\${base}\${variant.id}\${suffix}.\${options.format ?? 'png'}\${v}\`;
 }
 `,
   );

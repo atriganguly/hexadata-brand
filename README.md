@@ -57,7 +57,7 @@ import { HexaLogo } from '@hexadata/brand/react';
 ```
 
 ```html
-<script src="https://atriganguly.github.io/hexadata-brand/v2/elements/auto.js"></script>
+<script src="https://atriganguly.github.io/hexadata-brand/v2/js/hexadata.js"></script>
 <hexa-logo form="horizontal"></hexa-logo>
 ```
 
@@ -105,40 +105,60 @@ const theme = useHexaNativeTheme(useColorScheme() === 'dark' ? 'dark' : 'light')
 
 **Fonts:** the official static TTFs ship in the package at `@hexadata/brand/fonts/ttf/*.ttf` (`SpaceGrotesk-Regular|Medium|SemiBold|Bold`, `InterTight-…`, `JetBrainsMono-…`), already named per `NATIVE_FONTS` (checked by a test against each file's PostScript name). Copy them into your app's font folder (Expo: `expo-font`; bare RN: `react-native.config.js` assets). React Native does not handle variable fonts well, so static files are used. Nothing is downloaded at runtime.
 
-## Content-Security-Policy
+## Live brand updates (on by default, silent on failure)
 
-Nothing here needs `unsafe-inline`, `unsafe-eval`, inline scripts or third-party origins:
+Change the logo, a colour or a tagline in this repository and every app updates **without a release or any developer action**. Two mechanisms, both automatic:
 
-```
-default-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'
-# only if you enable runtime updates:  connect-src https://brand.your-domain.example
-```
-
-## Runtime brand updates (optional, off by default)
-
-By default **no request is made**. To let an app pick up brand changes without a redeploy, pass signed-manifest options:
+1. **Build-time:** the package is semver. Apps on `^2` get brand updates (new artwork, colours, taglines) as minor/patch releases; a bot (Renovate/Dependabot, config shipped here) opens and auto-merges them. Names never change inside a major version, so nothing breaks.
+2. **Runtime, no redeploy:** `HexaProvider` and the `<hexa-*>` elements render the baked-in brand first, then fetch a **signed manifest** from the evergreen hosted channel (`<origin>/v2/manifest.json`) and apply it. Logo URLs carry a content hash, so a new logo shows up immediately despite caches.
 
 ```tsx
-<HexaProvider
-  remote={{ url: 'https://brand.your-domain.example/manifest.json', keys: [{ kid: '2026-11', publicKey: '<base64url Ed25519>' }] }}
-  onIssue={(i) => report(i)}>
+<HexaProvider>…</HexaProvider>                 {/* live: on */}
+<HexaProvider live={false}>…</HexaProvider>    {/* zero network requests: strict CSP / offline / air-gapped */}
 ```
 
-What protects you: Ed25519 signature (unsigned/tampered → rejected) · https only · no cookies/credentials/referrer/custom headers ·
-16 KB size cap · 5 s timeout · anti-rollback (`revision`) · optional `expiresAt` · **contrast guard** (an update that would break any
-allowed colour pairing is rejected) · nothing written to storage. Host the manifest on **your own domain** to avoid any third-party exposure
-([PRIVACY.md](PRIVACY.md)). Browsers without WebCrypto Ed25519 (and React Native without an injected `verify`) simply keep the baked-in brand.
+```html
+<script src="https://atriganguly.github.io/hexadata-brand/v2/js/hexadata.js"></script>
+<!-- live: on -->
+<script src="https://atriganguly.github.io/hexadata-brand/v2/js/hexadata.js" data-hd-live="off"></script>
+<!-- live: off -->
+```
 
-Operate keys and manifests with the bundled tool (refuses to sign anything invalid):
+**What protects you:** Ed25519 signature checked against keys embedded in the package (`brand/keys.json`; unsigned/tampered → rejected) · https only · no cookies/credentials/referrer/custom headers · 16 KB cap · 5 s timeout · anti-rollback (`revision`) · expiry · **contrast guard** (an update that would break any allowed colour pairing is rejected) · nothing written to storage · **any failure keeps the baked-in brand**. With no keys embedded (the state until the brand owner provisions a signing key) no request is made at all.
+
+Your own manifest instead of the brand channel: `<HexaProvider remote={{ url, keys }}>` (always wins over `live`). React Native has no WebCrypto Ed25519: live updates are off there unless you pass `remote` with a `verify` function.
+
+### The hosted channel
+
+Built by `npm run build:channel` and deployed to GitHub Pages (later your own domain; only `brand/content.json` `origin` changes):
+
+| Path                                                                                      | What                                                                                          |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `/v2/`                                                                                    | **Evergreen**: redeployed on every release; point apps here to update with no release         |
+| `/<version>/`                                                                             | **Immutable** copy; pin it and use the SRI hashes in `integrity.json` for reproducible builds |
+| `css/{all,hexadata,base,components,fonts}.css`, `js/hexadata.js`, `logo/*`, `fonts/ttf/*` | Assets (`css/fonts/*.woff2` are referenced by `css/fonts.css`)                                |
+| `tokens.json`, `manifest.json`, `integrity.json`, `version.json`                          | Resolved tokens for tooling, the signed manifest, SRI hashes, build info                      |
+
+### Content-Security-Policy
+
+Nothing here needs `unsafe-inline`, `unsafe-eval` or inline scripts. Self-hosted everything:
+
+```
+default-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'
+```
+
+To use the evergreen channel add its origin: `connect-src https://atriganguly.github.io; img-src 'self' https://atriganguly.github.io` (and `script-src` / `style-src` / `font-src` if you load the files from it).
+
+### Operating keys and manifests
 
 ```bash
 npm run build
-npm run manifest -- keygen 2026-11 ./brand-signing.jwk            # prints the public key to embed in apps
-npm run manifest -- sign manifest.json ./brand-signing.jwk 2026-11 > envelope.json
-npm run manifest -- verify envelope.json 2026-11 <public-key>
+npm run manifest -- keygen 2026-11 ./brand-signing.jwk     # prints {kid, publicKey}; add the public key to brand/keys.json, release
+HEXA_SIGNING_JWK="$(cat brand-signing.jwk)" npm run build:channel -- --require-signed   # sign + assemble the channel
+npm run manifest -- verify channel-out/v2/manifest.json 2026-11 <public-key>
 ```
 
-Use a KMS/HSM for production signing keys. Key rotation, compromise response: [SECURITY.md](SECURITY.md).
+Use a KMS/HSM or a protected CI secret for the production key; never commit it. Rotation and compromise response: [SECURITY.md](SECURITY.md).
 
 ## Develop
 

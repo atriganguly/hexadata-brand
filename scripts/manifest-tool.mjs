@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 // Operator tool for signed brand manifests (Ed25519). Requires `npm run build` first.
 //   keygen <kid> <private-key-out.jwk>          create a key pair (prints the public key to embed in apps)
-//   sign   <manifest.json> <private-key.jwk> <kid>   validate + sign -> envelope JSON on stdout
+//   sign   <manifest.json> <private-key.jwk> <kid>   validate + sign -> envelope JSON on stdout (key may come from $HEXA_SIGNING_JWK)
 //   verify <envelope.json> <kid> <public-key>        verify an envelope and print the parsed manifest
 //
 // Production keys belong in a KMS/HSM (e.g. AWS KMS / GCP KMS Ed25519 / Cloud HSM). This tool's file-based
 // private key is for development and for CI signing with a short-lived, access-controlled secret.
 import { chmodSync, readFileSync, writeFileSync } from 'node:fs';
 import { parseManifest, base64urlDecode, webCryptoEd25519Verifier } from '../dist/core/index.js';
+import { loadSigningJwk, signManifest } from './lib/sign.mjs';
 
 const b64u = (b) => Buffer.from(b).toString('base64url');
 const [cmd, ...args] = process.argv.slice(2);
@@ -39,10 +40,9 @@ if (cmd === 'keygen') {
     check.warnings.forEach((w) => console.error(`  ${w.path}: ${w.message}`));
     process.exit(1);
   }
-  const key = await crypto.subtle.importKey('jwk', JSON.parse(readFileSync(keyFile, 'utf8')), { name: 'Ed25519' }, false, ['sign']);
-  const payload = new TextEncoder().encode(JSON.stringify(manifest));
-  const signature = new Uint8Array(await crypto.subtle.sign({ name: 'Ed25519' }, key, payload));
-  console.log(JSON.stringify({ kid, payload: b64u(payload), signature: b64u(signature) }));
+  const jwk = loadSigningJwk(keyFile);
+  if (!jwk) usage();
+  console.log(JSON.stringify(await signManifest(manifest, jwk, kid)));
 } else if (cmd === 'verify') {
   const [file, kid, publicKey] = args;
   if (!file || !kid || !publicKey) usage();

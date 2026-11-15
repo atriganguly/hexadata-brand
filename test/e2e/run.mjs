@@ -253,6 +253,8 @@ await check('custom elements: tagline text, theme toggle (no storage), accessibl
   const ctx = await browser.newContext({ colorScheme: 'light' });
   const page = await ctx.newPage();
   const errors = [];
+  const requested = [];
+  page.on('request', (r) => requested.push(r.url()));
   page.on('console', (m) => {
     if (m.type() === 'error' || /Content Security Policy/i.test(m.text())) errors.push(m.text());
   });
@@ -274,6 +276,11 @@ await check('custom elements: tagline text, theme toggle (no storage), accessibl
   assert.equal(await tip.isHidden(), true);
   assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length + document.cookie.length), 0);
   assert.deepEqual(errors, []);
+  // Live updates are on by default, but with no keys embedded in this build there is nothing to verify against: no request.
+  assert.ok(
+    requested.every((u) => u.startsWith(origin)),
+    `unexpected request(s): ${requested.filter((u) => !u.startsWith(origin)).join(', ')}`,
+  );
   await ctx.close();
 });
 

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isHex6 } from '../../src/core/contrast.ts';
-import type { FoundationGroup, Foundations, LogoVariantSpec, Tokens } from './types.ts';
+import type { FoundationGroup, Foundations, LogoVariantSpec, Tokens, TrustedKeySpec } from './types.ts';
 
 /** Reads brand/ (DTCG 2025.10 token files + contrast.json + content.json) into the flat model emitters use. */
 
@@ -122,12 +122,18 @@ export function loadModel(root: string): Tokens {
       tone: v['tone'] as LogoVariantSpec['tone'],
       background: v['background'] as LogoVariantSpec['background'],
       opaque: v['opaque'] === true,
+      sha256: String(v['sha256']),
       width: num(trim['width'], 'trim.width'),
       height: num(trim['height'], 'trim.height'),
     };
   });
 
+  const trustedKeys = ((read(root, 'brand/keys.json')['keys'] ?? []) as Json[]).map(
+    (k) => ({ kid: String(k['kid']), publicKey: String(k['publicKey']) }) satisfies TrustedKeySpec,
+  );
+
   return {
+    trustedKeys,
     origin: String(content['origin']),
     descriptor: String(content['descriptor']),
     logo,

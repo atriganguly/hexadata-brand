@@ -3,31 +3,28 @@ import {
   DEFAULT_MANIFEST,
   FOUNDATIONS,
   SEMANTIC,
-  fetchSignedManifest,
+  startLive,
   type HexaManifest,
-  type ManifestWarning,
+  type LiveIssue,
   type PaletteKey,
-  type RemoteFailure,
-  type RemoteManifestOptions,
+  type RemoteConfig,
   type SemanticRole,
   type ThemeMode,
 } from '../core/index.js';
 
 const HexaNativeContext = createContext<HexaManifest>(DEFAULT_MANIFEST);
 
-export type HexaNativeIssue =
-  | { readonly kind: 'remote-failed'; readonly reason: RemoteFailure; readonly detail?: string }
-  | { readonly kind: 'warnings'; readonly warnings: readonly ManifestWarning[] };
+export type HexaNativeIssue = LiveIssue;
 
 export interface HexaNativeProviderProps {
   readonly children: ReactNode;
   /**
-   * Opt-in signed runtime updates. React Native (Hermes) has no WebCrypto Ed25519, so you MUST
-   * supply `verify` (e.g. backed by @noble/ed25519 or react-native-quick-crypto); without it a
-   * remote update is rejected with reason 'no-verifier' and the baked-in brand stays active.
-   * Nothing is persisted to device storage.
+   * Opt-in signed runtime updates (OFF by default on native). React Native (Hermes) has no WebCrypto Ed25519, so you
+   * MUST supply `verify` (e.g. backed by @noble/ed25519 or react-native-quick-crypto) and the trusted keys
+   * (`TRUSTED_KEYS`, `DEFAULT_MANIFEST_URL` are exported from the core entry); without a verifier a remote update is
+   * rejected with reason 'no-verifier' and the baked-in brand stays active. Nothing is persisted to device storage.
    */
-  readonly remote?: Omit<RemoteManifestOptions, 'signal'>;
+  readonly remote?: RemoteConfig;
   readonly onIssue?: (issue: HexaNativeIssue) => void;
 }
 
@@ -40,24 +37,8 @@ export function HexaNativeProvider({ children, remote, onIssue }: HexaNativeProv
   const remoteKey = remote ? JSON.stringify([remote.url, remote.keys, remote.minRevision, remote.timeoutMs, remote.maxBytes]) : null;
 
   useEffect(() => {
-    const options = remoteRef.current;
-    if (!options) return undefined;
-    const controller = new AbortController();
-    void fetchSignedManifest({ ...options, signal: controller.signal }).then((result) => {
-      if (controller.signal.aborted) return;
-      if (!result.ok) {
-        if (result.reason !== 'aborted')
-          onIssueRef.current?.({
-            kind: 'remote-failed',
-            reason: result.reason,
-            ...(result.detail !== undefined ? { detail: result.detail } : {}),
-          });
-        return;
-      }
-      if (result.warnings.length > 0) onIssueRef.current?.({ kind: 'warnings', warnings: result.warnings });
-      setManifest(result.manifest);
-    });
-    return () => controller.abort();
+    const handle = startLive(remoteRef.current, { onManifest: setManifest, onIssue: (i) => onIssueRef.current?.(i) });
+    return () => handle.stop();
   }, [remoteKey]);
 
   const value = useMemo(() => manifest, [manifest]);

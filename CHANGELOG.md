@@ -35,6 +35,9 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - Official fonts: the four brand weights of each family as static TTF in `brand/fonts` (hash-checked, identity-checked), shipped at `@hexadata/brand/fonts/ttf/*` for React Native, Flutter, iOS/Android and Office; supplied OFL texts are the authoritative licences.
 - **Licensing changed**: software is now Apache-2.0; HexaData Brand Assets are protected by `BRAND-LICENSE.md` (trademark policy, permitted co-branding/sponsor/educational uses); `docs/USE-FOR-YOUR-OWN-BRAND.md` explains reuse for other brands. Package licence expression `Apache-2.0 AND LicenseRef-HexaData-Brand`; `publishConfig.access` is now `public`. Logo outputs embed the trademark notice (EXIF) and ship `dist/logo/NOTICE.txt`.
 
+- **Live channel**: signed manifest v2 (adds descriptor and logo content hashes), keys embedded from `brand/keys.json`, live updates on by default for `HexaProvider` and `<hexa-*>` elements (`live={false}` / `data-hd-live="off"` to disable; no request at all while no keys are embedded). `npm run build:channel` assembles `/v2/` + an immutable `/<version>/` copy with SRI hashes and a signed `manifest.json`. Logo URLs carry a content-hash cache buster.
+- **Zero runtime dependencies**: `zod` replaced by a hand-written validator (closes the high-severity audit finding); `HexaManifestSchema.safeParse` is kept.
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.

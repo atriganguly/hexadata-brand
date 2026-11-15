@@ -63,10 +63,10 @@ const scan = (dir) => {
 };
 scan(join(root, 'dist'));
 
-// 4. no install-time lifecycle scripts (supply-chain hygiene for consumers); one runtime dependency
+// 4. no install-time lifecycle scripts (supply-chain hygiene for consumers); zero runtime dependencies
 for (const s of ['preinstall', 'install', 'postinstall']) if (pkg.scripts?.[s]) fail(`package.json has a ${s} script`);
 const deps = Object.keys(pkg.dependencies ?? {});
-if (deps.join() !== 'zod') fail(`unexpected runtime dependencies: ${deps.join(', ') || '(none)'}; expected only zod`);
+if (deps.length > 0) fail(`unexpected runtime dependencies: ${deps.join(', ')}; this package must have zero runtime dependencies`);
 for (const k of ['license', 'version', 'exports', 'files', 'engines', 'publishConfig']) if (!pkg[k]) fail(`package.json is missing "${k}"`);
 
 // 5. strict: fonts, licences

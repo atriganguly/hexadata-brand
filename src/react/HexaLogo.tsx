@@ -1,4 +1,5 @@
 import type { ImgHTMLAttributes, ReactElement } from 'react';
+import { useHexaBrand } from './HexaProvider.js';
 import { DEFAULT_LOGO_BASE, resolveLogo, logoUrl, type IconSize, type LogoForm, type LogoFormat, type LogoTone } from '../core/index.js';
 
 export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -40,12 +41,13 @@ export function HexaLogo({
   loading = 'lazy',
   ...rest
 }: HexaLogoProps): ReactElement {
+  const { assets } = useHexaBrand();
   const light = resolveLogo(form, tone, 'light');
   const dark = resolveLogo(form, tone, 'dark');
   const img = (v: typeof light, side: 'light' | 'dark'): ReactElement => (
     <img
       className={`hd-logo__img hd-logo__img--on-${side}`}
-      src={logoUrl(v, { base, format, size: iconSize })}
+      src={logoUrl(v, { base, format, size: iconSize, version: assets.logo[v.id] ?? v.sha256 })}
       width={v.width}
       height={v.height}
       alt={alt}

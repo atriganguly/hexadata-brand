@@ -121,9 +121,6 @@
       "optional": true
     }
   },
-  "dependencies": {
-    "zod": "^3.25.76"
-  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.0",
     "@capsizecss/metrics": "^3.0.0",
@@ -159,7 +156,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check .",
     "test": "tsx --test test/*.test.ts test/*.test.tsx",
-    "test:dist": "node --test test/dist.test.mjs",
+    "test:dist": "node --test test/dist.test.mjs test/channel.dist.test.mjs",
     "verify": "node scripts/verify-package.mjs",
     "verify:release": "node scripts/verify-package.mjs --strict && node scripts/check-types.mjs && publint && attw --pack . --profile node16 --exclude-entrypoints ./tailwind/theme.css ./css ./base.css ./components.css ./all.css ./elements/auto ./fonts.css ./fonts-fallback.css --ignore-rules named-exports",
     "prepublishOnly": "npm run build && npm run build:fonts && npm run build:logos && npm run test && npm run test:dist && npm run test:e2e && npm run verify:release",
@@ -171,6 +168,7 @@
     "logo:check": "node scripts/logo-tool.mjs check",
     "logo:measure": "node scripts/logo-tool.mjs measure",
     "font:check": "node scripts/font-tool.mjs check",
-    "font:measure": "node scripts/font-tool.mjs measure"
+    "font:measure": "node scripts/font-tool.mjs measure",
+    "build:channel": "node scripts/build-channel.mjs"
   }
 }

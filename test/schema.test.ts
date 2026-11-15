@@ -53,7 +53,7 @@ test('unknown keys are ignored with a warning, including prototype-pollution sha
     '{"palette":{"__proto__":"#112233","constructor":"#112233","teal":"#112233"},"taglines":{"__proto__":"x","tertiary":"x"}}',
   );
   const r = ok(parseManifest(base(evil)));
-  // zod drops own '__proto__' keys outright (safe); the rest are reported.
+  // own '__proto__' keys are dropped outright (safe); the rest are reported.
   assert.equal(r.warnings.filter((w) => w.code === 'unknown-key').length, 3);
   assert.ok(!Object.hasOwn(r.manifest.tokens.palette, '__proto__'));
   assert.equal(({} as Record<string, unknown>).teal, undefined);

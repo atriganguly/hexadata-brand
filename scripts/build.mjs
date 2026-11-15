@@ -33,7 +33,7 @@ for (const [name, entry] of Object.entries(entries)) {
       format,
       platform: 'neutral',
       target: 'es2020',
-      packages: 'external', // zod, react, react-native stay external; our own relative modules are bundled
+      packages: 'external', // react and react-native stay external (no runtime dependencies); our own relative modules are bundled
       jsx: 'automatic',
       legalComments: 'none',
       ...(entry.banner ? { banner: { js: entry.banner } } : {}),

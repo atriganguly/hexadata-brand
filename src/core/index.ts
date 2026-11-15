@@ -4,3 +4,5 @@ export * from './contrast.js';
 export * from './schema.js';
 export * from './remote.js';
 export * from './apply.js';
+export * from './trust.js';
+export * from './live.js';
