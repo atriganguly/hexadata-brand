@@ -1,7 +1,7 @@
 # @hexadata/brand
 
 HexaData brand tokens (colour, typography, taglines) for **web, React, React Native and Tailwind**, generated from a
-single source of truth: [`tokens/brand.json`](tokens/brand.json), transcribed from _HexaData Brand Kit v1.0_.
+single source of truth: [`brand/`](brand/), transcribed from _HexaData Brand Kit v1.0_.
 
 **Design goals:** brand-exact · WCAG-enforced · no third-party requests · no browser storage · no personal data · tamper-evident updates.
 
@@ -110,14 +110,14 @@ Use a KMS/HSM for production signing keys. Key rotation, compromise response: [S
 
 ```bash
 npm install            # FIRST TIME ONLY: creates package-lock.json. Commit it (CI requires it)
-npm run generate       # tokens/brand.json -> TS, CSS, Tailwind v3/v4, docs/contrast-matrix.md
+npm run generate       # brand/ -> TS, CSS, Tailwind v3/v4, docs/contrast-matrix.md
 npm test               # unit tests (node:test via tsx)
 npm run build && npm run build:fonts
 npm run test:dist && npm run test:e2e   # built output + real Chromium (strict CSP, no 3rd-party, no storage)
 npm run verify:release # exports, banned APIs/URLs, tarball whitelist, consumer types, publint, attw
 ```
 
-**Changing the brand = edit `tokens/brand.json` + the golden values in `test/tokens.test.ts`, run `npm run generate`.** CI fails if any
+**Changing the brand = edit `brand/` + the golden values in `test/tokens.test.ts`, run `npm run generate`.** CI fails if any
 allowed pairing drops below its WCAG minimum or if generated files drift.
 
 ## Documents

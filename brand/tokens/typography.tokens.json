@@ -1,0 +1,76 @@
+{
+  "font": {
+    "family": {
+      "display": {
+        "$type": "fontFamily",
+        "$value": ["Space Grotesk", "Helvetica Neue", "Arial", "system-ui", "sans-serif"],
+        "$description": "Title / Heading / Hero",
+        "$extensions": {
+          "com.hexadata": {
+            "family": "Space Grotesk",
+            "role": "Title / Heading / Hero"
+          }
+        }
+      },
+      "body": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter Tight",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "Noto Sans Devanagari",
+          "Nirmala UI",
+          "Kohinoor Devanagari",
+          "sans-serif"
+        ],
+        "$description": "Subtitle / Body / Descriptions",
+        "$extensions": {
+          "com.hexadata": {
+            "family": "Inter Tight",
+            "role": "Subtitle / Body / Descriptions"
+          }
+        }
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": [
+          "JetBrains Mono",
+          "ui-monospace",
+          "SF Mono",
+          "Menlo",
+          "Cascadia Mono",
+          "Liberation Mono",
+          "Consolas",
+          "Courier New",
+          "monospace"
+        ],
+        "$description": "Detailed Descriptions / Paragraphs",
+        "$extensions": {
+          "com.hexadata": {
+            "family": "JetBrains Mono",
+            "role": "Detailed Descriptions / Paragraphs"
+          }
+        }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      }
+    }
+  }
+}

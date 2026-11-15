@@ -1,0 +1,74 @@
+{
+  "palette": {
+    "cyan": "#009BB6",
+    "deepBlue": "#046AA7",
+    "obsidian": "#121E36",
+    "vividCerulean": "#01A3E5",
+    "midnight": "#040F49",
+    "grey": "#A3B1C6",
+    "white": "#F8FAFC",
+    "crimson": "#FF3B30",
+    "copper": "#F59E0B",
+    "green": "#10B981"
+  },
+  "taglines": {
+    "primary": "Supercomputing, On-demand.",
+    "secondary": "Engineered in India. Built for the World."
+  },
+  "fallbackColors": {
+    "black": "#000000",
+    "white": "#FFFFFF"
+  },
+  "fonts": {
+    "display": {
+      "family": "Space Grotesk",
+      "weights": [400, 500, 600, 700],
+      "stack": ["Helvetica Neue", "Arial", "system-ui", "sans-serif"]
+    },
+    "body": {
+      "family": "Inter Tight",
+      "weights": [400, 500, 600, 700],
+      "stack": [
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Arial",
+        "Noto Sans Devanagari",
+        "Nirmala UI",
+        "Kohinoor Devanagari",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "weights": [400, 500, 600, 700],
+      "stack": ["ui-monospace", "SF Mono", "Menlo", "Cascadia Mono", "Liberation Mono", "Consolas", "Courier New", "monospace"]
+    }
+  },
+  "semantic": {
+    "light": {
+      "bg": "white",
+      "fg": "obsidian",
+      "fgStrong": "midnight",
+      "fgMuted": "obsidian",
+      "bgAlt": "grey",
+      "fgOnAlt": "obsidian",
+      "accent": "deepBlue",
+      "borderStrong": "obsidian",
+      "borderSubtle": "grey"
+    },
+    "dark": {
+      "bg": "obsidian",
+      "fg": "white",
+      "fgStrong": "white",
+      "fgMuted": "grey",
+      "bgAlt": "midnight",
+      "fgOnAlt": "white",
+      "accent": "vividCerulean",
+      "borderStrong": "grey",
+      "borderSubtle": "grey"
+    }
+  }
+}

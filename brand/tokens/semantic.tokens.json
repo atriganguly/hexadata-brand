@@ -1,0 +1,81 @@
+{
+  "$description": "Semantic roles per theme mode, as aliases to palette colours. Style with roles, never raw palette.",
+  "semantic": {
+    "light": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "fgStrong": {
+        "$type": "color",
+        "$value": "{color.midnight}"
+      },
+      "fgMuted": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "bgAlt": {
+        "$type": "color",
+        "$value": "{color.grey}"
+      },
+      "fgOnAlt": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.deepBlue}"
+      },
+      "borderStrong": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "borderSubtle": {
+        "$type": "color",
+        "$value": "{color.grey}"
+      }
+    },
+    "dark": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.obsidian}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "fgStrong": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "fgMuted": {
+        "$type": "color",
+        "$value": "{color.grey}"
+      },
+      "bgAlt": {
+        "$type": "color",
+        "$value": "{color.midnight}"
+      },
+      "fgOnAlt": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.vividCerulean}"
+      },
+      "borderStrong": {
+        "$type": "color",
+        "$value": "{color.grey}"
+      },
+      "borderSubtle": {
+        "$type": "color",
+        "$value": "{color.grey}"
+      }
+    }
+  }
+}

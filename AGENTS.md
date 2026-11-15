@@ -8,7 +8,7 @@ The single source of truth for the HexaData brand. Every HexaData app, site and 
 
 ## Hard rules (never break)
 
-1. **Never invent, infer or "improve" a brand value** (colour, font, tagline, logo, spacing). Source order: `brand/` (once migrated; today `tokens/brand.json`) > `brand/kit/HexaData-Brand-Kit-v1.0.pdf` > nothing. If a value is not there, stop and ask a human.
+1. **Never invent, infer or "improve" a brand value** (colour, font, tagline, logo, spacing). Source order: `brand/` > `brand/kit/HexaData-Brand-Kit-v1.0.pdf` > nothing. If a value is not there, stop and ask a human.
 2. **Never hand-edit a file whose first lines say `GENERATED FILE`.** Edit the source and run `npm run generate`.
 3. **Never rename or remove a public name** (CSS variable, class, export, element tag, hosted path, manifest key) without a major version bump.
 4. **Never touch signing keys** (`*.jwk`, `*.pem`, `*.key`), never publish, never push tags, never force-push.

@@ -17,5 +17,5 @@
     "types": ["node"],
     "paths": { "@hexadata/brand/react": ["./src/react/index.ts"] }
   },
-  "include": ["src", "test", "scripts/generate.ts"]
+  "include": ["src", "test", "scripts/generate.ts", "scripts/generate"]
 }

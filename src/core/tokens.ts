@@ -1,4 +1,4 @@
-/* GENERATED FILE: DO NOT EDIT. Source: tokens/brand.json (run `npm run generate`). */
+/* GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). */
 
 export const BRAND_SOURCE = "HexaData Brand Kit v1.0";
 export const BRAND_REVISION = 1;

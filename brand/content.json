@@ -1,0 +1,15 @@
+{
+  "source": "HexaData Brand Kit v1.0",
+  "owner": "HexaData / Esconet Technologies Limited",
+  "revision": 1,
+  "issuedAt": "2026-11-13T00:00:00Z",
+  "taglines": {
+    "primary": "Supercomputing, On-demand.",
+    "secondary": "Engineered in India. Built for the World."
+  },
+  "fallbackColors": {
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "note": "Brand Kit v1.0: pure black/white are acceptable ONLY where the defined shades are technically unusable (print, email clients, forced-colors) or as a fallback. They are never palette or manifest tokens."
+  }
+}

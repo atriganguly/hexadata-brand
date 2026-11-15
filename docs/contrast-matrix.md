@@ -1,7 +1,7 @@
-<!-- GENERATED FILE: DO NOT EDIT. Source: tokens/brand.json (run `npm run generate`). -->
+<!-- GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). -->
 # Contrast matrix (WCAG 2.x)
 
-Computed from `tokens/brand.json`. Legend: ✓✓ ≥ 7 (AAA text) · ✓ ≥ 4.5 (AA text) · ◐ ≥ 3 (large text / UI only) · ✗ < 3.
+Computed from `brand/`. Legend: ✓✓ ≥ 7 (AAA text) · ✓ ≥ 4.5 (AA text) · ◐ ≥ 3 (large text / UI only) · ✗ < 3.
 Contrast is symmetric, but *use* is directional: see the rules below.
 
 | | cyan | deepBlue | obsidian | vividCerulean | midnight | grey | white | crimson | copper | green |

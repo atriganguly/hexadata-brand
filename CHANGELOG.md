@@ -15,7 +15,7 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 
 ### Added
 
-- `tokens/brand.json` single source of truth + generator (TS, CSS, Tailwind v3 preset, Tailwind v4 theme, contrast matrix doc).
+- `brand/` (DTCG token files) single source of truth + generator (TS, CSS, Tailwind v3 preset, Tailwind v4 theme, contrast matrix doc).
 - WCAG contrast engine; allowed/forbidden colour pairs, semantic light/dark roles, CI enforcement, and a contrast guard on remote manifests.
 - Signed manifest transport (https-only, no credentials/referrer, size/time bounded, anti-rollback, expiry, key rotation), per-key fallback with warnings, `parseManifest` is total (never throws).
 - Operator tool `manifest-tool` (keygen/sign/verify); refuses to sign invalid manifests.

@@ -25,7 +25,7 @@ Until approved, the package follows **rules instead of new colours**: muted text
 | Deep Blue, on-dark                         | `#3E8DBB` | 4.53 on obsidian · 4.90 on midnight | Only for text/icons on dark                                     |
 
 Margins are thin (4.51–4.58). If approved, nudge each ≥ 0.1 darker for rounding/rendering safety. These tokens are valid **on white only** (≈2.2:1 on the grey background) and would be added to
-`tokens/brand.json` with their pairs, after which the generator, CI matrix and remote guard pick them up automatically.
+`brand/` (tokens + `contrast.json`) with their pairs, after which the generator, CI matrix and remote guard pick them up automatically.
 
 ## Decision requested
 

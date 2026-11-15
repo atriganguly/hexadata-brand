@@ -1,5 +1,5 @@
 'use strict';
-/* GENERATED FILE: DO NOT EDIT. Source: tokens/brand.json (run `npm run generate`). */
+/* GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). */
 
 // `rgb(var(--x-rgb) / <alpha-value>)` keeps Tailwind opacity modifiers (bg-hd-cyan/50)
 // working while the values stay overridable through CSS variables.

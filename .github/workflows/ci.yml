@@ -19,7 +19,7 @@ jobs:
       - name: Lockfile is mandatory (integrity pins the font binaries and every dependency)
         run: test -f package-lock.json || (echo "package-lock.json missing: run 'npm install' once and commit it" && exit 1)
       - run: npm ci --ignore-scripts
-      - name: Generated files are in sync with tokens/brand.json
+      - name: Generated files are in sync with brand/
         run: npm run generate:check
       - run: npm run typecheck
       - run: npm test

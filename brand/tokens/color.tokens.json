@@ -1,0 +1,85 @@
+{
+  "$description": "HexaData Brand Kit v1.0 palette. Source of truth; do not add shades (Kit: DO NOT use any other shades of Black, Grey and White).",
+  "color": {
+    "cyan": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.0, 0.607843, 0.713725],
+        "hex": "#009bb6"
+      }
+    },
+    "deepBlue": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.015686, 0.415686, 0.654902],
+        "hex": "#046aa7"
+      }
+    },
+    "obsidian": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.070588, 0.117647, 0.211765],
+        "hex": "#121e36"
+      }
+    },
+    "vividCerulean": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.003922, 0.639216, 0.898039],
+        "hex": "#01a3e5"
+      }
+    },
+    "midnight": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.015686, 0.058824, 0.286275],
+        "hex": "#040f49"
+      }
+    },
+    "grey": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.639216, 0.694118, 0.776471],
+        "hex": "#a3b1c6"
+      }
+    },
+    "white": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.972549, 0.980392, 0.988235],
+        "hex": "#f8fafc"
+      }
+    },
+    "crimson": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1.0, 0.231373, 0.188235],
+        "hex": "#ff3b30"
+      }
+    },
+    "copper": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.960784, 0.619608, 0.043137],
+        "hex": "#f59e0b"
+      }
+    },
+    "green": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.062745, 0.72549, 0.505882],
+        "hex": "#10b981"
+      }
+    }
+  }
+}
