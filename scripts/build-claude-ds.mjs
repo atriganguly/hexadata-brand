@@ -22,18 +22,6 @@ const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 const px = (css) => (css.endsWith('rem') ? `${parseFloat(css) * 16}px` : css === '0' ? '0' : css);
 const files = new Map(); // path under project/ -> text
 const put = (p, text) => files.set(p, text.endsWith('\n') ? text : `${text}\n`);
-const NAMES = {
-  cyan: 'Cyan',
-  deepBlue: 'Deep Blue',
-  obsidian: 'Obsidian',
-  vividCerulean: 'Vivid Cerulean',
-  midnight: 'Midnight',
-  grey: 'Grey',
-  white: 'White',
-  crimson: 'Crimson',
-  copper: 'Copper',
-  green: 'Green',
-};
 
 // ---------------------------------------------------------------- tokens.json
 const USE = {
