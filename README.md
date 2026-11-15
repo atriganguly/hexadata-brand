@@ -160,6 +160,19 @@ npm run manifest -- verify channel-out/v2/manifest.json 2026-11 <public-key>
 
 Use a KMS/HSM or a protected CI secret for the production key; never commit it. Rotation and compromise response: [SECURITY.md](SECURITY.md).
 
+## Website, Brand Kit PDF and local preview
+
+```bash
+npm run build && npm run build:fonts && npm run build:logos
+npm run build:channel                 # the hosted /v2/ + /<version>/ files (signed when HEXA_SIGNING_JWK is set)
+npm run build:pdf                     # brand/kit/HexaData-Brand-Kit-v2.0.pdf, rendered from the site (commit it)
+npm run build:site -- --base /        # site-out/ for local preview
+npm run preview                       # http://127.0.0.1:4173/
+npm run test:site                     # axe (light+dark), links, console, phone width
+```
+
+The site deploys to GitHub Pages on every push to `main` (Settings > Pages > Source: GitHub Actions). `npm run pdf:check` (CI) fails if the brand changed but the committed PDF did not.
+
 ## Develop
 
 ```bash

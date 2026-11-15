@@ -16,3 +16,4 @@ test/golden/brand.golden.json
 src/core/logo.ts
 src/core/trust.ts
 channel-out
+site-out

@@ -1,0 +1,40 @@
+name: Pages
+# Deploys the website AND the evergreen channel (/v2/ and /<version>/) to GitHub Pages on every push to main.
+# Needs: Settings > Pages > Source = "GitHub Actions", and the secret HEXA_SIGNING_JWK (Ed25519 private JWK whose public key is in brand/keys.json).
+# Without the secret the site still deploys but the manifest is unsigned and therefore not published: live updates stay inert.
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency: { group: pages, cancel-in-progress: false }
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # TODO(security): pin every action to a full commit SHA (Phase 8); Dependabot keeps them current.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build && npm run build:fonts && npm run build:logos
+      - name: Channel (signed when the secret exists)
+        env: { HEXA_SIGNING_JWK: '${{ secrets.HEXA_SIGNING_JWK }}' }
+        run: |
+          if [ -n "$HEXA_SIGNING_JWK" ]; then npm run build:channel -- --require-signed
+          else echo "::warning::HEXA_SIGNING_JWK is not set: publishing an UNSIGNED channel (live updates inert)"; npm run build:channel; fi
+      - run: npm run build:pdf
+      - run: npm run build:site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site-out }
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: { pages: write, id-token: write }
+    environment: { name: github-pages, url: '${{ steps.deployment.outputs.page_url }}' }
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

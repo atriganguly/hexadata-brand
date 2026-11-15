@@ -3,33 +3,33 @@ on:
   push: { branches: [main] }
   pull_request:
 permissions: { contents: read }
-concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }
+concurrency: { group: 'ci-${{ github.ref }}', cancel-in-progress: true }
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: { node: [20, 22, 24] }
+      matrix: { node: [22, 24] }
     steps:
-      # TODO(security): pin every action to a full commit SHA (e.g. with `pinact`); Dependabot keeps them current.
+      # TODO(security): pin every action to a full commit SHA (Phase 8); Dependabot keeps them current.
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '${{ matrix.node }}', cache: npm }
       - name: Lockfile is mandatory (integrity pins the font binaries and every dependency)
-        run: test -f package-lock.json || (echo "package-lock.json missing: run 'npm install' once and commit it" && exit 1)
+        run: test -f package-lock.json || (echo "package-lock.json missing" && exit 1)
       - run: npm ci --ignore-scripts
       - name: Generated files are in sync with brand/
         run: npm run generate:check
       - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
       - run: npm test
-      - run: npm run build
-      - run: npm run build:fonts
+      - run: npm run build && npm run build:fonts && npm run build:logos
       - run: npm run test:dist
       - run: npm run verify:release
-      - name: Lint (non-blocking until the first clean run, then remove continue-on-error)
-        run: npm run lint
-        continue-on-error: true
+      - name: Committed Brand Kit PDF carries the current brand fingerprint
+        run: npm run pdf:check
       - name: Dependency audit (runtime deps must be clean)
         run: npm audit --omit=dev --audit-level=high
 
@@ -42,6 +42,8 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci --ignore-scripts
       - run: npx playwright install --with-deps chromium
-      - run: npm run build && npm run build:fonts
-      - name: Strict-CSP, zero-third-party-request, no-storage checks in real Chromium
+      - run: npm run build && npm run build:fonts && npm run build:logos
+      - name: Strict-CSP, live-update, component-contrast checks in real Chromium
         run: npm run test:e2e
+      - name: Website axe WCAG 2.2 AA (light and dark), links, console, phone width
+        run: npm run test:site

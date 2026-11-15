@@ -1,9 +1,20 @@
 import js from '@eslint/js';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['dist/**', 'channel-out/**', 'node_modules/**', 'src/core/tokens.ts', 'src/tailwind/preset.cjs', 'test/e2e/demo.tsx'] },
+  {
+    ignores: [
+      'dist/**',
+      'channel-out/**',
+      'site-out/**',
+      'node_modules/**',
+      'src/core/tokens.ts',
+      'src/tailwind/preset.cjs',
+      'test/e2e/demo.tsx',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -23,33 +34,13 @@ export default tseslint.config(
     },
   },
   {
-    files: ['test/e2e/run.mjs'],
-    languageOptions: {
-      globals: {
-        document: 'readonly',
-        window: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
-        indexedDB: 'readonly',
-        caches: 'readonly',
-        getComputedStyle: 'readonly',
-      },
-    },
+    // Node tooling, the site generator and tests.
+    files: ['scripts/**/*.mjs', 'site/**/*.mjs', 'test/**/*.mjs', 'test/**/*.ts', 'test/**/*.tsx', 'src/tailwind/preset.cjs'],
+    languageOptions: { globals: { ...globals.node, module: 'writable', require: 'readonly' } },
   },
   {
-    files: ['scripts/**/*.mjs', 'test/**/*.mjs', 'test/**/*.ts', 'test/**/*.tsx', 'src/tailwind/preset.cjs'],
-    languageOptions: {
-      globals: {
-        process: 'readonly',
-        Buffer: 'readonly',
-        console: 'readonly',
-        crypto: 'readonly',
-        URL: 'readonly',
-        TextEncoder: 'readonly',
-        TextDecoder: 'readonly',
-        module: 'writable',
-        require: 'readonly',
-      },
-    },
+    // Code that runs in the browser: the site's script and the Playwright page.evaluate() callbacks inside e2e tests.
+    files: ['site/assets/site.js', 'test/e2e/run.mjs', 'test/site.e2e.mjs', 'scripts/build-pdf.mjs'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
 );

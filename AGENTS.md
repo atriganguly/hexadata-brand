@@ -22,6 +22,10 @@ The single source of truth for the HexaData brand. Every HexaData app, site and 
 
 `npm run generate` · `npm run typecheck` · `npm run lint` · `npm run format:check` · `npm test` · `npm run build` · `npm run build:fonts` · `npm run test:dist` · `npm run test:e2e` · `npm run verify:release`
 
+## Website and PDF
+
+`site/` is a framework-free static generator that reads the BUILT package (`dist/core`), so it cannot disagree with what ships. Never hard-code a colour, size or text that exists in `brand/`: read it from the data. Never add inline `style=` attributes (strict-CSP friendly). The Brand Kit PDF is the site's `/print/` route; after any brand change run `npm run build:pdf` and commit the PDF (CI runs `pdf:check`). The site test (`npm run test:site`) must stay axe-clean in light and dark.
+
 ## Definition of done
 
 All commands above pass, `npm run generate:check` shows no drift, CHANGELOG updated, and anything needing human sign-off (new brand values, licence, publishing) is listed for the owner rather than done.

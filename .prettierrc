@@ -1,1 +1,13 @@
-{ "singleQuote": true, "printWidth": 140, "trailingComma": "all" }
+{
+  "singleQuote": true,
+  "printWidth": 140,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "site/**/*.mjs",
+      "options": {
+        "embeddedLanguageFormatting": "off"
+      }
+    }
+  ]
+}

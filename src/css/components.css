@@ -194,6 +194,12 @@
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
+  /* The accent colour is too faint on the secondary (alt) surface in light mode (deep blue on grey is 2.67:1). */
+  .hd-surface-alt .hd-link,
+  .hd-card--alt .hd-link,
+  .hd-footer .hd-link {
+    color: var(--hd-fg-on-alt);
+  }
 
   /* ---------- Form fields ---------- */
   .hd-field {

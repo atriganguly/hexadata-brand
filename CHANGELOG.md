@@ -38,6 +38,10 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - **Live channel**: signed manifest v2 (adds descriptor and logo content hashes), keys embedded from `brand/keys.json`, live updates on by default for `HexaProvider` and `<hexa-*>` elements (`live={false}` / `data-hd-live="off"` to disable; no request at all while no keys are embedded). `npm run build:channel` assembles `/v2/` + an immutable `/<version>/` copy with SRI hashes and a signed `manifest.json`. Logo URLs carry a content-hash cache buster.
 - **Zero runtime dependencies**: `zod` replaced by a hand-written validator (closes the high-severity audit finding); `HexaManifestSchema.safeParse` is kept.
 
+- **Website** (static, framework-free, built from the package itself): home, logo, colour (swatches, roles, live contrast matrix, forbidden pairs), typography, foundations, every component with copyable HTML/React, three full example pages, per-stack quick starts, downloads, changelog and brand licence. Deployed to GitHub Pages together with the evergreen channel (`.github/workflows/pages.yml`). Tested in real Chromium: axe WCAG 2.2 AA in light and dark on every page, no console errors, no off-origin requests (except the brand manifest), no broken links or images, no horizontal scroll at 375 px.
+- **Brand Kit v2.0 PDF** (`brand/kit/HexaData-Brand-Kit-v2.0.pdf`), rendered from the site's print route with an embedded brand fingerprint; `npm run pdf:check` fails CI when the brand changed but the PDF did not. Kit v1.0 stays archived; its typos are fixed in v2.0.
+- `.hd-link` now follows the alternate-surface contrast rule (found by the website's axe run).
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.
