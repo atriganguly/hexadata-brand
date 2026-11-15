@@ -152,7 +152,7 @@
   },
   "scripts": {
     "generate": "tsx scripts/generate.ts",
-    "generate:check": "npm run generate && git diff --exit-code -- src docs/contrast-matrix.md platforms Package.swift",
+    "generate:check": "npm run generate && git diff --exit-code -- src docs/contrast-matrix.md platforms Package.swift figma",
     "build": "npm run generate && node scripts/build.mjs",
     "build:fonts": "node scripts/build-fonts.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -178,6 +178,8 @@
     "build:pdf": "node scripts/build-pdf.mjs",
     "pdf:check": "node scripts/build-pdf.mjs --check",
     "test:site": "node test/site.e2e.mjs",
-    "build:platforms": "node scripts/build-platforms.mjs"
+    "build:platforms": "node scripts/build-platforms.mjs",
+    "figma:check": "node scripts/figma-state.mjs check",
+    "figma:record": "node scripts/figma-state.mjs record"
   }
 }

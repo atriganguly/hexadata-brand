@@ -117,11 +117,11 @@ abstract final class HexaRadius {
   static const double full = 9999;
 }
 abstract final class HexaFontSize {
-  static const double sxs = 12;
-  static const double ssm = 14;
-  static const double sbase = 16;
-  static const double slg = 18;
-  static const double sxl = 20;
+  static const double xs = 12;
+  static const double sm = 14;
+  static const double base = 16;
+  static const double lg = 18;
+  static const double xl = 20;
   static const double s2xl = 24;
   static const double s3xl = 30;
   static const double s4xl = 36;

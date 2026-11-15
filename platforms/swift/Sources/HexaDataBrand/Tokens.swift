@@ -67,11 +67,11 @@ public enum HexaRadius {
     public static let full: CGFloat = 9999
 }
 public enum HexaFontSize {
-    public static let sxs: CGFloat = 12
-    public static let ssm: CGFloat = 14
-    public static let sbase: CGFloat = 16
-    public static let slg: CGFloat = 18
-    public static let sxl: CGFloat = 20
+    public static let xs: CGFloat = 12
+    public static let sm: CGFloat = 14
+    public static let base: CGFloat = 16
+    public static let lg: CGFloat = 18
+    public static let xl: CGFloat = 20
     public static let s2xl: CGFloat = 24
     public static let s3xl: CGFloat = 30
     public static let s4xl: CGFloat = 36

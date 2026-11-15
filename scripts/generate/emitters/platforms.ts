@@ -10,6 +10,7 @@ export function emit(t: Tokens, { write }: Ctx): void {
   const pal = Object.keys(P);
   const roles = Object.keys(t.semantic.light);
   const F = t.foundations;
+  const fs = (k: string): string => (/^[0-9]/.test(k) ? `s${k}` : k);
   const px = (g: Record<string, string>): [string, number][] => Object.entries(g).map(([k, v]) => [k, toNumber(v)]);
   const hashHeader = `GENERATED FILE: DO NOT EDIT. Source: brand/ (run \`npm run generate\`).`;
 
@@ -145,7 +146,7 @@ ${px(F.radius)
 }
 abstract final class HexaFontSize {
 ${px(F.fontSize)
-  .map(([k, v]) => `  static const double s${k.replace('-', '_')} = ${v};`)
+  .map(([k, v]) => `  static const double ${fs(k)} = ${v};`)
   .join('\n')}
 }
 abstract final class HexaFonts {
@@ -227,7 +228,7 @@ ${px(F.radius)
 }
 public enum HexaFontSize {
 ${px(F.fontSize)
-  .map(([k, v]) => `    public static let s${k.replace('-', '_')}: CGFloat = ${v}`)
+  .map(([k, v]) => `    public static let ${fs(k)}: CGFloat = ${v}`)
   .join('\n')}
 }
 public enum HexaFontName {
@@ -306,7 +307,7 @@ ${px(F.radius)
 /** sp values. */
 object HexaFontSize {
 ${px(F.fontSize)
-  .map(([k, v]) => `    const val s${k.replace('-', '_')} = ${v}f`)
+  .map(([k, v]) => `    const val ${fs(k)} = ${v}f`)
   .join('\n')}
 }
 `,

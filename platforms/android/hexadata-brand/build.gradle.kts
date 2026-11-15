@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.hexadata.brand"
-    compileSdk = 35
+    compileSdk = 34
     defaultConfig { minSdk = 24 }
     buildFeatures { compose = true }
     compileOptions {

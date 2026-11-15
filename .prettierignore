@@ -21,3 +21,4 @@ platforms/print/colors.json
 platforms/flutter/pubspec.yaml
 platforms/python/pyproject.toml
 platforms/email/template.html
+figma/sync-payload.json

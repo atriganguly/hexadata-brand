@@ -1,0 +1,235 @@
+{
+  "$generated": "GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).",
+  "version": "2.0.0",
+  "revision": 1,
+  "colors": {
+    "cyan": {
+      "hex": "#009BB6",
+      "css": "--hd-cyan"
+    },
+    "deep-blue": {
+      "hex": "#046AA7",
+      "css": "--hd-deep-blue"
+    },
+    "obsidian": {
+      "hex": "#121E36",
+      "css": "--hd-obsidian"
+    },
+    "vivid-cerulean": {
+      "hex": "#01A3E5",
+      "css": "--hd-vivid-cerulean"
+    },
+    "midnight": {
+      "hex": "#040F49",
+      "css": "--hd-midnight"
+    },
+    "grey": {
+      "hex": "#A3B1C6",
+      "css": "--hd-grey"
+    },
+    "white": {
+      "hex": "#F8FAFC",
+      "css": "--hd-white"
+    },
+    "crimson": {
+      "hex": "#FF3B30",
+      "css": "--hd-crimson"
+    },
+    "copper": {
+      "hex": "#F59E0B",
+      "css": "--hd-copper"
+    },
+    "green": {
+      "hex": "#10B981",
+      "css": "--hd-green"
+    }
+  },
+  "roles": {
+    "bg": {
+      "light": "white",
+      "dark": "obsidian",
+      "css": "--hd-bg"
+    },
+    "fg": {
+      "light": "obsidian",
+      "dark": "white",
+      "css": "--hd-fg"
+    },
+    "fg-strong": {
+      "light": "midnight",
+      "dark": "white",
+      "css": "--hd-fg-strong"
+    },
+    "fg-muted": {
+      "light": "obsidian",
+      "dark": "grey",
+      "css": "--hd-fg-muted"
+    },
+    "bg-alt": {
+      "light": "grey",
+      "dark": "midnight",
+      "css": "--hd-bg-alt"
+    },
+    "fg-on-alt": {
+      "light": "obsidian",
+      "dark": "white",
+      "css": "--hd-fg-on-alt"
+    },
+    "accent": {
+      "light": "deep-blue",
+      "dark": "vivid-cerulean",
+      "css": "--hd-accent"
+    },
+    "border-strong": {
+      "light": "obsidian",
+      "dark": "grey",
+      "css": "--hd-border-strong"
+    },
+    "border-subtle": {
+      "light": "grey",
+      "dark": "grey",
+      "css": "--hd-border-subtle"
+    },
+    "accent-fill": {
+      "light": "deep-blue",
+      "dark": "vivid-cerulean",
+      "css": "--hd-accent-fill"
+    },
+    "on-accent-fill": {
+      "light": "white",
+      "dark": "obsidian",
+      "css": "--hd-on-accent-fill"
+    },
+    "danger": {
+      "light": "crimson",
+      "dark": "crimson",
+      "css": "--hd-danger"
+    },
+    "warning": {
+      "light": "copper",
+      "dark": "copper",
+      "css": "--hd-warning"
+    },
+    "success": {
+      "light": "green",
+      "dark": "green",
+      "css": "--hd-success"
+    },
+    "on-status": {
+      "light": "obsidian",
+      "dark": "obsidian",
+      "css": "--hd-on-status"
+    }
+  },
+  "space": {
+    "0": 0,
+    "1": 4,
+    "2": 8,
+    "3": 12,
+    "4": 16,
+    "5": 20,
+    "6": 24,
+    "8": 32,
+    "10": 40,
+    "12": 48,
+    "16": 64,
+    "20": 80,
+    "24": 96,
+    "0-5": 2
+  },
+  "radius": {
+    "none": 0,
+    "sm": 4,
+    "md": 8,
+    "lg": 12,
+    "xl": 16,
+    "full": 9999
+  },
+  "fontSize": {
+    "xs": 12,
+    "sm": 14,
+    "base": 16,
+    "lg": 18,
+    "xl": 20,
+    "2xl": 24,
+    "3xl": 30,
+    "4xl": 36,
+    "5xl": 48,
+    "6xl": 60
+  },
+  "fonts": {
+    "display": {
+      "family": "Space Grotesk",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "body": {
+      "family": "Inter Tight",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    }
+  },
+  "shadows": [
+    {
+      "name": "1",
+      "layers": [
+        {
+          "y": 1,
+          "blur": 2,
+          "alpha": 0.12
+        }
+      ]
+    },
+    {
+      "name": "2",
+      "layers": [
+        {
+          "y": 2,
+          "blur": 6,
+          "alpha": 0.14
+        },
+        {
+          "y": 1,
+          "blur": 2,
+          "alpha": 0.1
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "layers": [
+        {
+          "y": 8,
+          "blur": 24,
+          "alpha": 0.18
+        },
+        {
+          "y": 2,
+          "blur": 6,
+          "alpha": 0.12
+        }
+      ]
+    }
+  ],
+  "taglines": {
+    "primary": "Supercomputing, On-demand.",
+    "secondary": "Engineered in India. Built for the World."
+  }
+}

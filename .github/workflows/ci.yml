@@ -30,6 +30,8 @@ jobs:
       - run: npm run verify:release
       - name: Committed Brand Kit PDF carries the current brand fingerprint
         run: npm run pdf:check
+      - name: Figma library is in sync with the brand (last recorded sync)
+        run: npm run figma:check
       - name: Dependency audit (runtime deps must be clean)
         run: npm audit --omit=dev --audit-level=high
 

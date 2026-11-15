@@ -105,11 +105,11 @@ object HexaRadius {
 }
 /** sp values. */
 object HexaFontSize {
-    const val sxs = 12f
-    const val ssm = 14f
-    const val sbase = 16f
-    const val slg = 18f
-    const val sxl = 20f
+    const val xs = 12f
+    const val sm = 14f
+    const val base = 16f
+    const val lg = 18f
+    const val xl = 20f
     const val s2xl = 24f
     const val s3xl = 30f
     const val s4xl = 36f
