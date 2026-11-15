@@ -10,7 +10,7 @@
       "version": "Version 2.000",
       "sha256": "637578d47b0e70e02b3eb5056847dd9add17bd683234d28f5d11a6cf66ff2725",
       "license": "licenses/space-grotesk-OFL.txt",
-      "licenseSha256": "d6227adcf031a9899e0f4fd017cfa4d9c88a1e223a4f08a64af10979802c06b9"
+      "licenseSha256": "f2e05925e3d5e73aebbe4148639a899876c12e4708eb453682b278a0a6f2a3b2"
     },
     {
       "role": "display",
@@ -21,7 +21,7 @@
       "version": "Version 2.000",
       "sha256": "d8135bce6603398f3d0cdb478a018d7fa869b0168d037a9408cad23e030bfa7a",
       "license": "licenses/space-grotesk-OFL.txt",
-      "licenseSha256": "d6227adcf031a9899e0f4fd017cfa4d9c88a1e223a4f08a64af10979802c06b9"
+      "licenseSha256": "f2e05925e3d5e73aebbe4148639a899876c12e4708eb453682b278a0a6f2a3b2"
     },
     {
       "role": "display",
@@ -32,7 +32,7 @@
       "version": "Version 2.000",
       "sha256": "279a5d22b8ab377f41706af566610667db3941b069b50187b98af09ca3b08f91",
       "license": "licenses/space-grotesk-OFL.txt",
-      "licenseSha256": "d6227adcf031a9899e0f4fd017cfa4d9c88a1e223a4f08a64af10979802c06b9"
+      "licenseSha256": "f2e05925e3d5e73aebbe4148639a899876c12e4708eb453682b278a0a6f2a3b2"
     },
     {
       "role": "display",
@@ -43,7 +43,7 @@
       "version": "Version 2.000",
       "sha256": "8fb63865c6afd083723dc1775548306b7751f20397bebcb79646032c598c81b9",
       "license": "licenses/space-grotesk-OFL.txt",
-      "licenseSha256": "d6227adcf031a9899e0f4fd017cfa4d9c88a1e223a4f08a64af10979802c06b9"
+      "licenseSha256": "f2e05925e3d5e73aebbe4148639a899876c12e4708eb453682b278a0a6f2a3b2"
     },
     {
       "role": "body",
@@ -54,7 +54,7 @@
       "version": "Version 3.004",
       "sha256": "f278c70e8414bd41ef0e95a780364ddf675b07fc09945ea00a24adb48e133dc6",
       "license": "licenses/inter-tight-OFL.txt",
-      "licenseSha256": "58b83714ea0ecc5b3ab35aaef47c3a790e40d81a27e5b966d39d13c49e1fee14"
+      "licenseSha256": "b5549d3852169eb0e214311dae1b3cebc3f32e916e449fa0e75fc6fd40ed3eba"
     },
     {
       "role": "body",
@@ -65,7 +65,7 @@
       "version": "Version 3.004",
       "sha256": "032ce16cb6f6278ba8b6bbc87f0539c5b7aea8c3b7a074f5694d5455f5fa5cc0",
       "license": "licenses/inter-tight-OFL.txt",
-      "licenseSha256": "58b83714ea0ecc5b3ab35aaef47c3a790e40d81a27e5b966d39d13c49e1fee14"
+      "licenseSha256": "b5549d3852169eb0e214311dae1b3cebc3f32e916e449fa0e75fc6fd40ed3eba"
     },
     {
       "role": "body",
@@ -76,7 +76,7 @@
       "version": "Version 3.004",
       "sha256": "08478d71e5571803e9e7be36dab8e34ea0f7230f77ee48040aaaaecb5a7dfb67",
       "license": "licenses/inter-tight-OFL.txt",
-      "licenseSha256": "58b83714ea0ecc5b3ab35aaef47c3a790e40d81a27e5b966d39d13c49e1fee14"
+      "licenseSha256": "b5549d3852169eb0e214311dae1b3cebc3f32e916e449fa0e75fc6fd40ed3eba"
     },
     {
       "role": "body",
@@ -87,7 +87,7 @@
       "version": "Version 3.004",
       "sha256": "e37fcfadf8147282cda29042dcaf12fff89d9b8eaeb62a6696eaa816b9fd0336",
       "license": "licenses/inter-tight-OFL.txt",
-      "licenseSha256": "58b83714ea0ecc5b3ab35aaef47c3a790e40d81a27e5b966d39d13c49e1fee14"
+      "licenseSha256": "b5549d3852169eb0e214311dae1b3cebc3f32e916e449fa0e75fc6fd40ed3eba"
     },
     {
       "role": "mono",
@@ -98,7 +98,7 @@
       "version": "Version 2.211",
       "sha256": "b6b1ff4ddefe36d7f2a6174e1d001cab374e594519ee9049af028d577b64c5f5",
       "license": "licenses/jetbrains-mono-OFL.txt",
-      "licenseSha256": "4d9694c4844a13ea377458c3f98c90d2bf83d3c214612dcae2b7808406520708"
+      "licenseSha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697"
     },
     {
       "role": "mono",
@@ -109,7 +109,7 @@
       "version": "Version 2.211",
       "sha256": "23d57b8a635d023c3717a9c7ac1721199d0f8c6fe4b06d4d5ba3af2170fcbaa2",
       "license": "licenses/jetbrains-mono-OFL.txt",
-      "licenseSha256": "4d9694c4844a13ea377458c3f98c90d2bf83d3c214612dcae2b7808406520708"
+      "licenseSha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697"
     },
     {
       "role": "mono",
@@ -120,7 +120,7 @@
       "version": "Version 2.211",
       "sha256": "55987f26bab41b3fc9f13ce5ca9db9d99a75e3be4bba0f7341d3c026ff6e4706",
       "license": "licenses/jetbrains-mono-OFL.txt",
-      "licenseSha256": "4d9694c4844a13ea377458c3f98c90d2bf83d3c214612dcae2b7808406520708"
+      "licenseSha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697"
     },
     {
       "role": "mono",
@@ -131,7 +131,7 @@
       "version": "Version 2.211",
       "sha256": "a2349098b9e45419e7bf0e2958d6c4937a049dded37387b08be725be4c7615f3",
       "license": "licenses/jetbrains-mono-OFL.txt",
-      "licenseSha256": "4d9694c4844a13ea377458c3f98c90d2bf83d3c214612dcae2b7808406520708"
+      "licenseSha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697"
     }
   ]
 }

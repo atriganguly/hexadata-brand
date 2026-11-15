@@ -1,0 +1,54 @@
+# GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).
+name: hexadata_brand
+description: HexaData brand colours, typography and Material 3 themes for Flutter.
+version: 2.0.0
+homepage: https://atriganguly.github.io/hexadata-brand
+repository: https://github.com/atriganguly/hexadata-brand
+publish_to: none # flip once the pub.dev publisher is set up
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  # Font and logo files are staged into assets/ by `npm run build:platforms` (they are not committed twice).
+  fonts:
+    - family: Space Grotesk
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/SpaceGrotesk-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
+          weight: 700
+    - family: Inter Tight
+      fonts:
+        - asset: assets/fonts/InterTight-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/InterTight-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/InterTight-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/InterTight-Bold.ttf
+          weight: 700
+    - family: JetBrains Mono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/JetBrainsMono-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/JetBrainsMono-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/JetBrainsMono-Bold.ttf
+          weight: 700

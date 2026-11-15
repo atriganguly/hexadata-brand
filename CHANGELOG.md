@@ -42,6 +42,9 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - **Brand Kit v2.0 PDF** (`brand/kit/HexaData-Brand-Kit-v2.0.pdf`), rendered from the site's print route with an embedded brand fingerprint; `npm run pdf:check` fails CI when the brand changed but the PDF did not. Kit v1.0 stays archived; its typos are fixed in v2.0.
 - `.hd-link` now follows the alternate-surface contrast rule (found by the website's axe run).
 
+- **Platforms** (generated from `brand/`, see `platforms/README.md`): Python (`hexadata-brand`: tokens, Matplotlib/Plotly themes), Flutter (Material 3 themes), SwiftUI (root `Package.swift`, dynamic light/dark roles), Android (Compose theme + `values`/`values-night` XML), Office Theme Colors/Fonts, a table-based e-mail template and a print colour sheet (nominal CMYK, **UNPROOFED**, no invented Pantone values). `npm run build:platforms` stages them with the official fonts and logos. Python is imported and tested here; Flutter/Swift/Android are statically tested here and compiled by `.github/workflows/platforms.yml`. `.pptx`/`.docx` templates are planned for 2.1.
+- Fixed: font licence hash was line-ending dependent (CI on Linux disagreed with Windows); `.gitattributes` now marks fonts and icons binary.
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.

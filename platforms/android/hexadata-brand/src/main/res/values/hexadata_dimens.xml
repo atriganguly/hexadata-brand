@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). -->
+<resources>
+    <dimen name="hd_space_0">0dp</dimen>
+    <dimen name="hd_space_1">4dp</dimen>
+    <dimen name="hd_space_2">8dp</dimen>
+    <dimen name="hd_space_3">12dp</dimen>
+    <dimen name="hd_space_4">16dp</dimen>
+    <dimen name="hd_space_5">20dp</dimen>
+    <dimen name="hd_space_6">24dp</dimen>
+    <dimen name="hd_space_8">32dp</dimen>
+    <dimen name="hd_space_10">40dp</dimen>
+    <dimen name="hd_space_12">48dp</dimen>
+    <dimen name="hd_space_16">64dp</dimen>
+    <dimen name="hd_space_20">80dp</dimen>
+    <dimen name="hd_space_24">96dp</dimen>
+    <dimen name="hd_space_0_5">2dp</dimen>
+    <dimen name="hd_radius_none">0dp</dimen>
+    <dimen name="hd_radius_sm">4dp</dimen>
+    <dimen name="hd_radius_md">8dp</dimen>
+    <dimen name="hd_radius_lg">12dp</dimen>
+    <dimen name="hd_radius_xl">16dp</dimen>
+    <dimen name="hd_radius_full">9999dp</dimen>
+    <dimen name="hd_font_size_xs">12sp</dimen>
+    <dimen name="hd_font_size_sm">14sp</dimen>
+    <dimen name="hd_font_size_base">16sp</dimen>
+    <dimen name="hd_font_size_lg">18sp</dimen>
+    <dimen name="hd_font_size_xl">20sp</dimen>
+    <dimen name="hd_font_size_2xl">24sp</dimen>
+    <dimen name="hd_font_size_3xl">30sp</dimen>
+    <dimen name="hd_font_size_4xl">36sp</dimen>
+    <dimen name="hd_font_size_5xl">48sp</dimen>
+    <dimen name="hd_font_size_6xl">60sp</dimen>
+</resources>

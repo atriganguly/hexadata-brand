@@ -32,6 +32,7 @@ export interface TrustedKeySpec {
   publicKey: string;
 }
 export interface Tokens {
+  version: string;
   trustedKeys: TrustedKeySpec[];
   origin: string;
   descriptor: string;

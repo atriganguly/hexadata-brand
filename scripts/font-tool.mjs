@@ -27,7 +27,9 @@ const sha = (b) => createHash('sha256').update(b).digest('hex');
 const files = [];
 const problems = [];
 for (const f of FAMILIES) {
-  const license = readFileSync(join(root, `brand/fonts/licenses/${f.slug}-OFL.txt`));
+  // Normalise line endings: git may check text files out with CRLF on Windows, and the hash must not depend on that.
+  const licenseText = readFileSync(join(root, `brand/fonts/licenses/${f.slug}-OFL.txt`), 'utf8');
+  const license = Buffer.from(licenseText.split(String.fromCharCode(13, 10)).join(String.fromCharCode(10)));
   for (const [style, weight] of Object.entries(WEIGHTS)) {
     const file = `ttf/${f.stem}-${style}.ttf`;
     const buf = readFileSync(join(root, 'brand/fonts', file));

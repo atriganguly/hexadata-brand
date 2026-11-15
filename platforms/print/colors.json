@@ -1,0 +1,162 @@
+{
+  "$generated": "GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).",
+  "status": "UNPROOFED",
+  "warning": "CMYK values are a naive mathematical conversion from sRGB. They are NOT Pantone matches and NOT press-proofed. Have the printer proof and sign off before any print run, then record the approved values in brand/.",
+  "fallbacks": {
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "note": "Brand Kit v1.0: pure black/white are acceptable ONLY where the defined shades are technically unusable (print, email clients, forced-colors) or as a fallback. They are never palette or manifest tokens."
+  },
+  "colors": {
+    "cyan": {
+      "hex": "#009BB6",
+      "rgb": [
+        0,
+        155,
+        182
+      ],
+      "cmykNominal": [
+        100,
+        15,
+        0,
+        29
+      ],
+      "pantone": null
+    },
+    "deepBlue": {
+      "hex": "#046AA7",
+      "rgb": [
+        4,
+        106,
+        167
+      ],
+      "cmykNominal": [
+        98,
+        37,
+        0,
+        35
+      ],
+      "pantone": null
+    },
+    "obsidian": {
+      "hex": "#121E36",
+      "rgb": [
+        18,
+        30,
+        54
+      ],
+      "cmykNominal": [
+        67,
+        44,
+        0,
+        79
+      ],
+      "pantone": null
+    },
+    "vividCerulean": {
+      "hex": "#01A3E5",
+      "rgb": [
+        1,
+        163,
+        229
+      ],
+      "cmykNominal": [
+        100,
+        29,
+        0,
+        10
+      ],
+      "pantone": null
+    },
+    "midnight": {
+      "hex": "#040F49",
+      "rgb": [
+        4,
+        15,
+        73
+      ],
+      "cmykNominal": [
+        95,
+        79,
+        0,
+        71
+      ],
+      "pantone": null
+    },
+    "grey": {
+      "hex": "#A3B1C6",
+      "rgb": [
+        163,
+        177,
+        198
+      ],
+      "cmykNominal": [
+        18,
+        11,
+        0,
+        22
+      ],
+      "pantone": null
+    },
+    "white": {
+      "hex": "#F8FAFC",
+      "rgb": [
+        248,
+        250,
+        252
+      ],
+      "cmykNominal": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "pantone": null
+    },
+    "crimson": {
+      "hex": "#FF3B30",
+      "rgb": [
+        255,
+        59,
+        48
+      ],
+      "cmykNominal": [
+        0,
+        77,
+        81,
+        0
+      ],
+      "pantone": null
+    },
+    "copper": {
+      "hex": "#F59E0B",
+      "rgb": [
+        245,
+        158,
+        11
+      ],
+      "cmykNominal": [
+        0,
+        36,
+        96,
+        4
+      ],
+      "pantone": null
+    },
+    "green": {
+      "hex": "#10B981",
+      "rgb": [
+        16,
+        185,
+        129
+      ],
+      "cmykNominal": [
+        91,
+        0,
+        30,
+        27
+      ],
+      "pantone": null
+    }
+  }
+}

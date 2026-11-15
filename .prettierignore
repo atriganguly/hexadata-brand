@@ -17,3 +17,7 @@ src/core/logo.ts
 src/core/trust.ts
 channel-out
 site-out
+platforms/print/colors.json
+platforms/flutter/pubspec.yaml
+platforms/python/pyproject.toml
+platforms/email/template.html

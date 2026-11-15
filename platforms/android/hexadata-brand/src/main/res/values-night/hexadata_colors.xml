@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). -->
+<resources>
+    <color name="hd_bg">#121E36</color>
+    <color name="hd_fg">#F8FAFC</color>
+    <color name="hd_fg_strong">#F8FAFC</color>
+    <color name="hd_fg_muted">#A3B1C6</color>
+    <color name="hd_bg_alt">#040F49</color>
+    <color name="hd_fg_on_alt">#F8FAFC</color>
+    <color name="hd_accent">#01A3E5</color>
+    <color name="hd_border_strong">#A3B1C6</color>
+    <color name="hd_border_subtle">#A3B1C6</color>
+    <color name="hd_accent_fill">#01A3E5</color>
+    <color name="hd_on_accent_fill">#121E36</color>
+    <color name="hd_danger">#FF3B30</color>
+    <color name="hd_warning">#F59E0B</color>
+    <color name="hd_success">#10B981</color>
+    <color name="hd_on_status">#121E36</color>
+</resources>

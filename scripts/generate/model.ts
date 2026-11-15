@@ -132,7 +132,10 @@ export function loadModel(root: string): Tokens {
     (k) => ({ kid: String(k['kid']), publicKey: String(k['publicKey']) }) satisfies TrustedKeySpec,
   );
 
+  const version = String((JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as Json)['version']);
+
   return {
+    version,
     trustedKeys,
     origin: String(content['origin']),
     descriptor: String(content['descriptor']),

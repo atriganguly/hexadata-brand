@@ -1,0 +1,44 @@
+name: Platforms
+# Compiles the generated non-web packages with their real toolchains. Kept separate from CI so a toolchain outage never blocks web work.
+on:
+  push: { branches: [main], paths: ['platforms/**', 'Package.swift', 'brand/**', 'scripts/generate/**'] }
+  pull_request: { paths: ['platforms/**', 'Package.swift', 'brand/**', 'scripts/generate/**'] }
+permissions: { contents: read }
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install ./platforms/python matplotlib plotly
+      - run: python -I -m unittest discover -s platforms/python/tests -v
+
+  flutter:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: platforms/flutter } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable }
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+
+  swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift build
+      - run: swift test
+
+  android:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: platforms/android } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: gradle :hexadata-brand:assembleRelease

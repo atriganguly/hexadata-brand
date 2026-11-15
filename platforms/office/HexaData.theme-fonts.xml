@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). Install: copy to %AppData%\Microsoft\Templates\Document Themes\Theme Fonts\ (install the fonts from fonts/ttf first) -->
+<a:fontScheme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="HexaData">
+  <a:majorFont><a:latin typeface="Space Grotesk"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont>
+  <a:minorFont><a:latin typeface="Inter Tight"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont>
+</a:fontScheme>
