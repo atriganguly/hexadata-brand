@@ -26,7 +26,7 @@ jobs:
           else echo "::warning::HEXA_SIGNING_JWK is not set: publishing an UNSIGNED channel (live updates inert)"; npm run build:channel; fi
       - run: npm run build:pdf
       - run: npm run build:site
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v3
         with: { path: site-out }
 
