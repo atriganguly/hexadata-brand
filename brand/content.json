@@ -11,5 +11,7 @@
     "black": "#000000",
     "white": "#FFFFFF",
     "note": "Brand Kit v1.0: pure black/white are acceptable ONLY where the defined shades are technically unusable (print, email clients, forced-colors) or as a fallback. They are never palette or manifest tokens."
-  }
+  },
+  "descriptor": "servers and workstations",
+  "origin": "https://atriganguly.github.io/hexadata-brand"
 }

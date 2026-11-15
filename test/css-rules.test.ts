@@ -24,7 +24,8 @@ test('hand-written CSS contains no raw colours, URLs or imports', () => {
 });
 
 test('every --hd-* variable used by the hand-written CSS is defined by the tokens (or has a local fallback)', () => {
-  const defined = new Set([...tokensCss.matchAll(/(--hd-[a-z0-9-]+)\s*:/g)].map((m) => m[1]!));
+  const all = tokensCss + Object.values(handwritten).join(' ');
+  const defined = new Set([...all.matchAll(/(--hd-[a-z0-9-]+)\s*:/g)].map((m) => m[1]!));
   for (const [name, raw] of Object.entries(handwritten)) {
     for (const m of strip(raw).matchAll(/var\((--hd-[a-z0-9-]+)(,)?/g)) {
       if (m[2] === ',') continue; // local override hook with a fallback, e.g. var(--hd-stack-gap, ...)

@@ -13,3 +13,4 @@ tailwind/package.json
 elements/package.json
 test/contract/public-api.json
 test/golden/brand.golden.json
+src/core/logo.ts

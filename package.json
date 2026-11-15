@@ -100,6 +100,7 @@
     "./all.css": "./dist/css/all.css",
     "./fonts.css": "./dist/css/fonts.css",
     "./fonts-fallback.css": "./dist/css/fonts-fallback.css",
+    "./logo/*": "./dist/logo/*",
     "./package.json": "./package.json"
   },
   "peerDependencies": {
@@ -140,6 +141,7 @@
     "publint": "^0.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sharp": "^0.35.5",
     "style-dictionary": "^5.8.0",
     "tailwindcss": "^4.3.0",
     "tsx": "^4.19.0",
@@ -158,10 +160,13 @@
     "test:dist": "node --test test/dist.test.mjs",
     "verify": "node scripts/verify-package.mjs",
     "verify:release": "node scripts/verify-package.mjs --strict && node scripts/check-types.mjs && publint && attw --pack . --profile node16 --exclude-entrypoints ./tailwind/theme.css ./css ./base.css ./components.css ./all.css ./elements/auto ./fonts.css ./fonts-fallback.css --ignore-rules named-exports",
-    "prepublishOnly": "npm run build && npm run build:fonts && npm run test && npm run test:dist && npm run test:e2e && npm run verify:release",
+    "prepublishOnly": "npm run build && npm run build:fonts && npm run build:logos && npm run test && npm run test:dist && npm run test:e2e && npm run verify:release",
     "format": "prettier --write .",
     "check-types": "node scripts/check-types.mjs",
     "test:e2e": "node test/e2e/run.mjs",
-    "manifest": "node scripts/manifest-tool.mjs"
+    "manifest": "node scripts/manifest-tool.mjs",
+    "build:logos": "node scripts/build-logos.mjs",
+    "logo:check": "node scripts/logo-tool.mjs check",
+    "logo:measure": "node scripts/logo-tool.mjs measure"
   }
 }

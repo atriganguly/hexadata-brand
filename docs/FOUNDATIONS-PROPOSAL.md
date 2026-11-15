@@ -15,6 +15,14 @@ Nothing here changes any Kit-defined value (palette, fonts, taglines, black/grey
 | z-index            | base 0, dropdown 1000 ... tooltip 1500                                                                         | Avoids z-index wars across apps                                                                         |
 | New semantic roles | `accentFill`, `onAccentFill`, `danger`, `warning`, `success`, `onStatus` (all map to existing palette colours) | Lets components stay inside the Kit's allowed contrast pairs in both themes                             |
 
+## Logo (needs owner input)
+
+- **Raster only.** Brand Kit v1.0 contains PNG-quality logos (500 px wordmarks, 4096 px icon tiles). 500 px is soft for large displays; please supply vector masters or 2000 px+ exports. Replace the files in `brand/logo/source/`, run `npm run logo:measure`, and nothing else changes.
+- **Inconsistent artwork in the Kit:** the three centered lockups have different proportions (442x296, 456x293, 479x362) and the dark-tile icon uses a navy that is not in the palette. Flagged, not altered.
+- **Mono artwork exists only for dark surfaces**, and there is no transparent icon (only white and navy tiles).
+- **Clear space, minimum size and misuse rules are proposals** (in `brand/logo/logo.json`, `rules`): clear space of about 0.2 x logo height; minimum widths 24 px icon, 96 px centered, 120 px horizontal.
+- **Default image source is the hosted channel** (`<origin>/v2/logo/`). Say if you would rather default to self-hosting.
+
 ## Rules the components follow (derived from the Kit, not invented)
 
 - Text on cyan, cerulean, crimson, copper and green fills is **Obsidian**; only Deep Blue takes White (light mode primary buttons). In dark mode the primary fill is Vivid Cerulean with Obsidian text.

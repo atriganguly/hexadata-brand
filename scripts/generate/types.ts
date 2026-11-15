@@ -15,7 +15,20 @@ export interface Pair {
 export type FoundationGroup = 'space' | 'radius' | 'shadow' | 'duration' | 'easing' | 'fontSize' | 'lineHeight' | 'breakpoint' | 'zIndex';
 /** Each group maps token name -> final CSS value (shadows already reference the palette's --hd-*-rgb variables). */
 export type Foundations = Record<FoundationGroup, Record<string, string>>;
+export interface LogoVariantSpec {
+  id: string;
+  form: 'icon' | 'centered' | 'horizontal';
+  tone: 'primary' | 'mono';
+  background: 'light' | 'dark';
+  opaque: boolean;
+  /** Rendered (trimmed) art size in px. */
+  width: number;
+  height: number;
+}
 export interface Tokens {
+  origin: string;
+  descriptor: string;
+  logo: LogoVariantSpec[];
   source: string;
   owner: string;
   revision: number;

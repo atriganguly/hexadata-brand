@@ -1,4 +1,5 @@
 export { HexaProvider, useHexaBrand, type HexaProviderProps, type HexaIssue } from './HexaProvider.js';
+export { HexaLogo, type HexaLogoProps, type LogoSize } from './HexaLogo.js';
 export { HexaTagline, type HexaTaglineProps } from './HexaTagline.js';
 export type { HexaManifest, PaletteKey, RemoteManifestOptions, TrustedKey } from '../core/index.js';
 export {

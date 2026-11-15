@@ -63,6 +63,7 @@ const GALLERY = `<!doctype html><html lang="en"><head><meta charset="utf-8"><tit
 <span class="hd-badge" data-check>Badge</span><span class="hd-badge hd-badge--accent" data-check>Accent</span>
 <label class="hd-field"><span class="hd-label" data-check>Name</span><input class="hd-input" data-check placeholder="Placeholder"></label>
 <table class="hd-table"><thead><tr><th data-check>H</th></tr></thead><tbody><tr><td data-check>C</td></tr></tbody></table>
+<hexa-logo id="lg" base="/logo/" alt="HexaData"></hexa-logo><hexa-logo id="lgi" form="icon" base="/logo/"></hexa-logo>
 <hexa-tagline id="et" variant="secondary"></hexa-tagline><hexa-theme-toggle></hexa-theme-toggle><hexa-tooltip text="Tip text"><button class="hd-btn" id="tb">Tip</button></hexa-tooltip>
 <footer class="hd-footer" data-check>Footer <a data-check href="#">link</a></footer>
 </main><script src="/elements.js"></script></body></html>`;
@@ -81,6 +82,17 @@ const server = createServer((req, res) => {
   if (path === '/elements.js') {
     res.setHeader('content-type', 'text/javascript');
     return res.end(readFileSync(join(root, 'dist/elements/auto.js')));
+  }
+  if (path.startsWith('/logo/')) {
+    try {
+      const name = path.slice(6);
+      if (!/^[a-z0-9.-]+$/.test(name)) throw new Error('bad name');
+      res.setHeader('content-type', name.endsWith('.webp') ? 'image/webp' : 'image/png');
+      return res.end(readFileSync(join(root, 'dist/logo', name)));
+    } catch {
+      res.statusCode = 404;
+      return res.end();
+    }
   }
   if (path === '/gallery') {
     res.setHeader('content-type', 'text/html');
@@ -205,6 +217,37 @@ await check('semantic CSS follows prefers-color-scheme and data-theme (light=whi
   assert.deepEqual(await probe(d.page), ['rgb(248, 250, 252)', 'rgb(18, 30, 54)']);
   await d.ctx.close();
 });
+
+for (const [scheme, shown, hidden] of [
+  ['light', 'on-light', 'on-dark'],
+  ['dark', 'on-dark', 'on-light'],
+]) {
+  await check(`logo: ${scheme} theme shows the ${shown} artwork, loads real files, same-origin only`, async () => {
+    const ctx = await browser.newContext({ colorScheme: scheme });
+    const page = await ctx.newPage();
+    const bad = [];
+    page.on('requestfailed', (r) => bad.push(r.url()));
+    page.on('response', (r) => {
+      if (r.status() >= 400) bad.push(r.url());
+    });
+    await page.goto(`${origin}/gallery`);
+    await page.waitForLoadState('networkidle');
+    const vis = (sel) => page.locator(sel).isVisible();
+    assert.equal(await vis(`#lg .hd-logo__img--${shown}`), true);
+    assert.equal(await vis(`#lg .hd-logo__img--${hidden}`), false);
+    const ok = await page.evaluate(() =>
+      [...document.querySelectorAll('#lg img, #lgi img')]
+        .filter((i) => getComputedStyle(i).display !== 'none')
+        .map((i) => i.complete && i.naturalWidth > 0),
+    );
+    assert.ok(ok.length === 2 && ok.every(Boolean), 'visible logos must load');
+    // a forced theme wins over the OS preference
+    await page.evaluate((t) => document.documentElement.setAttribute('data-theme', t), scheme === 'light' ? 'dark' : 'light');
+    assert.equal(await vis(`#lg .hd-logo__img--${hidden}`), true);
+    assert.deepEqual(bad, []);
+    await ctx.close();
+  });
+}
 
 await check('custom elements: tagline text, theme toggle (no storage), accessible dismissible tooltip, strict CSP', async () => {
   const ctx = await browser.newContext({ colorScheme: 'light' });

@@ -97,3 +97,17 @@ test('native theme exposes foundations in dp', () => {
   assert.equal(t.duration['base'], 200);
   assert.equal(t.colors.accentFill, DEFAULT_PALETTE.deepBlue);
 });
+
+test('HexaLogo renders both artworks, hosted base by default, overridable base, mono fallback on light', async () => {
+  const { HexaLogo } = await import('../src/react/index.ts');
+  const { BRAND_ORIGIN } = await import('../src/core/index.ts');
+  const html = renderToString(<HexaLogo />);
+  assert.ok(html.includes(`src="${BRAND_ORIGIN}/v2/logo/horizontal-primary-on-light.png"`));
+  assert.match(html, /hd-logo__img--on-dark/);
+  assert.match(html, /data-on="auto"/);
+  const self = renderToString(<HexaLogo form="icon" base="/brand/logo" iconSize={512} format="webp" alt="" />);
+  assert.ok(self.includes('src="/brand/logo/icon-on-light-512.webp"'));
+  const mono = renderToString(<HexaLogo tone="mono" />);
+  assert.ok(mono.includes('horizontal-primary-on-light.png')); // no mono artwork for light surfaces
+  assert.ok(mono.includes('horizontal-mono.png'));
+});

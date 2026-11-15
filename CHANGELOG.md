@@ -29,6 +29,9 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - `@hexadata/brand/base.css`, `/components.css`, `/all.css`: cascade-layered base styles and 20+ CSS components (button, fields, switch, card, badge, alert, table, tabs, dialog, breadcrumb, pagination, spinner, skeleton, avatar, code, layout, header/nav/footer). Contrast lint plus real-browser contrast test in both themes.
 - Golden two-key test, public-API contract snapshot, Style Dictionary v5 interop test.
 
+- Logo system: masters extracted unmodified from Brand Kit v1.0 into `brand/logo/` (hash-verified by `logo.json`); `npm run build:logos` derives trimmed PNG/WebP wordmarks, icon sizes 64-1024, favicon.ico, app icons and a 1200x630 social card into `dist/logo` (also served as `@hexadata/brand/logo/*`). `<HexaLogo>` / `<hexa-logo>` render both artworks and let CSS pick one for the active theme. **Raster only** until vector masters are supplied.
+- Custom elements `<hexa-tagline>`, `<hexa-logo>`, `<hexa-theme-toggle>`, `<hexa-tooltip>` (`@hexadata/brand/elements`, plus a self-registering `elements/auto` script) and React wrappers (`Button`, `ButtonLink`, `Alert`, `Badge`, `Card`, `Container`, `Stack`, `Cluster`, `Grid`, `Spinner`, `TextField`, `ThemeToggle`).
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.

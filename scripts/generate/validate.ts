@@ -25,4 +25,17 @@ export function validate(t: Tokens): void {
   for (const sp of t.semanticPairs) {
     if (!(sp.fg in t.semantic[sp.mode]) || !(sp.bg in t.semantic[sp.mode])) fail(`unknown semantic role in ${JSON.stringify(sp)}`);
   }
+  if (!/^https:\/\/[a-z0-9.-]+(\/[a-z0-9._~/-]*)?$/i.test(t.origin) || t.origin.endsWith('/'))
+    fail('content.origin must be an https origin/base path without a trailing slash');
+  const seen = new Set<string>();
+  for (const v of t.logo) {
+    if (!/^[a-z0-9-]+$/.test(v.id) || seen.has(v.id)) fail(`logo id ${v.id} is invalid or duplicated`);
+    seen.add(v.id);
+    if (v.width < 1 || v.height < 1) fail(`logo ${v.id} has no size`);
+  }
+  for (const form of ['icon', 'centered', 'horizontal'] as const) {
+    for (const bg of ['light', 'dark'] as const) {
+      if (!t.logo.some((v) => v.form === form && v.background === bg)) fail(`logo: no ${form} variant for ${bg} backgrounds`);
+    }
+  }
 }

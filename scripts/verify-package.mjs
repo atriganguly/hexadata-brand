@@ -23,6 +23,10 @@ Object.values(pkg.typesVersions?.['*'] ?? {})
 const optional = /fonts(-fallback)?\.css$/;
 for (const t of targets) {
   if (t === './package.json') continue;
+  if (t.endsWith('/*')) {
+    if (!existsSync(join(root, t.slice(0, -2)))) problems.push(`missing export directory ${t}`);
+    continue;
+  }
   if (!existsSync(join(root, t))) (optional.test(t) && !strict ? warnings : problems).push(`missing export target ${t}`);
 }
 
@@ -33,6 +37,8 @@ for (const f of ['dist/react/index.js', 'dist/react/index.cjs']) {
 }
 
 // 3. banned APIs / third-party URLs in shipped JS and CSS
+// The ONLY URL allowed in shipped code is the brand's own origin (the evergreen hosted channel), from brand/content.json.
+const brandOrigin = JSON.parse(readFileSync(join(root, 'brand/content.json'), 'utf8')).origin;
 const BANNED = [
   [/localStorage|sessionStorage|AsyncStorage|indexedDB|document\.cookie|navigator\.sendBeacon/, 'browser/device storage or beacon API'],
   [/dangerouslySetInnerHTML|\beval\s*\(|new Function\s*\(|document\.write/, 'unsafe code execution / HTML injection'],
@@ -51,7 +57,7 @@ const scan = (dir) => {
       continue;
     }
     if (!/\.(js|cjs|css|d\.ts|d\.cts)$/.test(name)) continue;
-    const text = readFileSync(p, 'utf8');
+    const text = readFileSync(p, 'utf8').split(brandOrigin).join('<brand-origin>');
     for (const [re, label] of BANNED) if (re.test(text)) fail(`${p.replace(root + '/', '')}: contains ${label} (${re.exec(text)[0]})`);
   }
 };
@@ -73,6 +79,18 @@ if (strict) {
     if (!existsSync(join(root, `dist/licenses/${slug}-OFL.txt`))) fail(`missing OFL licence for ${slug}`);
   const css = existsSync(join(root, 'dist/css/fonts.css')) ? readFileSync(join(root, 'dist/css/fonts.css'), 'utf8') : '';
   if ((css.match(/@font-face/g) ?? []).length !== 6) fail('fonts.css should declare 6 @font-face rules');
+  for (const f of [
+    'favicon.ico',
+    'favicon-32.png',
+    'apple-touch-icon.png',
+    'icon-192.png',
+    'icon-512.png',
+    'og-image.png',
+    'horizontal-primary-on-light.png',
+    'icon-on-dark-512.png',
+  ]) {
+    if (!existsSync(join(root, 'dist/logo', f))) fail(`missing dist/logo/${f} (run npm run build:logos)`);
+  }
 }
 
 // 6. tarball contents: whitelist only, and size-bounded
@@ -88,7 +106,7 @@ try {
   const allowed =
     /^(dist\/|react\/package\.json$|native\/package\.json$|elements\/package\.json$|tailwind\/package\.json$|package\.json$|README\.md$|LICENSE$|NOTICE$|SECURITY\.md$|PRIVACY\.md$|ACCESSIBILITY\.md$|CHANGELOG\.md$)/;
   for (const f of files) if (!allowed.test(f.path)) fail(`unexpected file in tarball: ${f.path}`);
-  if (size > 1_500_000) fail(`tarball is ${size} bytes (> 1.5 MB)`);
+  if (size > 3_000_000) fail(`tarball is ${size} bytes (> 3 MB)`);
   console.log(`  tarball: ${files.length} files, ${(size / 1024).toFixed(1)} KB packed`);
 } catch (e) {
   warnings.push(`could not run npm pack --dry-run (${e.message.split('\n')[0]})`);

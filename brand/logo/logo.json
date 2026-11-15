@@ -1,0 +1,178 @@
+{
+  "$description": "HexaData logo masters. Extracted unmodified from Brand Kit v1.0 (scripts/extract-kit-images.mjs). RASTER ONLY: replace with vector masters when available; keep the ids and the API stays stable.",
+  "background": {
+    "light": "Use on light surfaces (--hd-bg in light mode).",
+    "dark": "Use on dark surfaces (--hd-bg in dark mode)."
+  },
+  "rules": {
+    "status": "proposed",
+    "note": "Brand Kit v1.0 does not define clear space, minimum size or misuse. These are proposals pending owner approval (docs/FOUNDATIONS-PROPOSAL.md).",
+    "clearSpace": "Keep clear on every side at least the width of the \"H\" letter of the logo (about 0.2 x logo height).",
+    "minWidthPx": {
+      "icon": 24,
+      "horizontal": 120,
+      "centered": 96
+    },
+    "never": [
+      "stretch or skew",
+      "recolour (use the mono variant instead)",
+      "place on a busy photo without a solid backing",
+      "add effects or outlines",
+      "rotate"
+    ]
+  },
+  "variants": [
+    {
+      "id": "centered-primary-on-light",
+      "form": "centered",
+      "tone": "primary",
+      "background": "light",
+      "file": "source/centered-primary-on-light.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "d4b7a5308a56f1b089e4e5e91219ea5d8b6ca3da3ad71b1b049ec8b0da3af843",
+      "kitRef": "Brand Kit v1.0 p.2, Logo / Primary (Preferred) / Centered",
+      "pdfObject": 5,
+      "trim": {
+        "left": 37,
+        "top": 87,
+        "width": 442,
+        "height": 296
+      }
+    },
+    {
+      "id": "centered-primary-on-dark",
+      "form": "centered",
+      "tone": "primary",
+      "background": "dark",
+      "file": "source/centered-primary-on-dark.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "3614b31c9c0202f85e4e3622bc0a7cd83bd98650db2379f11e2f2443b226e244",
+      "kitRef": "Brand Kit v1.0 p.2, Alternative / Centered",
+      "pdfObject": 11,
+      "trim": {
+        "left": 22,
+        "top": 79,
+        "width": 456,
+        "height": 293
+      }
+    },
+    {
+      "id": "centered-mono",
+      "form": "centered",
+      "tone": "mono",
+      "background": "dark",
+      "file": "source/centered-mono.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "92d45e21c9079fe911627f7d795d3f4fea4c25361233b5a66475ef296057b9b4",
+      "kitRef": "Brand Kit v1.0 p.2, Mono / Centered",
+      "pdfObject": 15,
+      "trim": {
+        "left": 10,
+        "top": 50,
+        "width": 479,
+        "height": 362
+      }
+    },
+    {
+      "id": "horizontal-primary-on-light",
+      "form": "horizontal",
+      "tone": "primary",
+      "background": "light",
+      "file": "source/horizontal-primary-on-light.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "dd90fa67977e069b9fbcb39086bcbe528c3a9602b530b95af5ab3ef0e29e5084",
+      "kitRef": "Brand Kit v1.0 p.2, Logo / Primary (Preferred) / Horizontal",
+      "pdfObject": 604,
+      "trim": {
+        "left": 12,
+        "top": 156,
+        "width": 471,
+        "height": 131
+      }
+    },
+    {
+      "id": "horizontal-primary-on-dark",
+      "form": "horizontal",
+      "tone": "primary",
+      "background": "dark",
+      "file": "source/horizontal-primary-on-dark.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "a8d295682c24e8812cac674372fdc050f0c224981cd820dd811167d6252d6ccd",
+      "kitRef": "Brand Kit v1.0 p.2, Alternative / Horizontal",
+      "pdfObject": 13,
+      "trim": {
+        "left": 27,
+        "top": 143,
+        "width": 461,
+        "height": 132
+      }
+    },
+    {
+      "id": "horizontal-mono",
+      "form": "horizontal",
+      "tone": "mono",
+      "background": "dark",
+      "file": "source/horizontal-mono.png",
+      "width": 500,
+      "height": 500,
+      "opaque": false,
+      "sha256": "ae176c35b2f82d70abbcc99592f202f9732c8b42bda39fd9d282fcf6e014a413",
+      "kitRef": "Brand Kit v1.0 p.2, Mono / Horizontal",
+      "pdfObject": 17,
+      "trim": {
+        "left": 15,
+        "top": 138,
+        "width": 473,
+        "height": 141
+      }
+    },
+    {
+      "id": "icon-on-light",
+      "form": "icon",
+      "tone": "primary",
+      "background": "light",
+      "file": "source/icon-on-light.png",
+      "width": 4096,
+      "height": 4096,
+      "opaque": true,
+      "sha256": "f13e5a4eb2746bb5c616a2f9b15539f506abc8acdb891d2559af73c5d99bb12c",
+      "kitRef": "Brand Kit v1.0 p.2, Icon (App/Social), white tile",
+      "pdfObject": 9,
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 4096,
+        "height": 4096
+      }
+    },
+    {
+      "id": "icon-on-dark",
+      "form": "icon",
+      "tone": "primary",
+      "background": "dark",
+      "file": "source/icon-on-dark.png",
+      "width": 4096,
+      "height": 4096,
+      "opaque": true,
+      "sha256": "bf6d32b95eeaaf0062071cba7bc25bdb7840f5c54bff424477bdf52b652ec1d9",
+      "kitRef": "Brand Kit v1.0 p.2, Icon (App/Social), dark tile",
+      "pdfObject": 7,
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 4096,
+        "height": 4096
+      }
+    }
+  ]
+}

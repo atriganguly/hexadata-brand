@@ -7,6 +7,7 @@
  *   <hexa-theme-toggle label="Dark mode"></hexa-theme-toggle>
  *   <hexa-tooltip text="Opens the docs"><a href="/docs">Docs</a></hexa-tooltip>
  */
+import { DEFAULT_LOGO_BASE, logoUrl, resolveLogo, type LogoForm, type LogoTone } from '../core/logo.js';
 import { DEFAULT_TAGLINES, type TaglineKey } from '../core/tokens.js';
 
 type Ctor = new () => HTMLElement;
@@ -27,6 +28,47 @@ export class HexaTaglineElement extends Base {
     const key: TaglineKey = v === 'secondary' ? 'secondary' : 'primary';
     this.textContent = DEFAULT_TAGLINES[key];
     this.classList.add('hd-tagline');
+  }
+}
+
+const pick = <T extends string>(v: string | null, allowed: readonly T[], fallback: T): T =>
+  allowed.includes(v as T) ? (v as T) : fallback;
+
+/**
+ * <hexa-logo form="horizontal|centered|icon" tone="primary|mono" on="auto|light|dark" size="sm|md|lg|xl" base="..." alt="HexaData">
+ * Same markup as the React <HexaLogo>; the stylesheet shows the artwork for the active theme.
+ */
+export class HexaLogoElement extends Base {
+  static readonly observedAttributes = ['form', 'tone', 'on', 'size', 'base', 'alt'];
+  connectedCallback(): void {
+    this.render();
+  }
+  attributeChangedCallback(): void {
+    if (this.isConnected) this.render();
+  }
+  private render(): void {
+    const form = pick<LogoForm>(this.getAttribute('form'), ['horizontal', 'centered', 'icon'], 'horizontal');
+    const tone = pick<LogoTone>(this.getAttribute('tone'), ['primary', 'mono'], 'primary');
+    const on = pick(this.getAttribute('on'), ['auto', 'light', 'dark'], 'auto');
+    const size = pick(this.getAttribute('size'), ['sm', 'md', 'lg', 'xl'], 'md');
+    const base = this.getAttribute('base') ?? DEFAULT_LOGO_BASE;
+    const alt = this.getAttribute('alt') ?? 'HexaData';
+    const wrap = document.createElement('span');
+    wrap.className = `hd-logo hd-logo--${form} hd-logo--${size}`;
+    wrap.dataset['on'] = on;
+    for (const side of ['light', 'dark'] as const) {
+      const v = resolveLogo(form, tone, side);
+      const img = document.createElement('img');
+      img.className = `hd-logo__img hd-logo__img--on-${side}`;
+      img.src = logoUrl(v, { base });
+      img.width = v.width;
+      img.height = v.height;
+      img.alt = alt;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      wrap.append(img);
+    }
+    this.replaceChildren(wrap);
   }
 }
 
@@ -88,6 +130,7 @@ export class HexaTooltipElement extends Base {
 
 const ELEMENTS: readonly (readonly [string, Ctor])[] = [
   ['hexa-tagline', HexaTaglineElement],
+  ['hexa-logo', HexaLogoElement],
   ['hexa-theme-toggle', HexaThemeToggleElement],
   ['hexa-tooltip', HexaTooltipElement],
 ];

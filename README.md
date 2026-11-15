@@ -42,6 +42,21 @@ and can be forced with `<html data-theme="light|dark">`. **Style with roles, not
 
 Use `base.css` / `components.css` separately if you prefer. Spacing, radius, elevation, motion and the type scale are proposed values pending owner approval ([docs/FOUNDATIONS-PROPOSAL.md](docs/FOUNDATIONS-PROPOSAL.md)).
 
+### Logo
+
+```tsx
+import { HexaLogo } from '@hexadata/brand/react';
+<HexaLogo />                          {/* horizontal, follows light/dark automatically */}
+<HexaLogo form="icon" size="lg" />    {/* also: form="centered", tone="mono", on="dark" */}
+```
+
+```html
+<script src="https://atriganguly.github.io/hexadata-brand/v2/elements/auto.js"></script>
+<hexa-logo form="horizontal"></hexa-logo>
+```
+
+By default the images come from the **evergreen hosted channel** (`/v2/logo/`), so a logo change reaches every app without a release. To serve them from your own origin (strict `img-src` CSP, offline), copy `node_modules/@hexadata/brand/dist/logo` into your public folder and pass `base="/brand/logo"`. Files are also importable as `@hexadata/brand/logo/<name>.png`. The Brand Kit only supplies **raster** logos (500 px wordmarks, 4096 px icons) and mono artwork for dark surfaces; mono on a light surface falls back to full colour.
+
 ### React / Next.js (App Router safe)
 
 ```tsx
