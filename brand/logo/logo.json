@@ -6,8 +6,8 @@
     "dark": "Use on dark surfaces (--hd-bg in dark mode)."
   },
   "rules": {
-    "status": "proposed",
-    "note": "Brand Kit v1.0 does not define clear space, minimum size or misuse. These are proposals pending owner approval (docs/FOUNDATIONS-PROPOSAL.md).",
+    "status": "approved",
+    "note": "Brand Kit v1.0 does not define clear space, minimum size or misuse. Approved by the HexaData Marketing owner on 2026-11-15 (docs/FOUNDATIONS-PROPOSAL.md).",
     "clearSpace": "Keep clear on every side at least the width of the \"H\" letter of the logo (about 0.2 x logo height).",
     "minWidthPx": {
       "icon": 24,

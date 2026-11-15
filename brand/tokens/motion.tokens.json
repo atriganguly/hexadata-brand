@@ -4,8 +4,8 @@
       "$type": "duration",
       "$extensions": {
         "com.hexadata": {
-          "status": "proposed",
-          "note": "Not defined by Brand Kit v1.0. Awaiting owner approval; see docs/FOUNDATIONS-PROPOSAL.md."
+          "status": "approved",
+          "note": "Not defined by Brand Kit v1.0. Approved by the HexaData Marketing owner on 2026-11-15 (docs/FOUNDATIONS-PROPOSAL.md)."
         }
       },
       "instant": {
@@ -37,8 +37,8 @@
       "$type": "cubicBezier",
       "$extensions": {
         "com.hexadata": {
-          "status": "proposed",
-          "note": "Not defined by Brand Kit v1.0. Awaiting owner approval; see docs/FOUNDATIONS-PROPOSAL.md."
+          "status": "approved",
+          "note": "Not defined by Brand Kit v1.0. Approved by the HexaData Marketing owner on 2026-11-15 (docs/FOUNDATIONS-PROPOSAL.md)."
         }
       },
       "standard": {

@@ -9,7 +9,7 @@ const run = (file: string, env: Record<string, string> = {}) =>
     cwd: root,
     encoding: 'utf8',
     input: JSON.stringify({ tool_name: 'Edit', tool_input: { file_path: file } }),
-    env: { ...process.env, CLAUDE_PROJECT_DIR: root, ...env },
+    env: { ...process.env, HEXA_ALLOW_PROTECTED: '', CLAUDE_PROJECT_DIR: root, ...env },
   });
 
 test('the agent guard blocks generated files, keys, licences, masters and build output; allows normal source', () => {

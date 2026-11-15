@@ -3,10 +3,7 @@ import { page, pageHead, section } from '../lib/layout.mjs';
 import { CATALOGUE } from '../catalogue.mjs';
 
 const px = (v) => (v.endsWith('rem') ? `${parseFloat(v) * 16} px` : v);
-const PROPOSED = html`<div class="hd-alert hd-alert--warning" role="note">
-  <strong>Proposed.</strong> These values are not defined by Brand Kit v1.0 and are awaiting owner approval. See
-  <code>docs/FOUNDATIONS-PROPOSAL.md</code> in the repository.
-</div>`;
+const PROPOSED = html``; // foundations were approved by the brand owner on 2026-11-15
 
 export function typographyPage(ctx) {
   const { data } = ctx;

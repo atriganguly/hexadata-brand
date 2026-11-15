@@ -97,7 +97,7 @@ export const SEMANTIC_PAIRS: readonly SemanticPair[] = [
 ${tsSemPairs}
 ];
 
-/** Foundation scales as final CSS values (proposed; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
+/** Foundation scales as final CSS values (approved 2026-11-15; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
 export const FOUNDATIONS = ${JSON.stringify(t.foundations, null, 2)} as const;
 
 export const cssVarName = (key: string): string => \`--hd-\${key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}\`;

@@ -1,6 +1,6 @@
 # Proposal: v2.0 foundations and components (needs owner approval)
 
-**Status:** implemented as `proposed`, **not yet approved**. Brand Kit v1.0 defines logo, colours, fonts and taglines only. Everything below is new and is tagged `"status": "proposed"` in `brand/tokens/*`. Approve, change or reject each row; changes are one-line edits in `brand/` followed by `UPDATE_GOLDEN=1 npm test`.
+**Status: APPROVED by the HexaData Marketing owner on 2026-11-15** (stated in the maintenance session), including the logo rules and the hosted-channel logo default. Values are tagged `"status": "approved"` in `brand/tokens/*`. Brand Kit v1.0 itself did not define them; the next Brand Kit revision should be sourced from here.
 
 Nothing here changes any Kit-defined value (palette, fonts, taglines, black/grey/white rules).
 

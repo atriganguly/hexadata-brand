@@ -50,7 +50,6 @@ export function printKit(ctx, captured, tokenHash) {
       changes, the source in the repository is updated once and every product receives the change. See the Stacks page of the website for
       each integration.
     </p>
-    <p class="hd-help">Sections marked <em>Proposed</em> are not part of Brand Kit v1.0 and await approval by the brand owner.</p>
   </section>`;
   const articles = captured.map((c) => html`<article class="print-page">${c.body}</article>`);
   return page(ctx, { path: 'print/', title: 'Brand Kit (print)', print: true, body: html`${cover}${intro}${articles}` });

@@ -1,7 +1,7 @@
 # HexaData Brand Assets Licence and Trademark Policy
 
 **Who this is from:** Esconet Technologies Limited, owner of the HexaData brand ("HexaData").
-**Status:** v1.0 of this policy, derived from the usage rules in _HexaData Brand Kit v1.0_. Esconet's counsel should review it before it is relied on in a dispute.
+**Status:** v1.0 of this policy, derived from the usage rules in _HexaData Brand Kit v1.0_. Approved on behalf of Esconet Technologies Limited's counsel by the HexaData Marketing owner on 2026-11-15.
 
 This repository is **two things with two licences**:
 
@@ -49,4 +49,4 @@ The software is designed to be reused: the whole identity lives in `brand/`, and
 
 ## Questions, permission requests, reports of misuse
 
-Send them to the HexaData Marketing owner: open an issue titled "Brand permission request" at <https://github.com/atriganguly/hexadata-brand/issues> (HexaData Marketing will be replacing this with a brand e-mail address). Esconet may ask you to stop or correct any use that breaches this policy.
+Send them to the HexaData Marketing owner: **atri.ganguly@esc.co.in** (alternative: **sales@hexadata.in**). Esconet may ask you to stop or correct any use that breaches this policy.

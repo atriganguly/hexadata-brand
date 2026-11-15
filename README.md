@@ -46,7 +46,7 @@ and can be forced with `<html data-theme="light|dark">`. **Style with roles, not
 <div class="hd-alert hd-alert--success" role="status">Saved.</div>
 ```
 
-Use `base.css` / `components.css` separately if you prefer. Spacing, radius, elevation, motion and the type scale are proposed values pending owner approval ([docs/FOUNDATIONS-PROPOSAL.md](docs/FOUNDATIONS-PROPOSAL.md)).
+Use `base.css` / `components.css` separately if you prefer. Spacing, radius, elevation, motion and the type scale were approved by the brand owner on 2026-11-15 ([docs/FOUNDATIONS-PROPOSAL.md](docs/FOUNDATIONS-PROPOSAL.md)).
 
 ### Logo
 

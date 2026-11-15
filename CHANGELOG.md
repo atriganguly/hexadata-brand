@@ -45,6 +45,8 @@ Full rebuild following a security/compliance/accessibility audit of 1.0.0. **Bre
 - **Platforms** (generated from `brand/`, see `platforms/README.md`): Python (`hexadata-brand`: tokens, Matplotlib/Plotly themes), Flutter (Material 3 themes), SwiftUI (root `Package.swift`, dynamic light/dark roles), Android (Compose theme + `values`/`values-night` XML), Office Theme Colors/Fonts, a table-based e-mail template and a print colour sheet (nominal CMYK, **UNPROOFED**, no invented Pantone values). `npm run build:platforms` stages them with the official fonts and logos. Python is imported and tested here; Flutter/Swift/Android are statically tested here and compiled by `.github/workflows/platforms.yml`. `.pptx`/`.docx` templates are planned for 2.1.
 - Fixed: font licence hash was line-ending dependent (CI on Linux disagreed with Windows); `.gitattributes` now marks fonts and icons binary.
 
+- **Approvals (2026-11-15):** foundations, component rules and logo rules approved by the HexaData Marketing owner; licence text approved on behalf of Esconet counsel; brand contact set.
+
 ### Fixed
 
 - Build blockers in 1.0.0: JSX inside a `.ts` file, missing `tsconfig.json`, missing dev dependencies, `"use client"` stripped by the bundler.

@@ -25,7 +25,7 @@ The single source of truth for the HexaData brand. Everything visual (colours, t
 
 ## Hard rules (never break)
 
-1. **Never invent, infer or "improve" a brand value** (colour, font, tagline, logo, spacing). Source order: `brand/` > `brand/kit/HexaData-Brand-Kit-v1.0.pdf` > nothing. If a value is not there, stop and ask a human. Foundations and components marked _proposed_ are not owner-approved: do not present them as official.
+1. **Never invent, infer or "improve" a brand value** (colour, font, tagline, logo, spacing). Source order: `brand/` > `brand/kit/HexaData-Brand-Kit-v1.0.pdf` > nothing. If a value is not there, stop and ask a human. Foundations, component rules and logo rules were approved by the owner on 2026-11-15; anything new that Brand Kit v1.0 and `docs/FOUNDATIONS-PROPOSAL.md` do not cover is NOT approved: propose it, do not ship it as official.
 2. **Never hand-edit a file whose first lines say `GENERATED FILE`.** Edit `brand/` (or the emitter), then `npm run generate`. The guard hook blocks it.
 3. **Never rename or remove a public name** (CSS variable, class, export, element tag, hosted path, manifest key, logo id) without a major version bump. `test/contract/public-api.json` only grows within a major.
 4. **Never touch signing keys** (`*.jwk`, `*.pem`, `*.key`, `~/.hexadata-brand-secrets`): never read, print, paste, commit or regenerate them. `brand/keys.json` holds PUBLIC keys only and changes only with the brand owner. The channel is signed in CI by the owner's `HEXA_SIGNING_JWK` secret.

@@ -26,7 +26,7 @@
       ],
       "$extensions": {
         "com.hexadata": {
-          "status": "proposed",
+          "status": "approved",
           "alpha": [0.12]
         }
       }
@@ -75,7 +75,7 @@
       ],
       "$extensions": {
         "com.hexadata": {
-          "status": "proposed",
+          "status": "approved",
           "alpha": [0.14, 0.1]
         }
       }
@@ -124,7 +124,7 @@
       ],
       "$extensions": {
         "com.hexadata": {
-          "status": "proposed",
+          "status": "approved",
           "alpha": [0.18, 0.12]
         }
       }

@@ -55,7 +55,7 @@ export interface HexaNativeTheme {
   /** Semantic colours already resolved for the requested mode. */
   readonly colors: Readonly<Record<SemanticRole, string>>;
   readonly fonts: typeof NATIVE_FONTS;
-  /** Foundation scales in dp (rem x 16). Proposed values; see docs/FOUNDATIONS-PROPOSAL.md. */
+  /** Foundation scales in dp (rem x 16). Approved 2026-11-15 (docs/FOUNDATIONS-PROPOSAL.md). */
   readonly space: Readonly<Record<string, number>>;
   readonly radius: Readonly<Record<string, number>>;
   readonly fontSize: Readonly<Record<string, number>>;

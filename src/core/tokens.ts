@@ -203,7 +203,7 @@ export const SEMANTIC_PAIRS: readonly SemanticPair[] = [
   { mode: 'dark', fg: 'onStatus', bg: 'success', min: 4.5 },
 ];
 
-/** Foundation scales as final CSS values (proposed; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
+/** Foundation scales as final CSS values (approved 2026-11-15; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
 export const FOUNDATIONS = {
   "space": {
     "0": "0",

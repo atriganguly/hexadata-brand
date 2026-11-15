@@ -41,7 +41,7 @@ sources; laws change, so re-verify with counsel before each release.
 - [ ] **Provision the production signing key** (`npm run manifest -- keygen`), put the PUBLIC key in `brand/keys.json`, store the private key as a protected CI secret `HEXA_SIGNING_JWK` (until then live updates are inert);
 - [ ] Production signing keys in KMS/HSM; npm 2FA; protected `release` environment; branch protection + required reviews on `brand/` (including `brand/keys.json`) and `src/core/remote.ts` (see `CODEOWNERS`).
 - [x] Authorisation for public distribution of this repository and the hosted channel: given on 2026-11-15 by the HexaData Marketing owner (stated in the maintenance session). Keep a written copy with Esconet records.
-- [ ] Have Esconet counsel review `BRAND-LICENSE.md` (drafted from the Brand Kit usage rules) and confirm Apache-2.0 for the software and the copyright line in `NOTICE`; set the brand contact in `BRAND-LICENSE.md`; consider registering the HexaData marks where not already registered.
+- [x] Licence text (`BRAND-LICENSE.md`, Apache-2.0 for the software, copyright line in `NOTICE`) approved on behalf of Esconet's counsel by the HexaData Marketing owner on 2026-11-15; brand contact set to atri.ganguly@esc.co.in / sales@hexadata.in. Consider registering the HexaData marks where not already registered.
 - [ ] npm: confirm ownership of the `@hexadata` scope (public access is configured); PyPI `hexadata-brand`; enable trusted publishing.
 - [ ] Publish `security.txt`; set the real security contact in `SECURITY.md`.
 - [ ] Commit `package-lock.json`; pin GitHub Actions to commit SHAs; enable Dependabot alerts and secret scanning.
