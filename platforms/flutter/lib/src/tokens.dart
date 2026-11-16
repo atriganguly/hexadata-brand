@@ -1,8 +1,8 @@
 // GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).
 import 'dart:ui' show Color;
 
-const String hexaBrandVersion = "2.0.1";
-const int hexaBrandRevision = 1;
+const String hexaBrandVersion = "2.1.0";
+const int hexaBrandRevision = 2;
 const String hexaDescriptor = "servers and workstations";
 const String hexaPrimaryTagline = "Supercomputing, On-demand.";
 const String hexaSecondaryTagline = "Engineered in India. Built for the World.";
@@ -35,6 +35,8 @@ class HexaRoles {
     required this.borderSubtle,
     required this.accentFill,
     required this.onAccentFill,
+    required this.accentFillHover,
+    required this.indicator,
     required this.danger,
     required this.warning,
     required this.success,
@@ -51,6 +53,8 @@ class HexaRoles {
   final Color borderSubtle;
   final Color accentFill;
   final Color onAccentFill;
+  final Color accentFillHover;
+  final Color indicator;
   final Color danger;
   final Color warning;
   final Color success;
@@ -62,13 +66,15 @@ const HexaRoles hexaLightRoles = HexaRoles(
   fg: HexaPalette.obsidian,
   fgStrong: HexaPalette.midnight,
   fgMuted: HexaPalette.obsidian,
-  bgAlt: HexaPalette.grey,
+  bgAlt: HexaPalette.white,
   fgOnAlt: HexaPalette.obsidian,
   accent: HexaPalette.deepBlue,
   borderStrong: HexaPalette.obsidian,
   borderSubtle: HexaPalette.grey,
   accentFill: HexaPalette.deepBlue,
   onAccentFill: HexaPalette.white,
+  accentFillHover: HexaPalette.midnight,
+  indicator: HexaPalette.cyan,
   danger: HexaPalette.crimson,
   warning: HexaPalette.copper,
   success: HexaPalette.green,
@@ -86,6 +92,8 @@ const HexaRoles hexaDarkRoles = HexaRoles(
   borderSubtle: HexaPalette.grey,
   accentFill: HexaPalette.vividCerulean,
   onAccentFill: HexaPalette.obsidian,
+  accentFillHover: HexaPalette.cyan,
+  indicator: HexaPalette.vividCerulean,
   danger: HexaPalette.crimson,
   warning: HexaPalette.copper,
   success: HexaPalette.green,
@@ -110,10 +118,10 @@ abstract final class HexaSpace {
 }
 abstract final class HexaRadius {
   static const double none = 0;
-  static const double sm = 4;
-  static const double md = 8;
-  static const double lg = 12;
-  static const double xl = 16;
+  static const double sm = 2;
+  static const double md = 4;
+  static const double lg = 8;
+  static const double xl = 12;
   static const double full = 9999;
 }
 abstract final class HexaFontSize {

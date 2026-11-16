@@ -4,7 +4,7 @@
     "$extensions": {
       "com.hexadata": {
         "status": "approved",
-        "note": "Not defined by Brand Kit v1.0. Approved by the HexaData Marketing owner on 2026-11-15 (docs/FOUNDATIONS-PROPOSAL.md)."
+        "note": "Approved foundations for HexaData v2. Precision scale: tags 2 px, controls 4 px, containers 8 px."
       }
     },
     "none": {
@@ -15,25 +15,25 @@
     },
     "sm": {
       "$value": {
-        "value": 0.25,
+        "value": 0.125,
         "unit": "rem"
       }
     },
     "md": {
       "$value": {
-        "value": 0.5,
+        "value": 0.25,
         "unit": "rem"
       }
     },
     "lg": {
       "$value": {
-        "value": 0.75,
+        "value": 0.5,
         "unit": "rem"
       }
     },
     "xl": {
       "$value": {
-        "value": 1,
+        "value": 0.75,
         "unit": "rem"
       }
     },

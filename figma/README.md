@@ -20,7 +20,7 @@ Text styles: Heading H1-H5, Body, Label, Mono. Effect styles: Shadow 1-3. Every 
 - **Three pages**, which is why Brand holds several frames.
 - **No library publishing** and no Variables REST API, so syncing runs through the Figma plugin API (Claude's `use_figma`), not CI.
 - **Fonts:** Figma's font library has no Inter Tight and no Space Grotesk SemiBold. Body styles use Inter and headings H3-H5 use Space Grotesk Bold; each style's description says so. Install the official TTFs (`brand/fonts/ttf`) locally for exact rendering.
-- **Logos are raster** (PNG) until the vector masters arrive in v2.1.
+- **Logos are raster** (PNG) until the vector masters arrive.
 
 ## Re-syncing after a brand change
 

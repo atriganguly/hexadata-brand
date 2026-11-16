@@ -16,6 +16,8 @@
 | Install time                | No lifecycle scripts (`preinstall`/`install`/`postinstall`); **zero runtime dependencies**                                                                   | n/a                                               |
 | Build/CI                    | No telemetry                                                                                                                                                 | n/a                                               |
 
+The brand **website** (not the package) keeps one key, `hd-theme`, in tab-scoped `sessionStorage`, written only after a visitor presses the theme toggle and cleared when the tab closes. It never leaves the browser and is strictly necessary for the choice the visitor made, so it needs no consent banner (ePrivacy Art. 5(3) exemption).
+
 Each row is enforced by tests/CI (`test/e2e/run.mjs`, `scripts/verify-package.mjs`, ESLint `no-restricted-*`, `test/react.test.tsx`).
 
 ## Live updates (default) and `remote`

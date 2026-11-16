@@ -14,6 +14,7 @@ jobs:
     permissions: { contents: write, id-token: write, attestations: write }
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with: { node-version: 22, cache: npm, registry-url: 'https://registry.npmjs.org' }
       - run: npm install -g npm@latest # trusted publishing needs a recent npm
@@ -25,7 +26,7 @@ jobs:
       - run: npm run typecheck && npm run lint && npm run format:check && npm test
       - run: npm run build && npm run build:fonts && npm run build:logos
       - run: npm run test:dist && npm run test:e2e && npm run test:site
-      - run: npm run verify:release && npm run pdf:check && npm run figma:check
+      - run: npm run verify:release && npm run pdf:check && npm run version:check && npm run figma:check
       - run: npm audit --omit=dev --audit-level=high
       - name: Hosted channel (must be signed for a release)
         env: { HEXA_SIGNING_JWK: '${{ secrets.HEXA_SIGNING_JWK }}' }

@@ -393,7 +393,7 @@ ${px(F.fontSize)
       <tr><td style="padding:0 0 24px 0;font-family:${sans};font-size:16px;line-height:24px;color:${P.obsidian};">{{body}}</td></tr>
       <tr><td style="padding:0 0 32px 0;">
         <!-- Bulletproof button: Deep Blue fill with white text is the one allowed combination on a light background (5.54:1). -->
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="${P.deepBlue}" style="background-color:${P.deepBlue};border-radius:8px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="${P.deepBlue}" style="background-color:${P.deepBlue};border-radius:${toNumber(F.radius['md']!)}px;">
           <a href="{{cta_url}}" style="display:inline-block;padding:14px 28px;font-family:${sans};font-size:16px;font-weight:600;color:${P.white};text-decoration:none;">{{cta_label}}</a>
         </td></tr></table>
       </td></tr>

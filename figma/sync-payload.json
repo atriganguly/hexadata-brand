@@ -1,7 +1,7 @@
 {
   "$generated": "GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).",
-  "version": "2.0.1",
-  "revision": 1,
+  "version": "2.1.0",
+  "revision": 2,
   "colors": {
     "cyan": {
       "hex": "#009BB6",
@@ -66,7 +66,7 @@
       "css": "--hd-fg-muted"
     },
     "bg-alt": {
-      "light": "grey",
+      "light": "white",
       "dark": "midnight",
       "css": "--hd-bg-alt"
     },
@@ -99,6 +99,16 @@
       "light": "white",
       "dark": "obsidian",
       "css": "--hd-on-accent-fill"
+    },
+    "accent-fill-hover": {
+      "light": "midnight",
+      "dark": "cyan",
+      "css": "--hd-accent-fill-hover"
+    },
+    "indicator": {
+      "light": "cyan",
+      "dark": "vivid-cerulean",
+      "css": "--hd-indicator"
     },
     "danger": {
       "light": "crimson",
@@ -139,10 +149,10 @@
   },
   "radius": {
     "none": 0,
-    "sm": 4,
-    "md": 8,
-    "lg": 12,
-    "xl": 16,
+    "sm": 2,
+    "md": 4,
+    "lg": 8,
+    "xl": 12,
     "full": 9999
   },
   "fontSize": {

@@ -46,7 +46,7 @@ export function exampleLanding(ctx) {
           <p class="hd-eyebrow">HexaData servers and workstations</p>
           <h1>${data.taglines.primary}</h1>
           <p class="site-lede">
-            ${data.descriptor}: HexaData is an enterprise hardware engineering vendor specializing in high-performance computing platforms
+            ${data.descriptor}: HexaData is an enterprise hardware engineering vendor specialising in high-performance computing platforms
             and custom GPU servers.
           </p>
           <div class="hd-cluster">
@@ -280,7 +280,7 @@ export function downloadsPage(ctx) {
       <td>${note}</td>
     </tr>`;
   const kit = ctx.pdf
-    ? html`${tr('Brand Kit v2.0 (PDF)', `downloads/HexaData-Brand-Kit-v${data.pkg.version.split('.').slice(0, 2).join('.')}.pdf`, 'Current guidelines')}`
+    ? html`${tr(`Brand Kit v${data.kit} (PDF)`, `downloads/HexaData-Brand-Kit-v${data.kit}.pdf`, 'Current guidelines')}`
     : '';
   return page(ctx, {
     path: 'downloads/',
@@ -303,7 +303,7 @@ export function downloadsPage(ctx) {
             </tr>
           </thead>
           <tbody>
-            ${kit}${tr('Brand Kit v1.0 (PDF)', 'downloads/HexaData-Brand-Kit-v1.0.pdf', 'Original, archived')}
+            ${kit}
           </tbody>
         </table>
       </div>`,
@@ -377,11 +377,12 @@ export function changelogPage(ctx) {
 }
 
 export function legalPage(ctx) {
-  const body = ctx.data.brandLicense.replace(/^# .*\n/, '');
+  // Only the public policy: everything below the marker is repository-specific and stays on GitHub.
+  const body = ctx.data.brandLicense.split('<!-- public-end -->')[0].replace(/^# .*\n/, '');
   return page(ctx, {
     path: 'legal/',
     title: 'Brand licence and trademarks',
-    body: html`${pageHead('Project', 'Brand licence and trademark policy', 'Open software, protected brand.')}
+    body: html`${pageHead('Legal', 'Brand licence and trademark policy')}
       <div class="hd-container site-prose">${markdown(body, { baseHeading: 2, repoBase: 'https://github.com/atriganguly/hexadata-brand/blob/main/' })}</div>`,
   });
 }

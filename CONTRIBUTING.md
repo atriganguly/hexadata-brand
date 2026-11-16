@@ -11,6 +11,10 @@ Thanks for helping. This repository is the **single source of truth for the Hexa
 
 Open an issue first for anything larger than a small fix. For brand changes use the **Brand permission request** or **Feature request** template and wait for approval.
 
+## Versioning
+
+Versions are MAJOR.VISUAL.CHORE: the first number is the major version of the system, the second counts visual updates (it resets the third), the third counts technical chores that do not change the brand's appearance. `npm run version:check` enforces it against the last release tag; see AGENTS.md.
+
 ## Set up
 
 Node 22 or newer.

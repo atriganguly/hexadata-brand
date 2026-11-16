@@ -20,7 +20,7 @@
       },
       "bgAlt": {
         "$type": "color",
-        "$value": "{color.grey}"
+        "$value": "{color.white}"
       },
       "fgOnAlt": {
         "$type": "color",
@@ -45,6 +45,14 @@
       "onAccentFill": {
         "$type": "color",
         "$value": "{color.white}"
+      },
+      "accentFillHover": {
+        "$type": "color",
+        "$value": "{color.midnight}"
+      },
+      "indicator": {
+        "$type": "color",
+        "$value": "{color.cyan}"
       },
       "danger": {
         "$type": "color",
@@ -107,6 +115,14 @@
       "onAccentFill": {
         "$type": "color",
         "$value": "{color.obsidian}"
+      },
+      "accentFillHover": {
+        "$type": "color",
+        "$value": "{color.cyan}"
+      },
+      "indicator": {
+        "$type": "color",
+        "$value": "{color.vividCerulean}"
       },
       "danger": {
         "$type": "color",

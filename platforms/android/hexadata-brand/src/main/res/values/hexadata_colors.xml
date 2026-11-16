@@ -15,13 +15,15 @@
     <color name="hd_fg">#121E36</color>
     <color name="hd_fg_strong">#040F49</color>
     <color name="hd_fg_muted">#121E36</color>
-    <color name="hd_bg_alt">#A3B1C6</color>
+    <color name="hd_bg_alt">#F8FAFC</color>
     <color name="hd_fg_on_alt">#121E36</color>
     <color name="hd_accent">#046AA7</color>
     <color name="hd_border_strong">#121E36</color>
     <color name="hd_border_subtle">#A3B1C6</color>
     <color name="hd_accent_fill">#046AA7</color>
     <color name="hd_on_accent_fill">#F8FAFC</color>
+    <color name="hd_accent_fill_hover">#040F49</color>
+    <color name="hd_indicator">#009BB6</color>
     <color name="hd_danger">#FF3B30</color>
     <color name="hd_warning">#F59E0B</color>
     <color name="hd_success">#10B981</color>

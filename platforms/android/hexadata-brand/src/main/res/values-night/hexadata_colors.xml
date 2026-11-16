@@ -12,6 +12,8 @@
     <color name="hd_border_subtle">#A3B1C6</color>
     <color name="hd_accent_fill">#01A3E5</color>
     <color name="hd_on_accent_fill">#121E36</color>
+    <color name="hd_accent_fill_hover">#009BB6</color>
+    <color name="hd_indicator">#01A3E5</color>
     <color name="hd_danger">#FF3B30</color>
     <color name="hd_warning">#F59E0B</color>
     <color name="hd_success">#10B981</color>

@@ -2,8 +2,8 @@
 """HexaData brand tokens as plain Python data (no dependencies). Source of truth: brand/ in the repository."""
 
 BRAND_SOURCE = "HexaData Brand Kit v1.0"
-BRAND_REVISION = 1
-VERSION = "2.0.1"
+BRAND_REVISION = 2
+VERSION = "2.1.0"
 ORIGIN = "https://atriganguly.github.io/hexadata-brand"
 DESCRIPTOR = "servers and workstations"
 
@@ -26,13 +26,15 @@ SEMANTIC = {
         "fg": "#121E36",
         "fg_strong": "#040F49",
         "fg_muted": "#121E36",
-        "bg_alt": "#A3B1C6",
+        "bg_alt": "#F8FAFC",
         "fg_on_alt": "#121E36",
         "accent": "#046AA7",
         "border_strong": "#121E36",
         "border_subtle": "#A3B1C6",
         "accent_fill": "#046AA7",
         "on_accent_fill": "#F8FAFC",
+        "accent_fill_hover": "#040F49",
+        "indicator": "#009BB6",
         "danger": "#FF3B30",
         "warning": "#F59E0B",
         "success": "#10B981",
@@ -50,6 +52,8 @@ SEMANTIC = {
         "border_subtle": "#A3B1C6",
         "accent_fill": "#01A3E5",
         "on_accent_fill": "#121E36",
+        "accent_fill_hover": "#009BB6",
+        "indicator": "#01A3E5",
         "danger": "#FF3B30",
         "warning": "#F59E0B",
         "success": "#10B981",
@@ -87,10 +91,10 @@ SPACE_PX = {
 
 RADIUS_PX = {
     "none": 0,
-    "sm": 4,
-    "md": 8,
-    "lg": 12,
-    "xl": 16,
+    "sm": 2,
+    "md": 4,
+    "lg": 8,
+    "xl": 12,
     "full": 9999,
 }
 

@@ -113,19 +113,35 @@ export function TextField({ label, help, error, id, className, ...rest }: TextFi
   );
 }
 
-/** Switches <html data-theme> between light and dark. Nothing is persisted; the choice lasts for the page view. */
-export function ThemeToggle({ label = 'Dark mode', className, ...rest }: Omit<ButtonProps, 'children'> & { label?: string }): ReactElement {
+/**
+ * Switches <html data-theme> between light and dark. Nothing is persisted; the choice lasts for the page view.
+ * `appearance="icon"` renders a minimal icon-only button (moon in light mode, sun in dark mode) named by `label`.
+ */
+export function ThemeToggle({
+  label = 'Dark mode',
+  appearance = 'text',
+  className,
+  ...rest
+}: Omit<ButtonProps, 'children'> & { label?: string; appearance?: 'text' | 'icon' }): ReactElement {
   const [dark, setDark] = useState(false);
   useEffect(() => {
-    const forced = document.documentElement.getAttribute('data-theme');
-    setDark(forced ? forced === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
+    const read = (): void => {
+      const forced = document.documentElement.getAttribute('data-theme');
+      setDark(forced ? forced === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
+    };
+    read();
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
   }, []);
+  const icon = appearance === 'icon';
   return (
     <Button
-      variant="secondary"
-      size="sm"
-      className={className}
+      variant={icon ? 'ghost' : 'secondary'}
+      size={icon ? undefined : 'sm'}
+      className={cx(icon && 'hd-btn--icon', className)}
       aria-pressed={dark}
+      aria-label={icon ? label : undefined}
       onClick={() => {
         const next = dark ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
@@ -133,7 +149,29 @@ export function ThemeToggle({ label = 'Dark mode', className, ...rest }: Omit<Bu
       }}
       {...rest}
     >
-      {label}
+      {icon ? (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          {dark ? (
+            <g>
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            </g>
+          ) : (
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          )}
+        </svg>
+      ) : (
+        label
+      )}
     </Button>
   );
 }

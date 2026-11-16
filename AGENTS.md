@@ -31,7 +31,7 @@ The single source of truth for the HexaData brand. Everything visual (colours, t
 3. **Never rename or remove a public name** (CSS variable, class, export, element tag, hosted path, manifest key, logo id) without a major version bump. `test/contract/public-api.json` only grows within a major.
 4. **Never touch signing keys** (`*.jwk`, `*.pem`, `*.key`, `~/.hexadata-brand-secrets`): never read, print, paste, commit or regenerate them. `brand/keys.json` holds PUBLIC keys only and changes only with the brand owner. The channel is signed in CI by the owner's `HEXA_SIGNING_JWK` secret.
 5. **Two-key rule:** a brand value changes only if `brand/` AND `test/golden/brand.golden.json` change together (`UPDATE_GOLDEN=1 npm test`, then review the diff). Same for the contract snapshot (`UPDATE_CONTRACT=1`).
-6. Never add a runtime dependency, network call, browser storage, inline `style=`/`<script>`, `eval`, or third-party URL to shipped code. The package has **zero runtime dependencies**; the only URL allowed is the brand origin.
+6. Never add a runtime dependency, network call, browser storage, inline `style=`/`<script>`, `eval`, or third-party URL to shipped code. The package has **zero runtime dependencies**; the only URL allowed is the brand origin. The one documented exception is the website's `site/assets/theme.js`: it keeps the visitor's theme in a single tab-scoped `sessionStorage` key (`hd-theme`), written only after they press the toggle. The package itself never stores anything.
 7. Pure `#000000` / `#FFFFFF` are never tokens (only documented fallbacks).
 8. **Licensing split:** software is Apache-2.0; the HexaData Brand Assets (names, logos, taglines, Brand Kit, brand pack) are NOT open (`BRAND-LICENSE.md`). Never relicense, never place brand assets outside `brand/logo/` and `brand/kit/`, never call them open or free, never edit `LICENSE`, `BRAND-LICENSE.md` or `NOTICE` without the owner.
 9. **Outward-facing actions need the owner's explicit go-ahead in that session:** `git push`, tags, releases, npm/PyPI publish, GitHub settings or secrets, Pages changes, Figma file changes. Never force-push. Never use a personal email in commits: use the GitHub noreply identity already configured.
@@ -51,11 +51,13 @@ The single source of truth for the HexaData brand. Everything visual (colours, t
 
 **Rotate the signing key.** Owner generates the new key (`npm run manifest -- keygen`), adds its PUBLIC key as the second slot of `brand/keys.json`, release, wait for adoption, switch the CI secret, later drop the old public key. See `SECURITY.md`.
 
-**Release.** Owner bumps `package.json` version + CHANGELOG, tags `vX.Y.Z`; `release.yml` verifies, builds archives/wheel/SBOM and creates the GitHub release. npm/PyPI publishing is off until the owner sets the `PUBLISH_NPM` / `PUBLISH_PYPI` variables and configures trusted publishing.
+**Versioning (MAJOR.VISUAL.CHORE).** The first number is the major version of the system (breaking changes), the second counts visual updates of that major (colour, type, logo, shape, components, Brand Kit; the last number resets to 0), the third counts technical chores that do not change what the brand looks like (tooling, CI, docs, dependencies, fixes). Public surfaces (website footer, Brand Kit PDF name, cover and footer) show only MAJOR.VISUAL, so a chore release changes nothing a visitor sees. `npm run version:check` compares the Brand Kit PDF fingerprint (`kit:`, `revision:`, `tokens:`) with the last release tag and fails if the numbers disagree with what changed. Additive, non-visual API grows in a chore release.
+
+**Release.** Owner bumps `package.json` version (and `CITATION.cff`) + CHANGELOG, tags `vX.Y.Z`; `release.yml` verifies, builds archives/wheel/SBOM and creates the GitHub release. npm/PyPI publishing is off until the owner sets the `PUBLISH_NPM` / `PUBLISH_PYPI` variables and configures trusted publishing.
 
 ## Commands (Node 22+; on the maintainer's Windows machine activate with `fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; fnm use default`)
 
-`npm run generate` · `generate:check` · `typecheck` · `lint` · `format:check` · `test` · `build` · `build:fonts` · `build:logos` · `build:channel` · `build:platforms` · `build:site -- --base /` · `build:pdf` · `test:dist` · `test:e2e` · `test:site` · `verify:release` · `pdf:check` · `figma:check` · `preview`
+`npm run generate` · `generate:check` · `typecheck` · `lint` · `format:check` · `test` · `build` · `build:fonts` · `build:logos` · `build:channel` · `build:platforms` · `build:site -- --base /` · `build:pdf` · `test:dist` · `test:e2e` · `test:site` · `verify:release` · `pdf:check` · `version:check` · `figma:check` · `preview`
 
 Run the full set before saying "done". `npm test` needs no build; the dist/e2e/site tests need `build`, `build:fonts`, `build:logos` first.
 

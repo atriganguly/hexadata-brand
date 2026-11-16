@@ -41,7 +41,7 @@ ${paletteVars}
   --hd-font-weight-semibold: 600;
   --hd-font-weight-bold: 700;
 
-  /* Foundations (approved 2026-11-15; see docs/FOUNDATIONS-PROPOSAL.md) */
+  /* Foundations */
 ${foundationVars}
 
   /* Semantic roles: light (default) */

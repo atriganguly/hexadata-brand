@@ -39,7 +39,7 @@ export function page(ctx, { path, title, description, body, wide = false, print 
     description ?? `${data.taglines.primary} ${data.taglines.secondary} Official HexaData brand system: logo, colour, type, components.`;
   const link = (rel) => `${base}${rel}`;
   return html`<!doctype html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,6 +51,7 @@ export function page(ctx, { path, title, description, body, wide = false, print 
 <meta property="og:title" content="${fullTitle}">
 <meta property="og:description" content="${desc}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${data.origin}/v2/logo/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -62,6 +63,7 @@ export function page(ctx, { path, title, description, body, wide = false, print 
 <link rel="stylesheet" href="${link('v2/css/fonts.css')}">
 <link rel="stylesheet" href="${link('v2/css/all.css')}">
 <link rel="stylesheet" href="${link('site.css')}">
+${print ? '' : html`<script src="${link('theme.js')}"></script>`}
 <script src="${link('v2/js/hexadata.js')}" defer></script>
 <script src="${link('site.js')}" defer></script>
 </head>
@@ -80,7 +82,7 @@ ${
               ${NAV.map(([href, label]) => html`<li><a href="${link(href)}" ${path === href ? raw(' aria-current="page"') : ''}>${label}</a></li>`)}
             </ul>
           </nav>
-          <hexa-theme-toggle label="Dark mode"></hexa-theme-toggle>
+          <hexa-theme-toggle label="Dark mode" appearance="icon"></hexa-theme-toggle>
         </div>
       </header>`
 }
@@ -101,8 +103,8 @@ ${
             <li><a href="https://github.com/atriganguly/hexadata-brand">Source on GitHub</a></li>
           </ul>
           <p class="site-footer__legal">
-            HexaData is a trademark of Esconet Technologies Limited. Software: Apache-2.0. Brand assets: all rights reserved, see the
-            <a href="${link('legal/')}">brand licence</a>. Version ${data.version}.
+            HexaData is a trademark of Esconet Technologies Limited. Brand assets: all rights reserved, see the
+            <a href="${link('legal/')}">brand licence</a>. Version ${data.kit}.
           </p>
         </div>
       </footer>`

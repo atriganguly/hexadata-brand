@@ -1,8 +1,8 @@
 /* GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`). */
 
 export const BRAND_SOURCE = "HexaData Brand Kit v1.0";
-export const BRAND_REVISION = 1;
-export const BRAND_ISSUED_AT = "2026-11-13T00:00:00Z";
+export const BRAND_REVISION = 2;
+export const BRAND_ISSUED_AT = "2026-11-16T00:00:00Z";
 
 export const PALETTE_KEYS = ['cyan', 'deepBlue', 'obsidian', 'vividCerulean', 'midnight', 'grey', 'white', 'crimson', 'copper', 'green'] as const;
 export type PaletteKey = (typeof PALETTE_KEYS)[number];
@@ -55,7 +55,7 @@ export const FONTS = {
 } as const;
 export type FontRole = keyof typeof FONTS;
 
-export type SemanticRole = 'bg' | 'fg' | 'fgStrong' | 'fgMuted' | 'bgAlt' | 'fgOnAlt' | 'accent' | 'borderStrong' | 'borderSubtle' | 'accentFill' | 'onAccentFill' | 'danger' | 'warning' | 'success' | 'onStatus';
+export type SemanticRole = 'bg' | 'fg' | 'fgStrong' | 'fgMuted' | 'bgAlt' | 'fgOnAlt' | 'accent' | 'borderStrong' | 'borderSubtle' | 'accentFill' | 'onAccentFill' | 'accentFillHover' | 'indicator' | 'danger' | 'warning' | 'success' | 'onStatus';
 export type ThemeMode = 'light' | 'dark';
 export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, PaletteKey>>>> = {
   light: {
@@ -63,13 +63,15 @@ export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, 
     fg: 'obsidian',
     fgStrong: 'midnight',
     fgMuted: 'obsidian',
-    bgAlt: 'grey',
+    bgAlt: 'white',
     fgOnAlt: 'obsidian',
     accent: 'deepBlue',
     borderStrong: 'obsidian',
     borderSubtle: 'grey',
     accentFill: 'deepBlue',
     onAccentFill: 'white',
+    accentFillHover: 'midnight',
+    indicator: 'cyan',
     danger: 'crimson',
     warning: 'copper',
     success: 'green',
@@ -87,6 +89,8 @@ export const SEMANTIC: Readonly<Record<ThemeMode, Readonly<Record<SemanticRole, 
     borderSubtle: 'grey',
     accentFill: 'vividCerulean',
     onAccentFill: 'obsidian',
+    accentFillHover: 'cyan',
+    indicator: 'vividCerulean',
     danger: 'crimson',
     warning: 'copper',
     success: 'green',
@@ -201,6 +205,10 @@ export const SEMANTIC_PAIRS: readonly SemanticPair[] = [
   { mode: 'dark', fg: 'onStatus', bg: 'danger', min: 4.5 },
   { mode: 'dark', fg: 'onStatus', bg: 'warning', min: 4.5 },
   { mode: 'dark', fg: 'onStatus', bg: 'success', min: 4.5 },
+  { mode: 'light', fg: 'onAccentFill', bg: 'accentFillHover', min: 4.5 },
+  { mode: 'light', fg: 'indicator', bg: 'bg', min: 3 },
+  { mode: 'dark', fg: 'onAccentFill', bg: 'accentFillHover', min: 4.5 },
+  { mode: 'dark', fg: 'indicator', bg: 'bg', min: 3 },
 ];
 
 /** Foundation scales as final CSS values (approved 2026-11-15; see docs/FOUNDATIONS-PROPOSAL.md). Shadows reference palette variables. */
@@ -223,10 +231,10 @@ export const FOUNDATIONS = {
   },
   "radius": {
     "none": "0",
-    "sm": "0.25rem",
-    "md": "0.5rem",
-    "lg": "0.75rem",
-    "xl": "1rem",
+    "sm": "0.125rem",
+    "md": "0.25rem",
+    "lg": "0.5rem",
+    "xl": "0.75rem",
     "full": "9999px"
   },
   "shadow": {

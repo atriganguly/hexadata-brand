@@ -16,10 +16,10 @@
     <dimen name="hd_space_24">96dp</dimen>
     <dimen name="hd_space_0_5">2dp</dimen>
     <dimen name="hd_radius_none">0dp</dimen>
-    <dimen name="hd_radius_sm">4dp</dimen>
-    <dimen name="hd_radius_md">8dp</dimen>
-    <dimen name="hd_radius_lg">12dp</dimen>
-    <dimen name="hd_radius_xl">16dp</dimen>
+    <dimen name="hd_radius_sm">2dp</dimen>
+    <dimen name="hd_radius_md">4dp</dimen>
+    <dimen name="hd_radius_lg">8dp</dimen>
+    <dimen name="hd_radius_xl">12dp</dimen>
     <dimen name="hd_radius_full">9999dp</dimen>
     <dimen name="hd_font_size_xs">12sp</dimen>
     <dimen name="hd_font_size_sm">14sp</dimen>

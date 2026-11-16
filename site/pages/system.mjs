@@ -3,7 +3,6 @@ import { page, pageHead, section } from '../lib/layout.mjs';
 import { CATALOGUE } from '../catalogue.mjs';
 
 const px = (v) => (v.endsWith('rem') ? `${parseFloat(v) * 16} px` : v);
-const PROPOSED = html``; // foundations were approved by the brand owner on 2026-11-15
 
 export function typographyPage(ctx) {
   const { data } = ctx;
@@ -36,15 +35,14 @@ export function typographyPage(ctx) {
       html`<div class="hd-grid">
         ${specimen('display', 'hd-text-display', 'Title / Heading / Hero', data.taglines.primary)}
         ${specimen('body', 'site-body-face', 'Subtitle / Body / Descriptions', data.taglines.secondary)}
-        ${specimen('mono', 'site-mono-face', 'Detailed descriptions / Paragraphs', 'HexaData is an enterprise hardware engineering vendor specializing in high-performance computing platforms, custom GPU servers, and high-density data center infrastructure.')}
+        ${specimen('mono', 'site-mono-face', 'Detailed descriptions / Paragraphs', 'HexaData is an enterprise hardware engineering vendor specialising in high-performance computing platforms, custom GPU servers, and high-density data centre infrastructure.')}
       </div>`,
     )}
     ${section(
       'scale',
       'Type scale',
       null,
-      html`${PROPOSED}
-        <div class="hd-table-wrap">
+      html`<div class="hd-table-wrap">
           <table class="hd-table">
             <caption class="hd-sr-only">
               Type scale
@@ -93,7 +91,6 @@ export function foundationsPage(ctx) {
     path: 'foundations/',
     title: 'Foundations',
     body: html`${pageHead('System', 'Foundations', 'Spacing, radius, elevation, motion, breakpoints and layering: the small decisions that make every product feel like HexaData.')}
-      <div class="hd-container">${PROPOSED}</div>
       ${section(
         'space',
         'Spacing',

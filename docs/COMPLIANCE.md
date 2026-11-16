@@ -6,15 +6,15 @@ sources; laws change, so re-verify with counsel before each release.
 
 ## 1. What the package removes by design
 
-| Risk                                                          | Design response                                   | Evidence                                                                           |
-| ------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Visitor IP sent to Google (Google Fonts)                      | Fonts self-hosted; no third-party origin anywhere | `test/e2e/run.mjs` (zero non-own-origin requests), `verify-package` (banned hosts) |
-| Reading/writing the user's device (ePrivacy Art. 5(3) / PECR) | No storage or cookies of any kind                 | e2e storage test, ESLint `no-restricted-globals`, `verify-package`                 |
-| Personal data collected by the SDK                            | None collected; no telemetry/analytics            | `PRIVACY.md`, tests above                                                          |
-| Third-party transfer mechanics (EU-US DPF dependence)         | No third-party processing in default mode         | n/a by design                                                                      |
-| CDN compromise altering what users see                        | Ed25519-signed manifests, pinned keys             | `test/remote.test.ts`                                                              |
-| Install-time supply-chain code                                | No lifecycle scripts; one runtime dependency      | `verify-package`                                                                   |
-| Inaccessible brand rollout                                    | Contrast guard on every update; CI pair matrix    | `test/schema.test.ts`, `test/tokens.test.ts`                                       |
+| Risk                                                          | Design response                                                                                                                                  | Evidence                                                                           |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Visitor IP sent to Google (Google Fonts)                      | Fonts self-hosted; no third-party origin anywhere                                                                                                | `test/e2e/run.mjs` (zero non-own-origin requests), `verify-package` (banned hosts) |
+| Reading/writing the user's device (ePrivacy Art. 5(3) / PECR) | No storage or cookies of any kind in the package; the website keeps one tab-scoped `sessionStorage` key (`hd-theme`) after the toggle is pressed | e2e storage test, ESLint `no-restricted-globals`, `verify-package`                 |
+| Personal data collected by the SDK                            | None collected; no telemetry/analytics                                                                                                           | `PRIVACY.md`, tests above                                                          |
+| Third-party transfer mechanics (EU-US DPF dependence)         | No third-party processing in default mode                                                                                                        | n/a by design                                                                      |
+| CDN compromise altering what users see                        | Ed25519-signed manifests, pinned keys                                                                                                            | `test/remote.test.ts`                                                              |
+| Install-time supply-chain code                                | No lifecycle scripts; one runtime dependency                                                                                                     | `verify-package`                                                                   |
+| Inaccessible brand rollout                                    | Contrast guard on every update; CI pair matrix                                                                                                   | `test/schema.test.ts`, `test/tokens.test.ts`                                       |
 
 ## 2. Regime-by-regime
 

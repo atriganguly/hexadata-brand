@@ -14,6 +14,8 @@ export async function loadData(root) {
     core,
     pkg,
     version: pkg.version,
+    kit: pkg.version.split('.').slice(0, 2).join('.'),
+    issued: new Date(core.BRAND_ISSUED_AT).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }),
     origin: core.BRAND_ORIGIN,
     palette: core.DEFAULT_PALETTE,
     paletteKeys: core.PALETTE_KEYS,

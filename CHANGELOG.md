@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.1.0 (2026-11-16)
+
+Visual update: Brand Kit v2.1. Brand revision 2. No public name was removed or renamed.
+
+### Changed (visual)
+
+- **Grey is for lines, not surfaces.** The light-mode secondary surface (`bgAlt`) is now White instead of Grey; Grey stays the hairline and border colour in both themes. Dark mode keeps Midnight and gains grey hairlines on alternate bands.
+- **Hover and current states use the accent colours** instead of Grey (light) or Midnight (dark): nav, tabs, secondary and ghost buttons turn to `accent` text; primary buttons move to the new `accentFillHover` role (Midnight in light, Cyan in dark); the current page, selected tab and interactive card edge use the new `indicator` role (Cyan in light, Vivid Cerulean in dark). All pairs are in the contrast gate.
+- **"Precision" shape scale.** Radius is now sm 2 px, md 4 px, lg 8 px, xl 12 px (was 4, 8, 12, 16): tags 2, controls 4, containers 8; circles only where the geometry needs them (avatar, switch, spinner). Badges are square-cornered mono tags, borders are 1 px hairlines, and resting cards are flat.
+- The theme toggle on the website is an icon-only button (moon in light mode, sun in dark mode), and the chosen theme now stays across pages of the website for the browser tab (one `sessionStorage` key, written only after the toggle is pressed; the package itself still stores nothing).
+
+### Added
+
+- Roles `accentFillHover` and `indicator` (`--hd-accent-fill-hover`, `--hd-indicator`, Tailwind `accent-fill-hover`, `indicator`); class `.hd-btn--icon`; `<hexa-theme-toggle appearance="icon">` and `<ThemeToggle appearance="icon" />`. The toggle now keeps its state in sync with the page.
+- `npm run version:check` and the versioning rule **MAJOR.VISUAL.CHORE**: the second number counts visual updates (resets the third), the third counts technical chores. Public surfaces show only MAJOR.VISUAL.
+
+### Website and Brand Kit
+
+- Only the current Brand Kit is published for download; Brand Kit v2.1 replaces v2.0 (earlier kits stay archived in the repository).
+- Public pages and the Brand Kit PDF no longer carry internal provenance wording; the brand licence page shows the corporate policy only (repository terms follow the `public-end` marker in `BRAND-LICENSE.md`).
+- Indian English (en-IN) throughout: `lang="en-IN"`, spelling, PDF language; enforced by the website test.
+- The Brand Kit PDF fingerprint is now `kit:`, `revision:`, `tokens:` and also covers the component styles.
+
 ## 2.0.1 (2026-11-16)
 
 Patch release: no change to the shipped package or any brand value. Updates CI and release automation and dev tooling (see below).

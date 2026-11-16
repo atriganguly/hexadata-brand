@@ -17,7 +17,7 @@
 - [ ] No brand value was invented or inferred; no contrast pair was loosened
 - [ ] No new runtime dependency, network call, storage, inline style or third-party URL in shipped code
 - [ ] Public names only grew (contract test), or this is a documented major change
-- [ ] `CHANGELOG.md` updated
+- [ ] `CHANGELOG.md` updated; version follows MAJOR.VISUAL.CHORE (`npm run version:check`)
 - [ ] Brand-affecting change: PDF (`build:pdf`), Figma sync state and Claude design system state updated, or listed below as follow-ups
 
 ## Not verified / follow-ups

@@ -1,6 +1,6 @@
 {
   "name": "@hexadata/brand",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "HexaData brand system (colour, type, logos, taglines, foundations, components) for web, React, React Native and Tailwind, generated from one source of truth. Self-contained: no third-party requests by default, no browser storage, no personal data.",
   "license": "Apache-2.0 AND LicenseRef-HexaData-Brand",
   "author": "HexaData (Esconet Technologies Limited)",
@@ -177,6 +177,7 @@
     "preview": "node scripts/serve.mjs site-out 4173",
     "build:pdf": "node scripts/build-pdf.mjs",
     "pdf:check": "node scripts/build-pdf.mjs --check",
+    "version:check": "node scripts/check-version.mjs",
     "test:site": "node test/site.e2e.mjs",
     "build:platforms": "node scripts/build-platforms.mjs",
     "figma:check": "node scripts/figma-state.mjs check",

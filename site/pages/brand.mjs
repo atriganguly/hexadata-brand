@@ -1,8 +1,10 @@
-import { html, raw } from '../lib/html.mjs';
+import { html } from '../lib/html.mjs';
 import { logoMarkup, page, pageHead, section } from '../lib/layout.mjs';
 
 const CORE = ['cyan', 'deepBlue', 'obsidian', 'vividCerulean', 'midnight'];
 const STATUS = ['crimson', 'copper', 'green'];
+/** Visible spelling (en-IN). Ids and attributes keep the public name `centered`. */
+const formLabel = (form) => (form === 'centered' ? 'centred' : form);
 const NEUTRAL = ['grey', 'white'];
 const NAMES = {
   deepBlue: 'Deep Blue',
@@ -106,7 +108,7 @@ function logoPanel(ctx, id, form, background) {
   const on = background;
   return html`<figure class="site-panel site-panel--${background}">
     <div class="site-panel__stage">
-      ${logoMarkup(ctx, { form, size: form === 'icon' ? 'lg' : 'lg', on, tone: 'primary', alt: `HexaData ${form} logo on ${background}` })}
+      ${logoMarkup(ctx, { form, size: form === 'icon' ? 'lg' : 'lg', on, tone: 'primary', alt: `HexaData ${formLabel(form)} logo on ${background}` })}
     </div>
     <figcaption>${v.id}</figcaption>
   </figure>`;
@@ -119,7 +121,7 @@ export function logoPage(ctx) {
     const file = v.form === 'icon' ? `${v.id}-512.png` : `${v.id}.png`;
     return html`<tr>
       <th scope="row">${v.id}</th>
-      <td>${v.form}</td>
+      <td>${formLabel(v.form)}</td>
       <td>${v.tone}</td>
       <td>${v.background}</td>
       <td>${v.width}×${v.height}</td>
@@ -136,7 +138,7 @@ export function logoPage(ctx) {
     ${section(
       'forms',
       'Three forms, two surfaces',
-      'Horizontal for headers and tight spaces, centered for covers and splash screens, the icon for apps and social avatars. Each has artwork for light and dark surfaces.',
+      'Horizontal for headers and tight spaces, centred for covers and splash screens, the icon for apps and social avatars. Each has artwork for light and dark surfaces.',
       html`<div class="site-panels">
           ${logoPanel(ctx, 'h-l', 'horizontal', 'light')}${logoPanel(ctx, 'h-d', 'horizontal', 'dark')}
           ${logoPanel(ctx, 'c-l', 'centered', 'light')}${logoPanel(ctx, 'c-d', 'centered', 'dark')}
@@ -159,7 +161,7 @@ export function logoPage(ctx) {
         </figure>
         <figure class="site-panel site-panel--dark">
           <div class="site-panel__stage">
-            ${logoMarkup(ctx, { form: 'centered', tone: 'mono', on: 'dark', size: 'lg', alt: 'HexaData mono centered logo' })}
+            ${logoMarkup(ctx, { form: 'centered', tone: 'mono', on: 'dark', size: 'lg', alt: 'HexaData mono centred logo' })}
           </div>
           <figcaption>centered-mono</figcaption>
         </figure>
@@ -168,7 +170,7 @@ export function logoPage(ctx) {
     ${section(
       'rules',
       'Using the logo',
-      html`${rules.status === 'proposed' ? raw('<span class="hd-badge hd-badge--warning">Proposed rules, pending owner approval</span> ') : ''}${rules.note}`,
+      null,
       html`<div class="hd-grid">
           <div class="hd-card">
             <h3>Clear space</h3>
@@ -177,7 +179,7 @@ export function logoPage(ctx) {
           <div class="hd-card">
             <h3>Minimum size</h3>
             <p>
-              Icon ${rules.minWidthPx.icon} px, centered ${rules.minWidthPx.centered} px, horizontal ${rules.minWidthPx.horizontal} px wide.
+              Icon ${rules.minWidthPx.icon} px, centred ${rules.minWidthPx.centered} px, horizontal ${rules.minWidthPx.horizontal} px wide.
             </p>
           </div>
           <div class="hd-card hd-card--alt">
@@ -202,7 +204,7 @@ export function logoPage(ctx) {
     ${section(
       'files',
       'Files',
-      'Wordmarks are trimmed to the artwork. Icons are published at 64, 128, 256, 512 and 1024 px. The official masters are PNG; vector masters are planned for v2.1.',
+      'Wordmarks are trimmed to the artwork. Icons are published at 64, 128, 256, 512 and 1024 px. The official masters are PNG; vector masters will follow.',
       html`<div class="hd-table-wrap">
         <table class="hd-table">
           <caption class="hd-sr-only">
