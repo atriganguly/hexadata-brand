@@ -50,7 +50,7 @@ writeFileSync(join(out, 'fonts.css'), fontsCss);
 // Metric-matched fallback faces (Capsize). The ranking is printed so maintainers can sanity-check the choice.
 let fallbackCss = '/* Metric-adjusted system fallbacks: minimise layout shift while web fonts load. Generated. */\n';
 try {
-  const { fromFile } = await import('@capsizecss/unpack');
+  const { fromFile } = await import('@capsizecss/unpack/fs');
   for (const f of BRAND_FONTS) {
     const pkgDir = dirname(require.resolve(`@fontsource-variable/${f.slug}/package.json`));
     const metrics = await fromFile(join(pkgDir, 'files', `${f.slug}-latin-wght-normal.woff2`));
