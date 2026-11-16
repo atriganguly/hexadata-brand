@@ -1,6 +1,6 @@
 {
   "name": "@hexadata/brand",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "HexaData brand system (colour, type, logos, taglines, foundations, components) for web, React, React Native and Tailwind, generated from one source of truth. Self-contained: no third-party requests by default, no browser storage, no personal data.",
   "license": "Apache-2.0 AND LicenseRef-HexaData-Brand",
   "author": "HexaData (Esconet Technologies Limited)",

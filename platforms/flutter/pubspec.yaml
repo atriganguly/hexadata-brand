@@ -1,7 +1,7 @@
 # GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).
 name: hexadata_brand
 description: HexaData brand colours, typography and Material 3 themes for Flutter.
-version: 2.0.0
+version: 2.0.1
 homepage: https://atriganguly.github.io/hexadata-brand
 repository: https://github.com/atriganguly/hexadata-brand
 publish_to: none # flip once the pub.dev publisher is set up

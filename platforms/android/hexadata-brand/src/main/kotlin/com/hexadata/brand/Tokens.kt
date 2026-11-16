@@ -4,7 +4,7 @@ package com.hexadata.brand
 import androidx.compose.ui.graphics.Color
 
 object HexaBrand {
-    const val VERSION = "2.0.0"
+    const val VERSION = "2.0.1"
     const val REVISION = 1
     const val DESCRIPTOR = "servers and workstations"
     const val PRIMARY_TAGLINE = "Supercomputing, On-demand."

@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 2.0.1 (2026-11-16)
+
+Patch release: no change to the shipped package or any brand value. Updates CI and release automation and dev tooling (see below).
 
 - Tooling: dev-tooling group update (eslint 10, `@eslint/js` 10, `eslint-plugin-react-hooks` 7, `@capsizecss/unpack` 4 and `metrics` 4); `build-fonts` imports `fromFile` from `@capsizecss/unpack/fs`; `@types/node` stays on 22 (Dependabot ignores its majors). Generated output is unchanged.
 - Repository: README with the official logo, badges and contents; community files (Code of Conduct, Contributing, Support, issue and PR templates, release-note categories, CITATION.cff); CodeQL, dependency review and OpenSSF Scorecard workflows; `security.txt` on the website; package metadata; GitHub settings, labels and rulesets.

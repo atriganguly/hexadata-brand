@@ -3,7 +3,7 @@
 
 BRAND_SOURCE = "HexaData Brand Kit v1.0"
 BRAND_REVISION = 1
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 ORIGIN = "https://atriganguly.github.io/hexadata-brand"
 DESCRIPTOR = "servers and workstations"
 
