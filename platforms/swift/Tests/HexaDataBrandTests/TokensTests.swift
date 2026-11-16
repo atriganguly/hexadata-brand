@@ -9,6 +9,6 @@ final class TokensTests: XCTestCase {
 
     func testScales() {
         XCTAssertEqual(HexaSpace.s4, 16)
-        XCTAssertEqual(HexaRadius.md, 8)
+        XCTAssertEqual(HexaRadius.md, 4)
     }
 }
