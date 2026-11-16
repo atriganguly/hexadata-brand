@@ -27,7 +27,7 @@ The official HexaData brand system: logo, colour, type, foundations and componen
 
 </div>
 
-> **Status:** v2.0.0 is released ([release notes](https://github.com/atriganguly/hexadata-brand/releases/tag/v2.0.0)). npm and PyPI publishing arrives with trusted publishing in v2.2; until then install from the GitHub release assets or use the hosted channel.
+> **Status:** v2.0.1 is released ([release notes](https://github.com/atriganguly/hexadata-brand/releases/tag/v2.0.1)). npm and PyPI publishing arrives with trusted publishing in v2.2; until then install from the GitHub release assets or use the hosted channel.
 
 ## Contents
 
@@ -59,7 +59,7 @@ The official HexaData brand system: logo, colour, type, foundations and componen
 
 ```bash
 npm install @hexadata/brand        # once published to npm (planned with v2.2)
-npm install https://github.com/atriganguly/hexadata-brand/releases/download/v2.0.0/hexadata-brand-2.0.0.tgz   # today
+npm install https://github.com/atriganguly/hexadata-brand/releases/download/v2.0.1/hexadata-brand-2.0.1.tgz   # today
 ```
 
 No package manager? Link the hosted files directly (see [Live brand updates](#live-brand-updates-on-by-default-silent-on-failure)). Other platforms are in the release assets and in [`platforms/`](platforms/README.md).
