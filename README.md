@@ -1,13 +1,6 @@
 <div align="center">
 
-<a href="https://atriganguly.github.io/hexadata-brand/">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://atriganguly.github.io/hexadata-brand/v2/logo/horizontal-primary-on-dark.png">
-    <img src="https://atriganguly.github.io/hexadata-brand/v2/logo/horizontal-primary-on-light.png" alt="HexaData" width="420">
-  </picture>
-</a>
-
-# HexaData Brand
+# <picture><source media="(prefers-color-scheme: dark)" srcset="https://atriganguly.github.io/hexadata-brand/v2/logo/icon-on-dark-128.png"><img src="https://atriganguly.github.io/hexadata-brand/v2/logo/icon-on-light-128.png" alt="HexaData" width="44" height="44" align="absmiddle"></picture> @hexadata/brand
 
 **Supercomputing, On-demand.**<br>
 Engineered in India. Built for the World.

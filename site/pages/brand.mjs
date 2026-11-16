@@ -27,7 +27,7 @@ const USE = {
   crimson: 'Error / destructive. Solid fill with Obsidian text.',
   copper: 'Warning. Solid fill with Obsidian text.',
   green: 'Success. Solid fill with Obsidian text.',
-  grey: 'Secondary light surface; muted text and borders on dark.',
+  grey: 'Hairlines, dividers and borders; muted text on dark surfaces.',
   white: 'Light mode background; primary light text on dark surfaces.',
 };
 

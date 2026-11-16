@@ -2,7 +2,7 @@
 import SwiftUI
 
 public enum HexaBrand {
-    public static let version = "2.1.0"
+    public static let version = "2.1.1"
     public static let revision = 2
     public static let descriptor = "servers and workstations"
     public static let primaryTagline = "Supercomputing, On-demand."
