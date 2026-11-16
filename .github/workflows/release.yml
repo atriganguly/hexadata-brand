@@ -39,7 +39,8 @@ jobs:
           python -m pip install --quiet build
           (cd dist/platforms/python && python -m build --outdir ../../../release/python)
           (cd channel-out/v2 && zip -qr "../../release/hexadata-brand-channel-${GITHUB_REF_NAME}.zip" .)
-          cp brand/kit/HexaData-Brand-Kit-v*.pdf release/
+          KIT=$(node -p "require('./package.json').version.split('.').slice(0, 2).join('.')")
+          cp "brand/kit/HexaData-Brand-Kit-v${KIT}.pdf" release/
       - name: SBOM (CycloneDX)
         run: npm sbom --sbom-format cyclonedx --omit dev > release/sbom.cdx.json
       - name: npm package tarball
