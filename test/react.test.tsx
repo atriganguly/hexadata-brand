@@ -92,7 +92,7 @@ test('component wrappers emit the .hd-* classes and accessible defaults (SSR)', 
 test('native theme exposes foundations in dp', () => {
   const t = resolveNativeTheme(DEFAULT_MANIFEST, 'light');
   assert.equal(t.space['4'], 16);
-  assert.equal(t.radius['md'], 8);
+  assert.equal(t.radius['md'], 4);
   assert.equal(t.fontSize['base'], 16);
   assert.equal(t.duration['base'], 200);
   assert.equal(t.colors.accentFill, DEFAULT_PALETTE.deepBlue);

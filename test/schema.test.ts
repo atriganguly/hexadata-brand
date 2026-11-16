@@ -4,7 +4,7 @@ import { DEFAULT_MANIFEST, DEFAULT_PALETTE, HexaManifestSchema, checkContrast, p
 
 const base = (tokens: unknown, extra: Record<string, unknown> = {}) => ({
   schemaVersion: 1,
-  revision: 1,
+  revision: 2,
   issuedAt: '2026-11-13T00:00:00Z',
   tokens,
   ...extra,

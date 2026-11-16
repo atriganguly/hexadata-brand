@@ -1,5 +1,5 @@
 {
-  "$description": "Official HexaData logo masters, supplied as PNG by the HexaData Marketing owner on 2026-11-15 (same artwork as Brand Kit v1.0 p.2, without PDF re-encoding). RASTER ONLY: vector masters are planned for v2.1; keep the ids and the API stays stable. These files are HexaData trademarks: see BRAND-LICENSE.md.",
+  "$description": "Official HexaData logo masters, supplied as PNG by the HexaData Marketing owner on 2026-11-15 (same artwork as Brand Kit v1.0 p.2, without PDF re-encoding). RASTER ONLY: vector masters will follow in a later visual update; keep the ids and the API stays stable. These files are HexaData trademarks: see BRAND-LICENSE.md.",
   "notice": "HexaData and the HexaData logo are trademarks of Esconet Technologies Limited. All rights reserved. Use only as permitted by BRAND-LICENSE.md (https://github.com/atriganguly/hexadata-brand).",
   "background": {
     "light": "Use on light surfaces (--hd-bg in light mode).",

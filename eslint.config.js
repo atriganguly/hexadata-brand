@@ -49,7 +49,7 @@ export default tseslint.config(
   },
   {
     // Code that runs in the browser: the site's script and the Playwright page.evaluate() callbacks inside e2e tests.
-    files: ['site/assets/site.js', 'test/e2e/run.mjs', 'test/site.e2e.mjs', 'scripts/build-pdf.mjs'],
+    files: ['site/assets/site.js', 'site/assets/theme.js', 'test/e2e/run.mjs', 'test/site.e2e.mjs', 'scripts/build-pdf.mjs'],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
 );

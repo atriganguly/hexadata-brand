@@ -2,8 +2,8 @@
 import SwiftUI
 
 public enum HexaBrand {
-    public static let version = "2.0.1"
-    public static let revision = 1
+    public static let version = "2.1.0"
+    public static let revision = 2
     public static let descriptor = "servers and workstations"
     public static let primaryTagline = "Supercomputing, On-demand."
     public static let secondaryTagline = "Engineered in India. Built for the World."
@@ -29,13 +29,15 @@ public enum HexaRole {
     public static let fg = Color.hexaDynamic(light: HexaPalette.obsidian, dark: HexaPalette.white)
     public static let fgStrong = Color.hexaDynamic(light: HexaPalette.midnight, dark: HexaPalette.white)
     public static let fgMuted = Color.hexaDynamic(light: HexaPalette.obsidian, dark: HexaPalette.grey)
-    public static let bgAlt = Color.hexaDynamic(light: HexaPalette.grey, dark: HexaPalette.midnight)
+    public static let bgAlt = Color.hexaDynamic(light: HexaPalette.white, dark: HexaPalette.midnight)
     public static let fgOnAlt = Color.hexaDynamic(light: HexaPalette.obsidian, dark: HexaPalette.white)
     public static let accent = Color.hexaDynamic(light: HexaPalette.deepBlue, dark: HexaPalette.vividCerulean)
     public static let borderStrong = Color.hexaDynamic(light: HexaPalette.obsidian, dark: HexaPalette.grey)
     public static let borderSubtle = Color.hexaDynamic(light: HexaPalette.grey, dark: HexaPalette.grey)
     public static let accentFill = Color.hexaDynamic(light: HexaPalette.deepBlue, dark: HexaPalette.vividCerulean)
     public static let onAccentFill = Color.hexaDynamic(light: HexaPalette.white, dark: HexaPalette.obsidian)
+    public static let accentFillHover = Color.hexaDynamic(light: HexaPalette.midnight, dark: HexaPalette.cyan)
+    public static let indicator = Color.hexaDynamic(light: HexaPalette.cyan, dark: HexaPalette.vividCerulean)
     public static let danger = Color.hexaDynamic(light: HexaPalette.crimson, dark: HexaPalette.crimson)
     public static let warning = Color.hexaDynamic(light: HexaPalette.copper, dark: HexaPalette.copper)
     public static let success = Color.hexaDynamic(light: HexaPalette.green, dark: HexaPalette.green)
@@ -60,10 +62,10 @@ public enum HexaSpace {
 }
 public enum HexaRadius {
     public static let none: CGFloat = 0
-    public static let sm: CGFloat = 4
-    public static let md: CGFloat = 8
-    public static let lg: CGFloat = 12
-    public static let xl: CGFloat = 16
+    public static let sm: CGFloat = 2
+    public static let md: CGFloat = 4
+    public static let lg: CGFloat = 8
+    public static let xl: CGFloat = 12
     public static let full: CGFloat = 9999
 }
 public enum HexaFontSize {

@@ -4,8 +4,8 @@ package com.hexadata.brand
 import androidx.compose.ui.graphics.Color
 
 object HexaBrand {
-    const val VERSION = "2.0.1"
-    const val REVISION = 1
+    const val VERSION = "2.1.0"
+    const val REVISION = 2
     const val DESCRIPTOR = "servers and workstations"
     const val PRIMARY_TAGLINE = "Supercomputing, On-demand."
     const val SECONDARY_TAGLINE = "Engineered in India. Built for the World."
@@ -37,6 +37,8 @@ data class HexaRoles(
     val borderSubtle: Color,
     val accentFill: Color,
     val onAccentFill: Color,
+    val accentFillHover: Color,
+    val indicator: Color,
     val danger: Color,
     val warning: Color,
     val success: Color,
@@ -48,13 +50,15 @@ val HexaLightRoles = HexaRoles(
     fg = HexaPalette.obsidian,
     fgStrong = HexaPalette.midnight,
     fgMuted = HexaPalette.obsidian,
-    bgAlt = HexaPalette.grey,
+    bgAlt = HexaPalette.white,
     fgOnAlt = HexaPalette.obsidian,
     accent = HexaPalette.deepBlue,
     borderStrong = HexaPalette.obsidian,
     borderSubtle = HexaPalette.grey,
     accentFill = HexaPalette.deepBlue,
     onAccentFill = HexaPalette.white,
+    accentFillHover = HexaPalette.midnight,
+    indicator = HexaPalette.cyan,
     danger = HexaPalette.crimson,
     warning = HexaPalette.copper,
     success = HexaPalette.green,
@@ -72,6 +76,8 @@ val HexaDarkRoles = HexaRoles(
     borderSubtle = HexaPalette.grey,
     accentFill = HexaPalette.vividCerulean,
     onAccentFill = HexaPalette.obsidian,
+    accentFillHover = HexaPalette.cyan,
+    indicator = HexaPalette.vividCerulean,
     danger = HexaPalette.crimson,
     warning = HexaPalette.copper,
     success = HexaPalette.green,
@@ -97,10 +103,10 @@ object HexaSpace {
 }
 object HexaRadius {
     const val none = 0f
-    const val sm = 4f
-    const val md = 8f
-    const val lg = 12f
-    const val xl = 16f
+    const val sm = 2f
+    const val md = 4f
+    const val lg = 8f
+    const val xl = 12f
     const val full = 9999f
 }
 /** sp values. */

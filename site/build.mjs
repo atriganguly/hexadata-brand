@@ -5,7 +5,6 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tokenHash } from '../scripts/lib/token-hash.mjs';
 import { loadData } from './lib/data.mjs';
 import {
   notFound as notFoundPage,
@@ -34,7 +33,7 @@ const out = resolve(root, opt('--out', 'site-out'));
 const channel = resolve(root, opt('--channel', 'channel-out'));
 if (!existsSync(join(channel, 'v2'))) throw new Error('site: channel-out/v2 is missing. Run: npm run build:channel');
 
-const kitMinor = data.version.split('.').slice(0, 2).join('.');
+const kitMinor = data.kit;
 const pdfName = `HexaData-Brand-Kit-v${kitMinor}.pdf`;
 const hasPdf = existsSync(join(root, 'brand/kit', pdfName));
 const ctx = { data, base, pdf: hasPdf };
@@ -80,10 +79,7 @@ write('404.html', String(notFoundPage(ctx)));
 const printSources = [logoPage, colourPage, typographyPage, foundationsPage, componentsPage, legalPage];
 const printCaptured = [];
 for (const fn of printSources) fn({ ...ctx, capture: printCaptured });
-write(
-  'print/index.html',
-  String(printKit(ctx, printCaptured, tokenHash(data.core))).replace('<head>', '<head>\n<meta name="robots" content="noindex">'),
-);
+write('print/index.html', String(printKit(ctx, printCaptured)).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));
 
 // Assets: handwritten CSS + one generated class per token (so no inline styles are ever needed).
 const T = data.foundations;
@@ -102,11 +98,13 @@ write(
   `${readFileSync(join(root, 'site/assets/site.css'), 'utf8')}\n/* Generated from the brand tokens: do not edit. */\n${gen}\n`,
 );
 write('site.js', readFileSync(join(root, 'site/assets/site.js'), 'utf8'));
+write('theme.js', readFileSync(join(root, 'site/assets/theme.js'), 'utf8'));
 write(
   'site.webmanifest',
   `${JSON.stringify(
     {
       name: 'HexaData Brand',
+      lang: 'en-IN',
       short_name: 'HexaData',
       start_url: base,
       display: 'browser',
@@ -143,8 +141,8 @@ Policy: https://github.com/atriganguly/hexadata-brand/blob/main/SECURITY.md
 // Evergreen channel + immutable copy, and the guideline PDFs
 for (const dir of ['v2', data.version]) cpSync(join(channel, dir), join(out, dir), { recursive: true });
 mkdirSync(join(out, 'downloads'), { recursive: true });
-for (const f of ['HexaData-Brand-Kit-v1.0.pdf', pdfName])
-  if (existsSync(join(root, 'brand/kit', f))) cpSync(join(root, 'brand/kit', f), join(out, 'downloads', f));
+// Only the current Brand Kit is published; earlier kits stay archived in the repository.
+if (hasPdf) cpSync(join(root, 'brand/kit', pdfName), join(out, 'downloads', pdfName));
 
 console.log(
   `site: ok (${publicPaths.length} pages + print + 404, base ${base}${hasPdf ? ', with PDF' : ', no v' + kitMinor + ' PDF yet'}) -> ${out}`,

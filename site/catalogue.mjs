@@ -5,7 +5,7 @@ export const CATALOGUE = [
     id: 'button',
     name: 'Button',
     description: 'Primary, secondary, ghost and danger, in three sizes. Targets are at least 44 px (32 px for small).',
-    a11y: 'Use a real <button> for actions and <a> for navigation. Hover adds elevation and an underline, never a new colour shade. Focus ring is always visible.',
+    a11y: 'Use a real <button> for actions and <a> for navigation. Hover moves to the accent colours, never to grey. Focus ring is always visible.',
     html: `<div class="hd-cluster">
   <button class="hd-btn">Get started</button>
   <button class="hd-btn hd-btn--secondary">Secondary</button>
@@ -47,7 +47,7 @@ export const CATALOGUE = [
   {
     id: 'card',
     name: 'Card',
-    description: 'A surface with a subtle border and elevation. The alternate card uses the secondary surface.',
+    description: 'A surface with a subtle hairline border. The alternate card uses the secondary surface.',
     a11y: 'Separate dark surfaces with the grey border, never by colour alone. Links inside the alternate card switch to the strong text colour automatically.',
     html: `<div class="hd-grid">
   <div class="hd-card"><h3>Custom servers</h3><p>Engineered to your workload.</p><a class="hd-link" href="#">Learn more</a></div>
@@ -73,7 +73,7 @@ export const CATALOGUE = [
   {
     id: 'badge',
     name: 'Badge',
-    description: 'Compact labels. Status badges are solid fills with Obsidian text.',
+    description: 'Compact square-cornered tags. Status badges are solid fills with Obsidian text.',
     a11y: 'Put the meaning in the text ("Active"), not only in the colour.',
     html: `<div class="hd-cluster">
   <span class="hd-badge">Neutral</span>
@@ -104,7 +104,7 @@ export const CATALOGUE = [
   {
     id: 'tabs',
     name: 'Tabs',
-    description: 'Selected tab gets a thick accent underline and bold weight, so it never depends on colour alone.',
+    description: 'Selected tab gets an accent underline and bold weight, so it never depends on colour alone.',
     a11y: 'Needs the ARIA tabs pattern: role="tablist", role="tab" with aria-selected and aria-controls, role="tabpanel", arrow-key navigation (app code).',
     html: `<div role="tablist" class="hd-tabs" aria-label="Product views">
   <button role="tab" aria-selected="true" id="t1" aria-controls="p1">Overview</button>

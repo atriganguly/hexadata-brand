@@ -34,6 +34,8 @@ const brandColors = {
     'border-subtle': rgb('border-subtle'),
     'accent-fill': rgb('accent-fill'),
     'on-accent-fill': rgb('on-accent-fill'),
+    'accent-fill-hover': rgb('accent-fill-hover'),
+    'indicator': rgb('indicator'),
     'danger': rgb('danger'),
     'warning': rgb('warning'),
     'success': rgb('success'),

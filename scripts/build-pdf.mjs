@@ -1,7 +1,7 @@
 // Brand Kit PDF, rendered from the website's print route (so the PDF and the site cannot drift).
 //   node scripts/build-pdf.mjs            render brand/kit/HexaData-Brand-Kit-v<major.minor>.pdf (needs build, fonts, logos, channel)
 //   node scripts/build-pdf.mjs --check    fail if the committed PDF does not carry the current brand fingerprint (no rendering needed)
-// The PDF embeds `package:`, `revision:` and `tokens:` fingerprints in its Keywords metadata.
+// The PDF embeds `kit:` (major.minor), `revision:` and `tokens:` fingerprints in its Keywords metadata.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,9 +14,9 @@ import { serve } from './lib/static-server.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const core = await import(pathToFileURL(join(root, 'dist/core/index.js')).href);
-const minor = pkg.version.split('.').slice(0, 2).join('.');
+const minor = pkg.version.split('.').slice(0, 2).join('.'); // the public kit version: major.minor (chore releases never change the PDF)
 const target = join(root, 'brand/kit', `HexaData-Brand-Kit-v${minor}.pdf`);
-const fingerprint = [`package:${pkg.version}`, `revision:${core.BRAND_REVISION}`, `tokens:${tokenHash(core)}`];
+const fingerprint = [`kit:${minor}`, `revision:${core.BRAND_REVISION}`, `tokens:${tokenHash(core)}`];
 
 if (process.argv.includes('--check')) {
   if (!existsSync(target)) {
@@ -25,14 +25,14 @@ if (process.argv.includes('--check')) {
   }
   const doc = await PDFDocument.load(readFileSync(target));
   const have = (doc.getKeywords() ?? '').split(/[\s,;]+/).filter(Boolean);
-  const stale = fingerprint.filter((f) => !have.includes(f) && !f.startsWith('package:'));
+  const stale = fingerprint.filter((f) => !have.includes(f));
   if (stale.length) {
     console.error(
       `pdf: the committed Brand Kit PDF is out of date (expected ${stale.join(', ')}; has ${have.join(', ') || 'nothing'}). Run: npm run build:pdf and commit the result.`,
     );
     process.exit(1);
   }
-  console.log(`pdf: ok (${doc.getPageCount()} pages, ${fingerprint.slice(1).join(', ')})`);
+  console.log(`pdf: ok (${doc.getPageCount()} pages, ${fingerprint.join(', ')})`);
   process.exit(0);
 }
 
@@ -63,6 +63,7 @@ try {
   doc.setAuthor('HexaData / Esconet Technologies Limited');
   doc.setSubject(`${core.DEFAULT_TAGLINES.primary} ${core.DEFAULT_TAGLINES.secondary}`);
   doc.setKeywords(fingerprint);
+  doc.setLanguage('en-IN');
   doc.setCreator('HexaData brand build (site print route)');
   doc.setProducer('Chromium print + pdf-lib');
   const issued = new Date(core.BRAND_ISSUED_AT);

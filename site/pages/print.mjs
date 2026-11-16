@@ -5,9 +5,9 @@ import { logoMarkup, page } from '../lib/layout.mjs';
  * The Brand Kit PDF is the website's own pages (logo, colour, typography, foundations, components, legal) printed in one go,
  * behind a cover and an introduction, so the PDF and the site can never drift apart.
  */
-export function printKit(ctx, captured, tokenHash) {
+export function printKit(ctx, captured) {
   const { data } = ctx;
-  const minor = data.version.split('.').slice(0, 2).join('.');
+  const minor = data.kit;
   const cover = html`<section class="print-page print-cover">
     <div>${logoMarkup(ctx, { form: 'centered', size: 'xl', on: 'light', eager: true })}</div>
     <div>
@@ -17,15 +17,14 @@ export function printKit(ctx, captured, tokenHash) {
       <p>${data.taglines.secondary}</p>
     </div>
     <p class="hd-help">
-      Package ${data.version} · brand revision ${data.core.BRAND_REVISION} · tokens ${tokenHash}<br />This document is generated from the
-      same source as the website and the code. The latest version is always at ${data.origin}/downloads/.
+      Issued ${data.issued}<br />The latest version is always at ${data.origin}/downloads/.
     </p>
   </section>`;
   const intro = html`<section class="print-page">
     <h2>About these guidelines</h2>
     <p>
       HexaData's logo and other branded elements are key to our company's unique identity and differentiation. These assets may not be used
-      in any manner that isn't expressly authorized in writing by HexaData or Esconet Technologies Limited.
+      in any manner that isn't expressly authorised in writing by HexaData or Esconet Technologies Limited.
     </p>
     <p>
       The HexaData logo is our primary brand identifier and the most often-used element of HexaData's visual identity. It's our signature,
@@ -47,7 +46,7 @@ export function printKit(ctx, captured, tokenHash) {
     <h3>How to use this system</h3>
     <p>
       Developers import the package (CSS, Tailwind, React, React Native or web components) and never re-implement the brand. When the brand
-      changes, the source in the repository is updated once and every product receives the change. See the Stacks page of the website for
+      changes, the brand is updated once at the source and every product receives the change. See the Stacks page of the website for
       each integration.
     </p>
   </section>`;

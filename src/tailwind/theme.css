@@ -26,6 +26,8 @@
   --color-hd-border-subtle: var(--hd-border-subtle);
   --color-hd-accent-fill: var(--hd-accent-fill);
   --color-hd-on-accent-fill: var(--hd-on-accent-fill);
+  --color-hd-accent-fill-hover: var(--hd-accent-fill-hover);
+  --color-hd-indicator: var(--hd-indicator);
   --color-hd-danger: var(--hd-danger);
   --color-hd-warning: var(--hd-warning);
   --color-hd-success: var(--hd-success);

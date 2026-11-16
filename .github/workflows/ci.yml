@@ -14,6 +14,7 @@ jobs:
     steps:
       # Actions are pinned to full commit SHAs; Dependabot keeps them current.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { fetch-depth: 0 } # full history and tags: version:check compares with the last release
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with: { node-version: '${{ matrix.node }}', cache: npm }
       - name: Lockfile is mandatory (integrity pins the font binaries and every dependency)
@@ -30,6 +31,8 @@ jobs:
       - run: npm run verify:release
       - name: Committed Brand Kit PDF carries the current brand fingerprint
         run: npm run pdf:check
+      - name: Version follows MAJOR.VISUAL.CHORE (compared with the last release tag)
+        run: npm run version:check
       - name: Claude Design System artifact is in sync with the repo (last published fingerprint)
         run: npm run claude-ds:check
       - name: Figma library is in sync with the brand (last recorded sync)

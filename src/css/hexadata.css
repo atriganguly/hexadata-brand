@@ -29,7 +29,7 @@
   --hd-font-weight-semibold: 600;
   --hd-font-weight-bold: 700;
 
-  /* Foundations (approved 2026-11-15; see docs/FOUNDATIONS-PROPOSAL.md) */
+  /* Foundations */
   --hd-space-0: 0;
   --hd-space-1: 0.25rem;
   --hd-space-2: 0.5rem;
@@ -45,10 +45,10 @@
   --hd-space-24: 6rem;
   --hd-space-0-5: 0.125rem;
   --hd-radius-none: 0;
-  --hd-radius-sm: 0.25rem;
-  --hd-radius-md: 0.5rem;
-  --hd-radius-lg: 0.75rem;
-  --hd-radius-xl: 1rem;
+  --hd-radius-sm: 0.125rem;
+  --hd-radius-md: 0.25rem;
+  --hd-radius-lg: 0.5rem;
+  --hd-radius-xl: 0.75rem;
   --hd-radius-full: 9999px;
   --hd-shadow-1: 0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.12);
   --hd-shadow-2: 0 2px 6px 0 rgb(var(--hd-midnight-rgb) / 0.14), 0 1px 2px 0 rgb(var(--hd-midnight-rgb) / 0.1);
@@ -91,8 +91,8 @@
   --hd-fg-strong-rgb: var(--hd-midnight-rgb);
   --hd-fg-muted: var(--hd-obsidian);
   --hd-fg-muted-rgb: var(--hd-obsidian-rgb);
-  --hd-bg-alt: var(--hd-grey);
-  --hd-bg-alt-rgb: var(--hd-grey-rgb);
+  --hd-bg-alt: var(--hd-white);
+  --hd-bg-alt-rgb: var(--hd-white-rgb);
   --hd-fg-on-alt: var(--hd-obsidian);
   --hd-fg-on-alt-rgb: var(--hd-obsidian-rgb);
   --hd-accent: var(--hd-deep-blue);
@@ -105,6 +105,10 @@
   --hd-accent-fill-rgb: var(--hd-deep-blue-rgb);
   --hd-on-accent-fill: var(--hd-white);
   --hd-on-accent-fill-rgb: var(--hd-white-rgb);
+  --hd-accent-fill-hover: var(--hd-midnight);
+  --hd-accent-fill-hover-rgb: var(--hd-midnight-rgb);
+  --hd-indicator: var(--hd-cyan);
+  --hd-indicator-rgb: var(--hd-cyan-rgb);
   --hd-danger: var(--hd-crimson);
   --hd-danger-rgb: var(--hd-crimson-rgb);
   --hd-warning: var(--hd-copper);
@@ -140,6 +144,10 @@
     --hd-accent-fill-rgb: var(--hd-vivid-cerulean-rgb);
     --hd-on-accent-fill: var(--hd-obsidian);
     --hd-on-accent-fill-rgb: var(--hd-obsidian-rgb);
+    --hd-accent-fill-hover: var(--hd-cyan);
+    --hd-accent-fill-hover-rgb: var(--hd-cyan-rgb);
+    --hd-indicator: var(--hd-vivid-cerulean);
+    --hd-indicator-rgb: var(--hd-vivid-cerulean-rgb);
     --hd-danger: var(--hd-crimson);
     --hd-danger-rgb: var(--hd-crimson-rgb);
     --hd-warning: var(--hd-copper);
@@ -175,6 +183,10 @@
   --hd-accent-fill-rgb: var(--hd-vivid-cerulean-rgb);
   --hd-on-accent-fill: var(--hd-obsidian);
   --hd-on-accent-fill-rgb: var(--hd-obsidian-rgb);
+  --hd-accent-fill-hover: var(--hd-cyan);
+  --hd-accent-fill-hover-rgb: var(--hd-cyan-rgb);
+  --hd-indicator: var(--hd-vivid-cerulean);
+  --hd-indicator-rgb: var(--hd-vivid-cerulean-rgb);
   --hd-danger: var(--hd-crimson);
   --hd-danger-rgb: var(--hd-crimson-rgb);
   --hd-warning: var(--hd-copper);

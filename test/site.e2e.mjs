@@ -2,7 +2,7 @@
 // no broken internal links or images, axe (WCAG 2.2 AA) clean in light AND dark, no horizontal scroll on a phone.
 // Usage: node test/site.e2e.mjs   (needs: npm run build && build:fonts && build:logos)
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -35,6 +35,52 @@ const check = async (name, fn) => {
   }
 };
 const checked = new Map();
+
+// Public copy rules: Indian English (en-IN), and no internal provenance or repository/software wording on public pages.
+const US_SPELLING =
+  /(?<![\w-])(colou?rs?|colou?red|centers?|centered|grays?|behaviou?rs?|catalogs?|licen[sc]ed?|organi[sz]ations?|specializ\w*|authoriz\w*|customiz\w*|optimiz\w*|standardiz\w*|recogniz\w*|analyz\w*|favou?rs?|honou?rs?|defense|offense|data center)(?![\w-])/gi;
+const US_ONLY = new Set([
+  'color',
+  'colors',
+  'colored',
+  'center',
+  'centers',
+  'centered',
+  'gray',
+  'grays',
+  'behavior',
+  'behaviors',
+  'catalog',
+  'catalogs',
+  'license',
+  'licensed',
+  'organization',
+  'organizations',
+  'defense',
+  'offense',
+  'data center',
+  'favor',
+  'favors',
+  'honor',
+  'honors',
+]);
+const isUs = (w) => US_ONLY.has(w.toLowerCase()) || /(iz(e|ed|es|ing|ation|ations))$/i.test(w);
+const INTERNAL =
+  /Brand Kit v1\.0|approved by|pending owner|FOUNDATIONS-PROPOSAL|docs\/|2026-11-|Software: Apache|\bApache\b|this repository|\brepositor(y|ies)\b|\bforks?\b/i;
+const publicText = (page) =>
+  page.evaluate(() => {
+    const clone = document.body.cloneNode(true);
+    for (const el of clone.querySelectorAll('pre, code, script, style, [hidden], .hd-sr-only')) el.remove();
+    return clone.textContent.replace(/\s+/g, ' ');
+  });
+const copyProblems = (path, text) => {
+  const out = [];
+  const spell = text.replace(/SIL Open Font License|Apache License|Theme Colors/g, '');
+  for (const m of spell.matchAll(US_SPELLING)) if (isUs(m[1])) out.push(`US spelling "${m[1]}"`);
+  const hit = path === '/changelog/' ? null : INTERNAL.exec(text);
+  if (hit) out.push(`internal wording "${hit[0]}"`);
+  return out.map((p) => `${path}: ${p}`);
+};
 
 for (const scheme of ['light', 'dark']) {
   for (const path of [...paths, '/404.html']) {
@@ -78,6 +124,8 @@ for (const scheme of ['light', 'dark']) {
         [],
       );
       if (scheme === 'light') {
+        assert.equal(await page.evaluate(() => document.documentElement.lang), 'en-IN', 'html lang must be en-IN');
+        assert.deepEqual(copyProblems(path, await publicText(page)), []);
         const links = await page.evaluate(() => [...document.querySelectorAll('a[href]')].map((a) => a.getAttribute('href')));
         for (const href of links) {
           if (!href || href.startsWith('#') || /^(https?:|mailto:)/.test(href)) continue;
@@ -93,6 +141,66 @@ for (const scheme of ['light', 'dark']) {
     });
   }
 }
+
+await check('print route (Brand Kit PDF source): en-IN, no internal wording', async () => {
+  const ctx = await browser.newContext({ colorScheme: 'light' });
+  const page = await ctx.newPage();
+  await page.goto(`${origin}/print/`);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'en-IN');
+  assert.deepEqual(copyProblems('/print/', await publicText(page)), []);
+  await ctx.close();
+});
+
+await check('downloads: exactly one Brand Kit PDF is published (no legacy kit), and it is the current one', async () => {
+  const pdfs = readdirSync(join(work, 'site/downloads')).filter((n) => n.endsWith('.pdf'));
+  const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+  assert.deepEqual(pdfs, [`HexaData-Brand-Kit-v${version.split('.').slice(0, 2).join('.')}.pdf`]);
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(`${origin}/downloads/`);
+  assert.deepEqual(
+    await page.evaluate(() => [...document.querySelectorAll('a[href$=".pdf"]')].map((a) => a.getAttribute('href'))),
+    pdfs.map((n) => `/downloads/${n}`),
+  );
+  await ctx.close();
+});
+
+await check('theme toggle: icon button, correct state, choice survives navigation, only hd-theme is stored (tab-scoped)', async () => {
+  for (const scheme of ['light', 'dark']) {
+    const ctx = await browser.newContext({ colorScheme: scheme });
+    const page = await ctx.newPage();
+    await page.goto(`${origin}/`);
+    const toggle = page.locator('hexa-theme-toggle button');
+    assert.equal(await toggle.getAttribute('aria-label'), 'Dark mode');
+    assert.equal(await toggle.textContent(), '', 'icon only: no visible text');
+    assert.equal(await toggle.getAttribute('aria-pressed'), String(scheme === 'dark'));
+    const shown = () =>
+      page.evaluate(() => {
+        const b = document.querySelector('hexa-theme-toggle button');
+        return [...b.querySelectorAll('svg > *')].map((n) => n.getAttribute('display'));
+      });
+    // moon first, sun second: the icon shows the theme you would switch to
+    assert.deepEqual(await shown(), scheme === 'dark' ? ['none', 'inline'] : ['inline', 'none']);
+    assert.deepEqual(await page.evaluate(() => Object.keys(sessionStorage)), [], 'nothing is stored before the toggle is pressed');
+    await toggle.click();
+    const next = scheme === 'dark' ? 'light' : 'dark';
+    assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-theme')), next);
+    assert.equal(await toggle.getAttribute('aria-pressed'), String(next === 'dark'));
+    for (const name of ['Colour', 'Typography', 'Downloads']) {
+      await page.locator('nav[aria-label="Main"]').getByRole('link', { name, exact: true }).click();
+      await page.waitForLoadState('domcontentloaded');
+      assert.equal(
+        await page.evaluate(() => document.documentElement.getAttribute('data-theme')),
+        next,
+        `theme lost after opening ${name}`,
+      );
+      assert.equal(await page.locator('hexa-theme-toggle button').getAttribute('aria-pressed'), String(next === 'dark'));
+    }
+    assert.deepEqual(await page.evaluate(() => Object.keys(sessionStorage)), ['hd-theme']);
+    assert.equal(await page.evaluate(() => localStorage.length + document.cookie.length), 0);
+    await ctx.close();
+  }
+});
 
 await check('internal links all resolve', async () => {
   const bad = [];

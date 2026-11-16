@@ -143,6 +143,30 @@
       "fg": "onStatus",
       "bg": "success",
       "min": 4.5
+    },
+    {
+      "mode": "light",
+      "fg": "onAccentFill",
+      "bg": "accentFillHover",
+      "min": 4.5
+    },
+    {
+      "mode": "light",
+      "fg": "indicator",
+      "bg": "bg",
+      "min": 3
+    },
+    {
+      "mode": "dark",
+      "fg": "onAccentFill",
+      "bg": "accentFillHover",
+      "min": 4.5
+    },
+    {
+      "mode": "dark",
+      "fg": "indicator",
+      "bg": "bg",
+      "min": 3
     }
   ],
   "pairs": [
