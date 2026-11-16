@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.1 (2026-11-16)
+
+Chore release: no change to any brand value, colour, shape or component style. Corrects wording that still described the 2.0 look.
+
+- Website and Brand Kit v2.1 PDF: the Grey swatch note now describes grey as the hairline and border colour. The PDF is regenerated.
+- Claude Design System: token notes, README text and version line follow Brand Kit v2.1 (new roles, precision radii, accent hover states); it now states the Brand Kit version and brand revision.
+- Release workflow attaches only the current Brand Kit PDF; older kits stay archived in the repository.
+
 ## 2.1.0 (2026-11-16)
 
 Visual update: Brand Kit v2.1. Brand revision 2. No public name was removed or renamed.

@@ -1,7 +1,7 @@
 // GENERATED FILE: DO NOT EDIT. Source: brand/ (run `npm run generate`).
 import 'dart:ui' show Color;
 
-const String hexaBrandVersion = "2.1.0";
+const String hexaBrandVersion = "2.1.1";
 const int hexaBrandRevision = 2;
 const String hexaDescriptor = "servers and workstations";
 const String hexaPrimaryTagline = "Supercomputing, On-demand.";

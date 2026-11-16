@@ -30,7 +30,7 @@ const USE = {
   obsidian: 'Dark-mode background; primary text on `white`; text on cyan, cerulean, crimson, copper and green fills.',
   'vivid-cerulean': 'Primary action fill and accent text in dark mode (text on a cerulean fill is `obsidian`).',
   midnight: 'Secondary dark surface; alternative dark text on `white`.',
-  grey: 'Secondary light surface; muted text and borders on dark surfaces. Never text on `white`.',
+  grey: 'Hairlines, dividers and borders in both themes; muted text on dark surfaces. Never text on `white`, never a large surface or a hover fill.',
   white: 'Light-mode background; primary text on dark surfaces.',
   crimson: 'Error and destructive actions. Solid fill, text `obsidian`.',
   copper: 'Warning. Solid fill, text `obsidian`.',
@@ -41,13 +41,16 @@ const ROLE_USE = {
   fg: 'Primary text on `bg`.',
   'fg-strong': 'Headings and emphasis on `bg`.',
   'fg-muted': 'Secondary text on `bg` (dark theme: grey; light theme uses obsidian, never grey on white).',
-  'bg-alt': 'Secondary surface (cards, footers, hover). Text on it: `fg-on-alt`.',
+  'bg-alt':
+    'Secondary surface (alternate cards, bands, footer): White in light, Midnight in dark. Never a hover fill. Text on it: `fg-on-alt`.',
   'fg-on-alt': 'Text and links on `bg-alt`.',
   accent: 'Links and accent text on `bg`.',
   'border-strong': 'Borders of controls and anything that identifies an input (3:1 on `bg`).',
   'border-subtle': 'Decorative dividers only.',
   'accent-fill': 'Primary button and selected-state fill. Text on it: `on-accent-fill`.',
-  'on-accent-fill': 'Text and icons on `accent-fill`.',
+  'on-accent-fill': 'Text and icons on `accent-fill` and `accent-fill-hover`.',
+  'accent-fill-hover': 'Primary button fill on hover (Midnight in light, Cyan in dark). Text on it: `on-accent-fill`.',
+  indicator: 'Light-blue accent line: current-page and selected-tab underline, interactive card edge. Non-text only (3:1 on `bg`).',
   danger: 'Error and destructive fill. Text on it: `on-status`.',
   warning: 'Warning fill. Text on it: `on-status`.',
   success: 'Success fill. Text on it: `on-status`.',
@@ -69,7 +72,7 @@ const shadow = Object.entries(F.shadow).map(([k, css]) => ({
     .replace(/rgb\(var\(--hd-midnight-rgb\) \/ ([0-9.]+)\)/g, (_m, a) => `rgba(${midnight.join(', ')}, ${a})`)
     .replace(/\b0px\b/g, '0'),
   usage:
-    { 1: 'Resting cards.', 2: 'Raised cards, hovered buttons.', 3: 'Dialogs and popovers.' }[k] +
+    { 1: 'Subtle lift where a hairline is not enough.', 2: 'Raised surfaces.', 3: 'Dialogs and popovers.' }[k] +
     ' On dark surfaces separate with a grey border, never shadow alone.',
 }));
 const styles = (family, list) =>
@@ -141,11 +144,11 @@ const tokens = {
       value: px(v),
       usage: {
         none: 'Square corners.',
-        sm: 'Badges, small chips.',
-        md: 'Buttons, inputs.',
-        lg: 'Cards, dialogs.',
+        sm: 'Tags and badges.',
+        md: 'Buttons, inputs, tooltips.',
+        lg: 'Cards, alerts, dialogs, code.',
         xl: 'Large surfaces.',
-        full: 'Pills, avatars, switches.',
+        full: 'Circles only: avatars, switches, spinners.',
       }[k],
     })),
   },
@@ -159,7 +162,7 @@ put('tokens.json', JSON.stringify(tokens, null, 2));
 const logoRows = logoDoc.variants.map((v) => `| \`${v.id}\` | ${v.form} | ${v.tone} | ${v.background} |`).join('\n');
 put(
   'README.md',
-  `Use this system for ANYTHING that carries the HexaData brand: web pages, apps, slides, documents, e-mails, charts, social posts. It is generated from the official repository (https://github.com/atriganguly/hexadata-brand, package \`@hexadata/brand\` ${pkg.version}, brand revision ${core.BRAND_REVISION}); the repository is the source of truth and always wins.
+  `Use this system for ANYTHING that carries the HexaData brand: web pages, apps, slides, documents, e-mails, charts, social posts. It is generated from the official repository (https://github.com/atriganguly/hexadata-brand, Brand Kit v${pkg.version.split('.').slice(0, 2).join('.')}, brand revision ${core.BRAND_REVISION}, package \`@hexadata/brand\` ${pkg.version.split('.').slice(0, 2).join('.')}.x); the repository is the source of truth and always wins.
 
 ## Content fundamentals
 
@@ -170,16 +173,16 @@ put(
 
 ## Visual foundations
 
-- **Colour.** Ten brand colours only (\`cyan\`, \`deep-blue\`, \`obsidian\`, \`vivid-cerulean\`, \`midnight\`, \`grey\`, \`white\`, \`crimson\`, \`copper\`, \`green\`). Never use any other shade of black, grey or white; pure #000000 / #FFFFFF only as a technical fallback (print, e-mail, forced colours). Style with the semantic roles (\`bg\`, \`fg\`, \`fg-strong\`, \`fg-muted\`, \`bg-alt\`, \`fg-on-alt\`, \`accent\`, \`border-strong\`, \`border-subtle\`, \`accent-fill\`, \`on-accent-fill\`, \`danger\`, \`warning\`, \`success\`, \`on-status\`): they switch with the theme and are the contrast-checked pairings.
-- **Contrast rules.** Text on cyan, cerulean, crimson, copper and green fills is \`obsidian\` (white fails there); only \`deep-blue\` takes white text. Never grey text on white. \`obsidian\` and \`midnight\` are 1.08:1 apart: separate dark surfaces with a \`grey\` border. Status is a solid fill with \`on-status\` text and a word, never colour alone. Hover is elevation, underline or \`bg-alt\`, never a new shade.
+- **Colour.** Ten brand colours only (\`cyan\`, \`deep-blue\`, \`obsidian\`, \`vivid-cerulean\`, \`midnight\`, \`grey\`, \`white\`, \`crimson\`, \`copper\`, \`green\`). Never use any other shade of black, grey or white; pure #000000 / #FFFFFF only as a technical fallback (print, e-mail, forced colours). Style with the semantic roles (\`bg\`, \`fg\`, \`fg-strong\`, \`fg-muted\`, \`bg-alt\`, \`fg-on-alt\`, \`accent\`, \`border-strong\`, \`border-subtle\`, \`accent-fill\`, \`on-accent-fill\`, \`accent-fill-hover\`, \`indicator\`, \`danger\`, \`warning\`, \`success\`, \`on-status\`): they switch with the theme and are the contrast-checked pairings.
+- **Contrast rules.** Text on cyan, cerulean, crimson, copper and green fills is \`obsidian\` (white fails there); only \`deep-blue\` takes white text. Never grey text on white. \`obsidian\` and \`midnight\` are 1.08:1 apart: separate dark surfaces with a \`grey\` border. Status is a solid fill with \`on-status\` text and a word, never colour alone. Grey is for hairlines and borders, never for large surfaces or hover fills. Hover and current states use the accent colours: \`accent\` text, \`accent-fill-hover\` on primary fills, \`indicator\` for the current-page underline and interactive card edge.
 - **Type.** Space Grotesk for titles, headings and hero text (\`h1\`-\`h5\`); Inter Tight for subtitles, body and descriptions; JetBrains Mono for detailed descriptions, paragraphs of specification text and code (\`detail\`). Weights 400/500/600/700 only. Fonts are SIL OFL, files in \`fonts/\`.
-- **Spacing and shape.** 4px base scale (\`space-1\`..\`space-24\`); radius \`radius-md\` 8px for buttons and inputs, \`radius-lg\` 12px for cards and dialogs, \`radius-full\` for pills. Elevation \`shadow-1\`..\`shadow-3\` tinted with \`midnight\`. Targets at least 44px. Motion 120/200/320ms, none under reduced-motion.
+- **Spacing and shape.** 4px base scale (\`space-1\`..\`space-24\`); precision radii: \`radius-sm\` 2px for tags and badges, \`radius-md\` 4px for buttons, inputs and tooltips, \`radius-lg\` 8px for cards, alerts, dialogs and code; \`radius-full\` only for circles (avatar, switch, spinner). Hairline 1px borders; resting cards are flat. Elevation \`shadow-1\`..\`shadow-3\` tinted with \`midnight\`. Targets at least 44px. Motion 120/200/320ms, none under reduced-motion.
 - **Themes.** Light (\`white\` ground) and Dark (\`obsidian\` ground). Always design both.
 - **Layout.** Containers up to 72rem, fluid headings, cards in auto-fit grids, generous section padding (\`space-16\`).
 
 ## Logo
 
-The logo is the primary identifier. Use the file made for the surface: \`*-on-light\` on light grounds, \`*-on-dark\` on dark grounds, \`*-mono\` (white/grey, dark grounds only) when one colour is required. Forms: horizontal (headers, tight spaces), centered (covers), icon (apps, avatars). Do not stretch, recolour, outline, rotate, add effects or place on busy photos. Clear space about 0.2 x logo height; minimum width icon 24px, centered 96px, horizontal 120px. The official masters are PNG (vectors planned for v2.1): never redraw or approximate the mark. All files are in the Logos group.
+The logo is the primary identifier. Use the file made for the surface: \`*-on-light\` on light grounds, \`*-on-dark\` on dark grounds, \`*-mono\` (white/grey, dark grounds only) when one colour is required. Forms: horizontal (headers, tight spaces), centered (covers), icon (apps, avatars). Do not stretch, recolour, outline, rotate, add effects or place on busy photos. Clear space about 0.2 x logo height; minimum width icon 24px, centered 96px, horizontal 120px. The official masters are PNG (vector masters will follow in a later visual update): never redraw or approximate the mark. All files are in the Logos group.
 
 | id | form | tone | for surface |
 |---|---|---|---|
@@ -323,7 +326,7 @@ for (const v of logoDoc.variants) {
 }
 put(
   'assets/Logos/README.md',
-  `Official HexaData logo files (PNG masters; vectors planned for v2.1). Light-surface files have dark text; \`*-on-dark\` and \`*-mono\` have light text and are for dark grounds only. Icons are opaque tiles (white or dark) for app and social avatars. Trademarks of Esconet Technologies Limited: use only as BRAND-LICENSE.md permits.\n`,
+  `Official HexaData logo files (PNG masters; vector masters will follow in a later visual update). Light-surface files have dark text; \`*-on-dark\` and \`*-mono\` have light text and are for dark grounds only. Icons are opaque tiles (white or dark) for app and social avatars. Trademarks of Esconet Technologies Limited: use only as BRAND-LICENSE.md permits.\n`,
 );
 const index = {
   v: 3,
