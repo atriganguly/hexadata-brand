@@ -165,7 +165,7 @@ await check('signed update: applied via CSSOM under strict CSP; request has no c
   await page.waitForFunction(() => document.getElementById('tag').textContent === 'Signed update applied.');
   assert.equal(await css(page, '--hd-cyan'), '#009AB4');
   assert.equal(await css(page, '--hd-cyan-rgb'), '0 154 180');
-  const m = requests.find((r) => r.url.startsWith('https://brand.example.com'));
+  const m = requests.find((r) => new URL(r.url).origin === 'https://brand.example.com');
   assert.ok(m, 'manifest request missing');
   assert.equal(m.headers.cookie, undefined);
   assert.equal(m.headers.referer, undefined);

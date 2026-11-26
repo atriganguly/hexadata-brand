@@ -17,7 +17,7 @@ jobs:
         with: { fetch-depth: 0 }
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with: { node-version: 22, cache: npm, registry-url: 'https://registry.npmjs.org' }
-      - run: npm install -g npm@latest # trusted publishing needs a recent npm
+      - run: npm install -g npm@12.2.3 # trusted publishing needs a recent npm; pinned for reproducible releases
       - run: npm ci --ignore-scripts
       - name: Tag must match package.json version
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
@@ -36,7 +36,7 @@ jobs:
           npm run build:platforms
           mkdir -p release
           for p in flutter swift android office email print; do (cd dist/platforms/$p && zip -qr "../../../release/hexadata-brand-$p-${GITHUB_REF_NAME}.zip" .); done
-          python -m pip install --quiet build
+          python -m pip install --quiet build==1.6.1
           (cd dist/platforms/python && python -m build --outdir ../../../release/python)
           (cd channel-out/v2 && zip -qr "../../release/hexadata-brand-channel-${GITHUB_REF_NAME}.zip" .)
           KIT=$(node -p "require('./package.json').version.split('.').slice(0, 2).join('.')")
