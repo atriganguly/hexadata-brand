@@ -36,8 +36,8 @@ jobs:
           npm run build:platforms
           mkdir -p release
           for p in flutter swift android office email print; do (cd dist/platforms/$p && zip -qr "../../../release/hexadata-brand-$p-${GITHUB_REF_NAME}.zip" .); done
-          python -m pip install --quiet build==1.6.1
-          (cd dist/platforms/python && python -m build --outdir ../../../release/python)
+          python -m pip install --quiet --require-hashes -r platforms/python/requirements-build.txt
+          (cd dist/platforms/python && python -m build --no-isolation --outdir ../../../release/python)
           (cd channel-out/v2 && zip -qr "../../release/hexadata-brand-channel-${GITHUB_REF_NAME}.zip" .)
           KIT=$(node -p "require('./package.json').version.split('.').slice(0, 2).join('.')")
           cp "brand/kit/HexaData-Brand-Kit-v${KIT}.pdf" release/
