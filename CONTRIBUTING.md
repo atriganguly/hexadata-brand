@@ -51,6 +51,12 @@ npm run test:dist && npm run test:e2e && npm run test:site && npm run verify:rel
 - Fill in the template checklist honestly, including anything you could not verify.
 - By contributing you agree that your contribution is licensed under Apache-2.0 (the software). You cannot contribute HexaData trademarks or brand assets; see [BRAND-LICENSE.md](BRAND-LICENSE.md).
 
+### Review and testing policy
+
+- The project is maintained by one person, so there is no mandatory second human review. Every change to `main` is instead gated by the required CI checks in the `main protection` ruleset (pull request, squash merge, and passing `verify (22)`, `verify (24)` and `browser`).
+- Changes that touch brand values also need the two-key golden update described in [AGENTS.md](AGENTS.md).
+- Fuzzing is not yet in CI. Parsing-heavy code (the signed-manifest verifier and token readers) is covered by unit and e2e tests instead.
+
 ## Security and conduct
 
 Report vulnerabilities privately (see [SECURITY.md](SECURITY.md)), never in a public issue. Report conduct problems to the address in the [Code of Conduct](CODE_OF_CONDUCT.md).
