@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+Chore: CI and build-tooling dependency updates. No change to any brand value, colour, shape or component style.
+
+- GitHub Actions: `actions/setup-java` 6.3.0, `gradle/actions/setup-gradle` (pinned SHA), `actions/dependency-review-action` 5.0.1, `ossf/scorecard-action` 2.6.0.
+- Dev tooling: `eslint` 10.15, `typescript-eslint` 8.73, `@capsizecss/metrics` 4.5.
+- Security: `glob` pinned to 14 for the build-time token tooling, so `minimatch` resolves to a patched 11.x (fixes Dependabot alert #3, GHSA-g3hv-75wg-m249, which affects `minimatch` 7.0.0 up to 11.0.1).
+
 ## 2.1.1 (2026-11-16)
 
 Chore release: no change to any brand value, colour, shape or component style. Corrects wording that still described the 2.0 look.
