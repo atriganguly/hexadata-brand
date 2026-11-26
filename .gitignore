@@ -11,3 +11,5 @@ dist/
 channel-out/
 site-out/
 claude-ds-out/
+__pycache__/
+*.pyc

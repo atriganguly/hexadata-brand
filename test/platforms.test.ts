@@ -62,7 +62,12 @@ test('office theme files are well-formed and map the palette', () => {
   const fonts = read('platforms/office/HexaData.theme-fonts.xml');
   assert.ok(fonts.includes('typeface="Space Grotesk"') && fonts.includes('typeface="Inter Tight"'));
   for (const xml of [colors, fonts]) {
-    const tags = [...xml.replace(/<!--[\s\S]*?-->/g, '').matchAll(/<(\/?)([A-Za-z:]+)[^>]*?(\/?)>/g)];
+    let stripped = xml;
+    for (let prev = ''; prev !== stripped;) {
+      prev = stripped;
+      stripped = stripped.replace(/<!--[\s\S]*?-->/g, '');
+    }
+    const tags = [...stripped.matchAll(/<(\/?)([A-Za-z:]+)[^>]*?(\/?)>/g)];
     const stack: string[] = [];
     for (const [, close, name, self] of tags) {
       if (self || name!.startsWith('?')) continue;
